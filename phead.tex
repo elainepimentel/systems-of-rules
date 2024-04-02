@@ -1,0 +1,639 @@
+%%%%%%%%%%%%%
+% Utilities
+%%%%%%%%%%%%%
+
+% !TEX spellcheck = en-US
+%!TEX root = geometric.tex
+
+\newcommand{\lP}{$\lambda$Prolog\xspace}
+\newcommand{\zc}[1]{{\color[rgb]{1.000000,0.509804,0.278431} ZC: #1}}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\lpInf}{\: \turnstyle \:}
+\newcommand{\turnstyle}{\hbox{\tt \ :-\ }} % turnstyle Prolog-style
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\magenta}[1]{\textcolor{magenta}{#1}}
+\newcommand{\cyan}[1]{\textcolor{cyan}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+
+\newcommand{\D}{\mathsf{D}}
+\newcommand{\R}{\mathsf{R}}
+
+%%%%%%%%%%%%%%
+% System names
+%%%%%%%%%%%%%%
+\newcommand\proofsystem[1]{\mbox{\slshape #1}\xspace}
+\newcommand\LK   {\proofsystem{LK}}
+\newcommand\LKT  {\proofsystem{LKT}}
+\newcommand\LKQ  {\proofsystem{LKQ}}
+\newcommand\LCF  {\proofsystem{LCF}}
+\newcommand\LKF  {\proofsystem{LKF}}
+\newcommand\aLKF {\hbox{\proofsystem{LKF}\kern-2pt$^a$}\xspace}
+\newcommand\LKU  {\proofsystem{LKU}}
+\newcommand\LJ   {\proofsystem{LJ}}
+\newcommand\LJT  {\proofsystem{LJT}}
+\newcommand\LJQ  {\proofsystem{LJQ}}
+\newcommand\LJF  {\proofsystem{LJF}}
+\newcommand\aLJF {\hbox{\proofsystem{LJF}\kern-2pt$^a$}\xspace}
+\newcommand\LKpos{\proofsystem{LKpos}}
+\newcommand\LKneg{\proofsystem{LKneg}}
+\newcommand\negclass[2]{\mathcal{N}_{#1}^{#2}}
+\newcommand\posclass[2]{\mathcal{P}_{#1}^{#2}}
+
+% Clean redefined macros (talk of oct 15th)
+% Previous commands are still active(see bellow) for retrofitting : They only 
+% call on the new ones and should be removed.
+
+% Naming convention: 
+% binary connectives [k|j][n|p][and|or]
+% Unary connectives [k|j][some|all]
+% Bureau : 
+%          simple naming          : <Connective_name>[c|e]
+%          Usage (with parameters : <Connective_name>[c|e]u
+% I know for LKF [c|e] is subsumed by [n|p] but this way it's more coherant
+
+% Explore the idea of naming release with an uparrow, decide with a down arrow.
+
+%%%%%%%%%%%%%%
+% LKF Macros
+%%%%%%%%%%%%%%
+
+% => Sequents
+\newcommand{\async}[2]{\seq#1\mathbin{\Uparrow}   #2}
+\newcommand{\sync }[2]{\seq#1\mathbin{\Downarrow} #2}
+\newcommand{\Async}[3]{#1\async{#2}{#3}}  % With Xi
+\newcommand{\Sync }[3]{#1\sync{#2}{#3}}  % With Xi
+
+\newcommand{\impl}{\supset}
+
+
+% => Connectives and rules
+% ==> Names 
+%\newcommand{\knand}{ \& }
+\newcommand{\knand}{ \jnand }
+%\newcommand{\knor}{\parr }
+\newcommand{\knor}{\vee^{-}}
+%\newcommand{\kpand}{\otimes}
+\newcommand{\kpand}{\jpand}
+%\newcommand{\kpor}{\oplus }
+\newcommand{\kpor}{\veep }
+\newcommand{\unp}[1]{#1^{\circ}}
+%\newcommand{\pol}[1]{#1^{\bullet}}  % DM not needed
+\newcommand{\del}[1]{[#1]^{l/r}}
+\newcommand{\delm}[2]{[#1]^{l/r}_{#2}}
+%\newcommand{\delp}[1]{[#1]_{\delpf}}
+%\newcommand{\deln}[1]{[#1]_{\delnf}}
+\newcommand{\delp}[1]{[#1]^{r}}
+\newcommand{\deln}[1]{[#1]^{l}}
+\newcommand{\delpm}[2]{[#1]^{r}_{#2}}
+\newcommand{\delnm}[2]{[#1]^{l}_{#2}}
+%\newcommand{\synrules}[1]{\mathcal{R}(#1)}
+%\newcommand{\unpsynrules}[1]{\unp{\mathcal{R}}(#1)}
+\newcommand{\axioms}{\mathcal{T}}
+
+
+%\newcommand{\ksome}{\Sigma }
+\newcommand{\ksome}{\jsome }
+%\newcommand{\kall}{\Pi }
+\newcommand{\kall}{\jall}
+%\newcommand{\kpfalse}{0}
+\newcommand{\kpfalse}{\pfalse}
+\newcommand{\kptrue}{\ptrue}
+\newcommand{\knfalse}{\nfalse}
+\newcommand{\kntrue}{\ntrue}
+% -- Structural
+\newcommand{\kstore}{\mathsf{S}}
+\newcommand{\kdecide}{\mathsf{D}}
+\newcommand{\krelease}{\mathsf{R}}
+\newcommand{\kinit}{\mathsf{I}}
+% ==> Usage
+\newcommand{\knandu}[2]{#1 \knand #2}
+\newcommand{\knoru}[2]{#1 \knor #2}
+\newcommand{\kpandu}[2]{#1 \kpand #2}
+\newcommand{\kporu}[2]{#1 \kpor #2}
+\newcommand{\ksomeu}[1]{\ksome #1}
+\newcommand{\kallu}[1]{\kall #1}
+
+
+% => Bureau 
+%% ==> Names
+\newcommand{\knandc}{\knand_c}
+\newcommand{\knorc}{\knor_c}
+\newcommand{\kpande}{\kpand_e}
+\newcommand{\kpore}{\kpor_e}
+\newcommand{\ksomee}{\ksome_e}
+\newcommand{\kallc}{\kall_c}
+\newcommand{\kptruee}{\kptrue_e}
+\newcommand{\knfalsec}{\knfalse_c}
+%--Structural
+\newcommand{\kstorec}{\kstore_c}
+\newcommand{\kdecidee}{\kdecide_e}
+\newcommand{\kreleasee}{\krelease_e}
+\newcommand{\kinite}{\kinit_e}
+
+%% ==> Usage (with parameters)
+% ZC : still not sure about giving the formula as a parameter
+\newcommand{\knandcu}[4]{\knandc(#1,#2,#3,#4)} % C F C1 C2
+\newcommand{\knorcu}[3]{\knorc(#1,#2,#3)} % C F C'
+\newcommand{\kpandeu}[4]{\kpande(#1,#2,#3,#4)} % C F C1 C2
+\newcommand{\kporeu}[4]{\kpore(#1,#2,#3,#4)} % C F Choice C'
+\newcommand{\ksomeeu}[4]{\ksomee(#1,#2,#3,#4)} % C F Witness C'
+\newcommand{\kallcu}[3]{\kallc(#1,#2,#3)} % C F (x\C')
+\newcommand{\kptrueeu}[1]{\kptruee(#1)}
+\newcommand{\knfalsecu}[2]{\knfalsec(#1,#2)}
+%--Structural
+\newcommand{\kstorecu}[4]{\kstorec(#1,#2,#3,#4)} %C F Indx C'
+\newcommand{\kdecideeu}[3]{\kdecidee(#1,#2,#3)} % C Indx C'
+\newcommand{\kreleaseeu}[3]{\kreleasee(#1,#2,#3)} % C F C'
+\newcommand{\kiniteu}[3]{\kinite(#1,#2,#3)} %C F I
+
+%%%%%%%%%%%%%%
+% LJF Macros
+%%%%%%%%%%%%%%
+% => Sequents
+
+\newcommand{\veenldotsveen}{\veen\kern-5pt\ldots\kern-2pt\veen}
+%\newcommand{\CNXT}{\axiom, \neg \overline{P}, \neg \Gamma}
+\newcommand{\CNXT}{\Upsilon}
+
+%\newcommand{\Rscr}{{\cal S}} % Used for an ambiguous rhs
+% DM If we don't use \synrules, we can reclaim the R for ambiguous rhs
+\newcommand{\Rscr}{{\cal R}} % Used for an ambiguous rhs
+
+\newcommand{\kUnf}[4]{#1 \mathbin\Uparrow #2 \seq  #3 \mathbin\Uparrow #4}
+\newcommand{\kUnfG}[2]{\Gamma \mathbin\Uparrow #1 \seq  #2 \mathbin\Uparrow \Delta}
+\newcommand{\kUnfamb}[3]{#1 \mathbin\Uparrow #2 \seq  #3 \Theta' \Uparrow \Delta}
+\newcommand{\kUnfGamb}[1]{\Gamma\mathbin\Uparrow #1\seq \Theta' \Uparrow \Delta}
+\newcommand{\kLf}[3]{#1 \Downarrow #2 \seq #3}
+\newcommand{\kRf}[3]{#1 \seq #2 \Downarrow #3}
+\newcommand{\kLfG}[1]{\kLf{\Gamma}{#1}{\Delta}}
+\newcommand{\kRfG}[1]{\kRf{\Gamma}{#1}{\Delta}}
+
+% Use the following to see if a context is empty in a focused
+% sequent.  If so, used \cdot instead.  Needs the xifthen package.
+\newcommand{\isemp}[1]{\ifthenelse{\isempty{#1}}{\cdot}{#1}}
+
+%\newcommand{\jUnf}[4]{#1 ; #2 \seq  #3 ; #4}% unfocused sequent
+\newcommand{\jUnf}[4]{\isemp{#1}\mathbin{\Uparrow}\isemp{#2}\seq
+                      \isemp{#3}\mathbin{\Uparrow}\isemp{#4}}% unfocused sequent
+
+\newcommand{\jUnfamb}[3]{#1 \mathbin\Uparrow #2 \seq  #3 \Rscr}% unfocused sequent
+%\newcommand{\jUnfG}[2]{\jUnf{\Gamma}{#1}{#2}{{\cdot}}}% unf sequ with \Gamma
+\newcommand{\jUnfG}[2]{\jUnf{\Gamma}{\isemp{#1}}{\isemp{#2}}{{\cdot}}}% unf sequ with \Gamma
+\newcommand{\jUnfGamb}[1]{\Gamma\mathbin\Uparrow #1\seq \Rscr}% unf sequ with \Gamma
+\newcommand{\jLf}[3]{\isemp{#1}\Downarrow\isemp{#2}\seq\isemp{#3}}% left focused sequent
+\newcommand{\jLCf}[3]{#1,\Cx{\Downarrow{#2}}\seq\isemp{#3}}% left focused context sequent
+\newcommand{\jLfG}[1]{\jLf{\Gamma}{#1}{R}}% left foc seq with \Gamma 
+\newcommand{\jRf}[2]{#1 \seq #2 \Downarrow}% right focused sequent
+\newcommand{\jRCf}[3]{#1 \seq \Cx{#2 \Downarrow},#3}% right focused sequent
+\newcommand{\jRfG}[1]{\jRf{\Gamma}{#1}}% right foc seq with \Gamma
+%\newcommand{\jC}[2]{{\blue {#1 \colon\,}} #2} % Use for all other instances
+\newcommand{\jC}[2]{{\blue {#1 \colon}} #2} % Use for all other instances
+
+% => Connectives
+% ==> Names
+\newcommand{\jarr}{\supset}
+\newcommand{\jor}{\vee}
+\newcommand{\jpand}{\wedge^{\scriptscriptstyle +}}
+\newcommand{\jnand}{\wedge^{\scriptscriptstyle -}}
+\newcommand{\jsome}{\exists}
+\newcommand{\jall}{\forall}
+\newcommand{\jtrue}{\hbox{\sl t}}
+\newcommand{\jfalse}{\hbox{\sl f}}
+\newcommand{\iimp}{\supset}
+% -- Strructural
+
+\newcommand{\jinit}{\mathbb{I}}
+\newcommand{\jrelease}{\mathbb{R}}
+\newcommand{\jdecide}{\mathbb{D}}
+\newcommand{\jstore}{\mathbb{S}}
+%--
+\newcommand{\jinitl}{\jinit^l}
+\newcommand{\jreleasel}{\jrelease^l}
+\newcommand{\jdecidel}{\jdecide^l}
+\newcommand{\jstorel}{\jstore^l}
+
+\newcommand{\jinitr}{\jinit^r}
+\newcommand{\jreleaser}{\jrelease^r}
+\newcommand{\jdecider}{\jdecide^r}
+\newcommand{\jstorer}{\jstore^r}
+% ==> Usage
+\newcommand{\jarru}[2]{#1 \jarr #2}
+\newcommand{\joru}[2]{#1 \jor #2}
+\newcommand{\jpandu}[2]{#1 \jpand #2}
+\newcommand{\jnandu}[2]{#1 \jnand #2}
+\newcommand{\jsomeu}[1]{\jsome #1}
+\newcommand{\jallu}[1]{\jall  #1}
+
+% => Bureau
+% ==> Names
+\newcommand{\jarrc}{\jarr_c}
+\newcommand{\jarre}{\jarr_e}
+\newcommand{\jorc}{\jor_c}
+\newcommand{\jore}{\jor_e}
+\newcommand{\jpandc}{\jpand_c}
+\newcommand{\jpande}{\jpand_e}
+\newcommand{\jnandc}{\jnand_c}
+\newcommand{\jnande}{\jnand_e}
+\newcommand{\jsomec}{\jsome_c}
+\newcommand{\jsomee}{\jsome_e}
+\newcommand{\jallc}{\jall_c}
+\newcommand{\jalle}{\jall_e}
+
+\newcommand{\jtruec}{\jtrue_c}
+\newcommand{\jtruee}{\jtrue_e}
+\newcommand{\jfalsec}{\jfalse_c}
+%-- Structural
+\newcommand{\jinitle}{\jinitl_e}
+\newcommand{\jreleasele}{\jreleasel_e}
+\newcommand{\jdecidele}{\jdecidel_e}
+\newcommand{\jstorelc}{\jstorel_c}
+
+\newcommand{\jinitre}{\jinitr_e}
+\newcommand{\jreleasere}{\jreleaser_e}
+\newcommand{\jdecidere}{\jdecider_e}
+\newcommand{\jstorerc}{\jstorer_c}
+
+%==>Usage 
+% (#1,#2) [2] 
+\newcommand{\jarrcu}[3]{\jarrc(#1,#2,#3)}
+\newcommand{\jarreu}[4]{\jarre(#1,#2,#3,#4)}
+\newcommand{\jorcu}[4]{\jorc(#1,#2,#3,#4)}
+\newcommand{\joreu}[4]{\jore(#1,#2,#3,#4)}
+\newcommand{\jpandcu}[3]{\jpandc(#1,#2,#3)}
+\newcommand{\jpandeu}[4]{\jpande(#1,#2,#3,#4)}
+\newcommand{\jnandcu}[4]{\jnandc(#1,#2,#3,#4)}
+\newcommand{\jnandeu}[4]{\jnande(#1,#2,#3,#4)}
+\newcommand{\jsomecu}[3]{\jsomec(#1,#2,#3)}
+\newcommand{\jsomeeu}[4]{\jsomee(#1,#2,#3,#4)}
+\newcommand{\jallcu}[3]{\jallc(#1,#2,#3)}
+\newcommand{\jalleu}[4]{\jalle(#1,#2,#3,#4)}
+
+\newcommand{\jtruecu}[2]{\jtruec(#1,#2)}
+\newcommand{\jtrueeu}[1]{\jtruee(#1)}
+\newcommand{\jfalsecu}[1]{\jfalsec(#1)}
+%-- Structural
+\newcommand{\jinitleu}[1]{\jinitle(#1)}
+\newcommand{\jreleaseleu}[3]{\jreleasele(#1,#2,#3)}
+\newcommand{\jdecideleu}[3]{\jdecidele(#1,#2,#3)}
+\newcommand{\jstorelcu}[4]{\jstorelc(#1,#2,#3,#4)}
+
+\newcommand{\jinitreu}[2]{\jinitre(#1,#2)}
+\newcommand{\jreleasereu}[3]{\jreleasere(#1,#2,#3)}
+\newcommand{\jdecidereu}[2]{\jdecidere(#1,#2)}
+\newcommand{\jstorercu}[3]{\jstorerc(#1,#2,#3)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Old ones  Should call on the new ones and be slowly eliminated.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\jeArr}[3]{\supset_e (#1,#2,#3)}
+\newcommand{\jeOr}[3]{\vee_e (#1,#2,#3)}
+\newcommand{\jeAndP}[3]{\wedgep_e (#1,#2,#3)}
+\newcommand{\jeDelayP}[2]{\posdop_e (#1,#2)}
+\newcommand{\jeAndN}[3]{\wedgen_e (#1,#2,#3)}
+\newcommand{\jeDelayN}[2]{\negdop_e (#1,#2)}
+\newcommand{\jeTrueP}[1]{\ptrue_e (#1)}
+\newcommand{\jeSome}[3]{\exists_e(#1,#2,#3)}
+\newcommand{\jeAll}[3]{\forall_e(#1,#2,#3)}
+
+\newcommand{\jcArr}[2]{\supset_c(#1,#2)}
+\newcommand{\jcOr}[3]{\vee_c (#1,#2,#3)}
+\newcommand{\jcFalse}[1]{\pfalse_c (#1)}
+\newcommand{\jcAndP}[2]{\wedgep_c(#1,#2)}
+\newcommand{\jcDelayP}[2]{\posdop_c(#1,#2)}
+\newcommand{\jcAndN}[3]{\wedgen_c(#1,#2,#3)}
+\newcommand{\jcDelayN}[2]{\negdop_c(#1,#2)}
+\newcommand{\jcTrueN}[1]{\ntrue_c(#1)}
+\newcommand{\jcTrueP}[2]{\ptrue_c(#1,#2)}
+\newcommand{\jcSome}[2]{\exists_c(#1,#2)}
+\newcommand{\jcAll}[2]{\forall_c(#1,#2)}
+% Structural
+\newcommand{\jeDecL}[3]{\hbox{\sl DecideL}_e(#1,#2,#3)}
+\newcommand{\jeDecR}[2]{\hbox{\sl DecideR}_e(#1,#2)}
+\newcommand{\jeRelL}[2]{\hbox{\sl ReleaseL}_e(#1,#2)}
+\newcommand{\jeRelR}[2]{\hbox{\sl ReleaseR}_e(#1,#2)}
+\newcommand{\jcStoreL}[3]{\hbox{\sl StoreL}_c(#1,#2,#3)}
+\newcommand{\jcStoreR}[2]{\hbox{\sl StoreR}_c(#1,#2)}
+% Identity experts
+\newcommand{\jeInitL}[1]{\hbox{\sl InitialL}_e(#1)}
+\newcommand{\jeInitR}[2]{\hbox{\sl InitialR}_e(#1,#2)}
+\newcommand{\jeCut}[4]{\hbox{\sl Cut}_e(#1,#2,#3,#4)}
+
+\newcommand{\cert}{{\tt cert}\xspace}
+
+%--------------------
+
+\newcommand{\true }{t\/}
+\newcommand{\false}{f\/}
+
+\newcommand{\ntrue}{t^-}
+\newcommand{\ptrue}{t^+}
+\newcommand{\nfalse}{f^-}
+\newcommand{\pfalse}{f^+}
+\newcommand{\wedgep}{\wedge^{\!+}}
+\newcommand{\wedgepn}{\wedge^{\!\pm}}
+\newcommand{\wedgen}{\wedge^{\!-}}
+\newcommand{\veep}{\vee^{\!+}}
+\newcommand{\veepn}{\vee^{\!\pm}}
+\newcommand{\veen}{\vee^{\!-}}
+\newcommand{\implp}{\impl^{\!+}}
+\newcommand{\impln}{\impl^{\!-}}
+
+\newcommand{\andClerk}[3]{{\wedge_c}(#1,#2,#3)}
+\newcommand{\falseClerk}[2]{f_c(#1,#2)}
+\newcommand{\orClerk}[2]{{\vee_c}(#1,#2)}
+\newcommand{\allClerk}[2]{\forall_c(#1,#2)}
+\newcommand{\storeClerk}[3]{\hbox{\sl store}_c(#1,#2,#3)}
+
+\newcommand{\trueExpert }[1]{{\true_e}(#1)}
+\newcommand{\andExpert}[3]{{\wedge_e}(#1,#2,#3)}
+\newcommand{\andExpertLJF}[6]{{\wedge_e}(#1,#2,#3,#4,#5,#6)}
+\newcommand{\orExpert  }[3]{{\vee_e}(#1,#2,#3)}
+\newcommand{\someExpert}[3]{\exists_e(#1,#2,#3)}
+\newcommand{\initExpert}[2]{\hbox{\sl init}_e(#1,#2)}
+\newcommand{\cutExpert}[4]{\hbox{\sl cut}_e(#1,#2,#3,#4)}
+\newcommand{\decideExpert}[3]{\hbox{\sl decide}_e(#1,#2,#3)}
+\newcommand{\releaseExpert}[2]{\hbox{\sl release}_e(#1,#2)}
+
+\newcommand{\Blue}[1]{{\color{blue}{#1}}} % Use this for comments
+% In order to get a draft without blue sentences (for the web), we can
+% change its definition to the following
+%\newcommand{\Blue}[1]{#1} 
+
+\newcommand{\blue}[1]{{\color{blue}{#1}}}
+%\newcommand{\blue}[1]{{\color[rgb]{0,0,1} #1}}
+\newcommand{\tupp}[2]{\blue{\langle #1,}#2{\blue{\rangle}}}
+
+
+\newcommand{\seq}{\Rightarrow}
+\newcommand{\eseq}[3]{#1;#2\seq #3}
+\newcommand{\seqneg}[2]{\seq #1 ; #2}
+\newcommand{\seqpos}[3]{\seq #1 ; #2 ; #3}
+\newcommand{\Ncal}{{\cal N}}
+\newcommand{\seqnega}[3]{\blue{#1} \seq #2 ; #3}
+\newcommand{\seqposa}[4]{\blue{#1} \seq #2 ; #3 ; #4}
+
+\newcommand{\mkpos}[1]{\partial\kern -1pt_{\scriptscriptstyle +}\kern -1pt(#1)}
+\newcommand{\mkneg}[1]{\partial\kern -1pt_{\scriptscriptstyle -}\kern -1pt(#1)}
+
+\newcommand{\tup}[1]{\langle #1\rangle}
+
+\newcommand{\ra}{\rightarrow}
+\newcommand{\args }[2]{(\hbox{\tt args}~#1~#2)}
+\newcommand{\lc   }[2]{(\hbox{\tt lc}~#1~#2)}
+\newcommand{\apply}[2]{(\hbox{\tt apply}~#1~#2)}
+\newcommand{\lidx }[1]{(\hbox{\tt idx}~#1)}
+\newcommand{\mapping}[3]{[\![#1\mathbin{|}#2]\!]_{#3}}
+
+\newcommand{\delayop}{\ensuremath{\partial}}
+\newcommand{\negdop}{\delayop}
+\newcommand{\posdop}{\rotatebox[origin=c]{180}{\delayop}}
+%\newcommand{\negd}[1]{\negdop\mkern -2mu\left(#1\right)}
+%\newcommand{\posd}[1]{\posdop\mkern -2mu\left(#1\right)}
+\newcommand{\negd}[1]{\delayop_{\scriptscriptstyle -}(#1)}
+\newcommand{\posd}[1]{\delayop_{\scriptscriptstyle +}(#1)}
+\newcommand{\delpf}{\delayop_{\scriptscriptstyle +}}%_F
+\newcommand{\delnf}{\delayop_{\scriptscriptstyle -}}%_F
+
+\newcommand{\delpfr}{\delayop_{\scriptscriptstyle +}^{\kern 1pt r}}%_F
+\newcommand{\delpfl}{\delayop_{\scriptscriptstyle +}^{\kern 2pt l}}%_F
+\newcommand{\delnfr}{\delayop_{\scriptscriptstyle -}^{\kern 1pt r}}%_F
+\newcommand{\delnfl}{\delayop_{\scriptscriptstyle -}^{\kern 2pt l}}%_F
+
+% MODAL FOCUSING MACROS
+\newcommand{\tr}[2]{\lbrack #1 \rbrack_{#2}}
+\newcommand{\trL}[2]{\lfloor #1 \rfloor_{#2}}
+\newcommand{\trR}[2]{\lceil #1 \rceil_{#2}}
+\newcommand{\str}[2]{ST_{#2}(#1)}
+\newcommand{\nnf}[1]{#1^\circ}
+\newcommand{\trlab}[1]{\lbrack #1 \rbrack}
+\newcommand{\trlabL}[1]{\lfloor #1 \rfloor}
+\newcommand{\trlabR}[1]{\lceil #1 \rceil}
+\newcommand{\trseq}[1]{\lbrack #1 \rbrack}
+\newcommand{\trplus}[1]{\lbrack #1 \rbrack^{+}}
+\newcommand{\rel}{R}
+\newcommand{\wld}{W}
+\newcommand{\val}{V}
+\newcommand{\m}{\mathcal{M}}
+\newcommand{\modelb}{\models_{\mathcal{B}}}
+\newcommand{\prop}{\mathcal{P}}
+\newcommand{\fl}{\mathcal{F}}
+\newcommand{\relfo}{R}
+\newcommand{\refl}{refl}
+\newcommand{\trans}{trans}
+\newcommand{\symm}{symm}
+\newcommand{\eucl}{eucl}
+\newcommand{\ser}{ser}
+\newcommand{\dir}{dir}
+\newcommand{\conn}{conn}
+\newcommand{\init}{init}
+\newcommand{\initR}{\init_{R}}
+\newcommand{\lwedge}{L\wedge}
+\newcommand{\rwedge}{R\wedge}
+\newcommand{\lvee}{L\vee}
+\newcommand{\rvee}{R\vee}
+\newcommand{\lbox}{L\square}
+\newcommand{\rbox}{R\square}
+\newcommand{\ldiamond}{L\lozenge}
+\newcommand{\rdiamond}{R\lozenge}
+\newcommand{\limpl}{L{\impl}}
+\newcommand{\rimpl}{R{\impl}}
+\newcommand{\lbot}{L\bot}
+\newcommand{\rtop}{R\top}
+\newcommand{\logick}{K}
+\newcommand{\logicik}{IK}
+\newcommand{\logicr}{R}
+%\newcommand{\labk}{G3K}
+\newcommand\labk  {\proofsystem{G3K}}
+\newcommand\labkN  {\proofsystem{G3K}}
+\newcommand\labkV  {\proofsystem{S(K)}}
+\newcommand\labkF  {\proofsystem{LMF}}
+\newcommand\labkstarF  {\proofsystem{G3K^*F}}
+\newcommand\labr  {\proofsystem{R}}
+\newcommand{\fix}[2]{{\bf FIX}\footnote{{\bf #1:} #2}}
+\newcommand{\initf}{init}%_F
+%\newcommand{\cutf}{cut}%_F
+\newcommand{\storef}{store}%_F
+\newcommand{\releasef}{release}%_F
+\newcommand{\decidef}{decide}%_F
+\newcommand{\wedgenf}{\wedgen}%_F
+\newcommand{\veenf}{\veen}%_F
+\newcommand{\wedgepf}{\wedgep}%_F
+\newcommand{\veepf}{\veep}%_F
+\newcommand{\boxf}{\square}%_F
+\newcommand{\diamondf}{\lozenge}%_F
+\newcommand{\implf}{{\impl}}%_F
+\newcommand{\ntruef}{{\ntrue}}%_F
+\newcommand{\nfalsef}{{\nfalse}}%_F
+\newcommand{\ptruef}{{\ptrue}}%_F
+\newcommand{\forallf}{\forall}%_F
+\newcommand{\existsf}{\exists}%_F
+
+\newcommand{\bigwedgep}{\bigwedge^{+}}
+\newcommand{\bigwedgen}{\bigwedge^{-}}
+\newcommand{\bigveep}{\bigvee^{+}}
+\newcommand{\bigveen}{\bigvee^{-}}
+
+\newcommand{\initk}{init_K}
+\newcommand{\initrk}{init_{\rel K}}
+\newcommand{\cutk}{cut_K}
+\newcommand{\storek}{store_K}
+\newcommand{\releasek}{release_K}
+\newcommand{\decidek}{decide_K}
+\newcommand{\wedgenk}{\wedgen_K}
+\newcommand{\veenk}{\veen_K}
+\newcommand{\wedgepk}{\wedgep_K}
+\newcommand{\veepk}{\veep_K}
+\newcommand{\boxk}{\square_K}
+\newcommand{\diamondk}{\lozenge_K}
+\newcommand{\implk}{{\impl}_K}
+\newcommand{\ntruek}{{\ntrue}_K}
+\newcommand{\nfalsek}{{\nfalse}_K}
+\newcommand{\ptruek}{{\ptrue}_K}
+\newcommand{\forallk}{\forall_K}
+\newcommand{\existsk}{\exists_K}
+\newcommand{\delpk}{\delayop^+_K}
+\newcommand{\delnk}{\delayop^-_K}
+
+%\newcommand{\delp}[1]{{#1}^{\delayop^{+}}}
+\newcommand{\axiom}{G}
+\newcommand{\fv}[1]{FV(#1)}
+
+\newcommand{\grs}{GRS}
+\newcommand{\fgrs}{FGRS}
+\newcommand{\ursl}{URS_{L}}
+\newcommand{\ursr}{URS_{R}}
+
+\newcommand{\GThreeC}{G3c}
+\newcommand{\GThreeIM}{G3im}
+
+\newcommand{\mpi}{\mathsf{mp}}
+
+\newcommand{\sepp}{\mathrel\mid} % DM Needed to change name from \sep
+                                 % (conflict with elsarticle)
+\newcommand{\coloneq}{\mathrel{::=}}
+
+%\newcommand{\DM}[1]{\smallskip\par\noindent\green{\bf #1}\smallskip}
+\newcommand{\DM}[1]{{\color[rgb]{0.23, 0.74, 0.23} 
+                     \smallskip\par\noindent\textbf{DM: #1}}\smallskip}
+\newcommand{\EP}[1]{\smallskip\par\noindent\red{#1}\smallskip}
+\newcommand{\bias}[1]{\delta(#1)}
+\newcommand{\biasn}[1]{\delta^-\kern -1pt(#1)}
+\newcommand{\biasp}[1]{\delta^+\kern -1pt(#1)}
+
+\newcommand{\adj}[2]{\hbox{\sl adj}~#1~#2}
+\newcommand{\pth}[2]{\hbox{\sl path}~#1~#2}
+
+\newcommand{\dcutf }{\hbox{\textsl{dcut}}_f \xspace}
+
+\newtheorem{goal}{Goal}
+
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{example}[theorem]{Example}
+%\newproof{proof}{Proof}
+
+%\newdefinition{rmk}{Remark}
+
+%Contexts
+\newcommand*\mdelim[3]{%
+	\mathopen{}\left#1%
+	#3%
+	\right#2\mathclose{}%
+}
+
+\makeatletter
+\newcommand*{\cxs}{%
+	\@ifnextchar\i{\cxs@two}{%
+		\@ifnextchar\bgroup{\cxs@one}{% % \bgroup is the same as {
+}}}
+\newcommand*{\cxs@one}[1]{%
+	\def\cxs@{#1}%
+	\mdelim{\lbrace}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #1\fi}%
+	\cxs@one@decor%
+}
+\newcommand*{\cxs@two}[3]{%
+	\def\cxs@{#3}%
+	\mdelim{\lbrace\strut^{#2}}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #3\fi}%
+	\cxs@one@decor%
+}
+\def\cxs@one@decor{%
+%	\@ifnextchar_{\cxs@one@sub}{%
+%		\@ifnextchar^{\cxs@one@sup}{%
+			\@ifnextchar\dots{\@firstoftwo{\dotsm\cxs@one@decor}}{%
+%				\@ifnextchar[{\cxs@one@arg}%]
+				\cxs}%}}%
+}
+%\def\cxs@one@sub_#1{_{#1}\cxs@one@decor}
+%\def\cxs@one@sup^#1{^{#1}\cxs@one@decor}
+%\def\cxs@one@arg[#1]{{#1}\cxs@one@decor}
+
+\def\cx@delete@right#1*{{#1}^{\star}\cx@continuation}
+\def\cx@delete@always#1{{#1}^{\ast}\cx@continuation}
+
+\def\cx@delete@star#1*{%
+	\@ifnextchar*{\cx@delete@right{#1}}{\cx@delete@always{#1}}%
+}
+
+\newcommand*{\@makecontextual}[2]{
+	\newcommand*{#1}{%
+		\@ifnextchar*{\cx@delete@star{#2}}{%
+%			\@ifnextchar\f{\cx@delete@focus{#2}}{%
+				#2\cx@continuation}}%
+	}
+%}
+\newcommand*{\cx@continuation}[1][]{_{#1}\cxs}
+
+\@makecontextual{\Ex}{}
+
+\@makecontextual{\Cx}{\mathcal{C}}
+\@makecontextual{\Dx}{\Delta}
+\@makecontextual{\Lx}{\Lambda}
+\@makecontextual{\Px}{\Pi}
+\@makecontextual{\Lxpr}{\Lambda'}
+\@makecontextual{\Rx}{\Gamma}
+\@makecontextual{\RxP}{\Gamma^{P}}
+\@makecontextual{\Rxs}{\Gamma^*}
+\@makecontextual{\Rxpr}{\Gamma'}
+\@makecontextual{\Dxb}{\Delta^{\rt{\bot}}}
+\@makecontextual{\Dxs}{\Delta^*}
+\@makecontextual{\Rxb}{\Gamma^{\rt{\bot}}}
+\@makecontextual{\Lxb}{\Lambda^{\rt{\bot}}}
+\@makecontextual{\Dxn}{\lf\Delta}
+\@makecontextual{\Dxt}{\rt\Delta}
+\@makecontextual{\Dxp}{\ct\Delta}
+\@makecontextual{\Rxp}{\Pi^{+}}
+\@makecontextual{\Rxm}{\Pi^{-}}
+\@makecontextual{\Dxm}{\Delta^{-}}
+\@makecontextual{\Ox}{\Omega}
+%\@makecontextual{\RRx}{\Xi}
+%\@makecontextual{\CCx}{\Sigma}
+%\@makecontextual{\DDx}{\Theta}
+
+%\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
+\newcommand*{\BR}{%
+	\@ifnextchar\i{\br@two}{%
+		\@ifnextchar\bgroup{\br@one}{% 
+}}}
+\newcommand*{\br@one}[1]{%
+	\def\br@{#1}%
+	\mdelim{\lbrack}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+}
+\newcommand*{\br@two}[3]{%
+	\def\br@{#3}%
+	\mdelim{\lbrack\strut^{#2}}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+}
+
+\newcommand*{\@makeoperator}[2]{
+	\newcommand*{#1}{%
+		\mathrm{#2}\mdelim{(}{)}
+	}
+}
+%
+\@makeoperator{\fm}{et}
+
+\makeatother
+
