@@ -1,0 +1,43 @@
+%!TEX root = main.tex
+% !TEX spellcheck = en-US
+
+In~\cite{DBLP:journals/tocl/CiabattoniG18} a method transforming 2-systems into hypersequents (and vice-versa) was presented. The general idea is the following
+\begin{itemize}
+\item[$\Rightarrow$] The conclusion sequents $S_i$ are joined in the same conclusion hypersequent and the premises are extended to the hypersequent formulation
+\[
+\infer[hr]{G\mid S_1\mid \ldots \mid S_k}
+{M_1 \ldots M_k}
+\]
+where $M_i$ is the multiset of premises $G\mid S_{i_j}$, for $1\leq j\leq n_i, 1\leq i\leq k$.
+\item[$\Leftarrow$] Consider the hypersequent rule $hr$ where the sets $M_i, 1 \leq i \leq k$ constitute a partition of the set of premisses of $hr$ and each $M_i$ contains the premisses $S_{i_j}, 1\leq j\leq n_i$. The corresponding polarized 2-system is
+\[
+\infer[r]{\Gamma\vdash C}
+      {\deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\pi_1}}\quad\ldots\quad
+       \deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\pi_k}}}
+\]
+where each derivation $\pi_i$, for $1\leq i \leq k$ may contain several applications of
+\[
+\infer[r_i]{S_i}
+{S_{i_1}\qquad\ldots\qquad S_{i_{n_i}}}
+\]
+where $S_i,S_{i_j}$ are sequents that act on the same multisets of (atomic) formulas, $1\leq i\leq k, 1\leq j\leq n_i$. %\red{EP. I find this highly non-deterministic!}
+\end{itemize}
+\begin{example}
+The polarized 2-system given in Example~\ref{ex:linearity} is transformed 
+into the hypersequent rule
+\[
+\infer[com]{G\mid P,\Gamma_1\vdash C_1\mid Q,\Gamma_2\vdash C_2}
+{G\mid P,Q,\Gamma_1\vdash C_1 & G\mid  P,Q,\Gamma_2\vdash C_2}
+\]
+\end{example}
+Observe that all the sequent/hypersequent/system of rules manipulate atomic formulas only, such as in the case for labelled systems arising from frame conditions. Hence the resulting systems are not ``general'', as the ones considered, \eg in~\cite{DBLP:conf/lics/CiabattoniGT08}. This has some consequences, for example, it does not seem possible to expand the analyticity proofs in~\cite{DBLP:journals/apal/MarinMPV22} to {\em axiom schemata} -- also it is not clear what {\em polarization} would be in the general case. The same happens in all the works concerning geometric axioms and extensions~\cite{NegVPl98,Neg03,Neg16,negri19}.
+
+As suggested in~\cite{DBLP:journals/tocl/CiabattoniG18}, and for all propositional Hilbert axioms within the class $\mathcal{P}_3$, analyticity for the {\em general} 2-systems (\ie\ not restrict to atoms) can be recovered by (a) first translating them into hypersequent rules, (b) applying the completion procedure in~\cite{DBLP:conf/lics/CiabattoniGT08} to the latter, and (c) translating them back. 
+
+\magenta{EP. I am not sure how this would work in a polarized setting... It should be observed, however, that Negri's 2-systems and Ciabattoni's (hyper)systems can be justified by polarized formulas in $\mathcal{N}_4$ (claim) when atoms have positive polarity.}
+
+

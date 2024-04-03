@@ -1,0 +1,43 @@
+%!TEX root = main.tex
+% !TEX spellcheck = en-US
+
+In~\cite{DBLP:journals/apal/MarinMPV22} we have presented a process of transforming (polarized) bipolar axioms into rules in the
+classical/intuitionistic settings. 
+The idea is that bipolars force a unique {\em shape} in focused derivations (called {\em bipoles}), where only atoms are stored in the leaves.
+Bipoles then {\em justifies} a synthetic inference rule for the respective bipolar.\footnote{While it should be noted that a bipolar can give rise to different bipoles, they do not differ in their {\em shape}.}
+
+We will illustrate the process with an example.
+\begin{example}\label{ex:bipole}
+Let $R(x,y)$ be a {\em negative} atomic
+formula and assume that the polarized formula $\forall x,y. R(x,y)\iimp R(y,y) $ is a member of
+$\Gamma$.
+%
+Consider the following \LKF derivation 
+\[
+  \infer[\kdecide_l]{\jUnf{\Gamma}{}{}{\Delta}}{
+  \infer[\forall_l]{\jLf{\Gamma}{\forall x,y. R(x,y)\iimp R(y,y)}{\Delta}}
+ {\infer[\impl_l]{\jLf{\Gamma}{R(x,y)\iimp R(y,y) }{\Delta}}
+  {\infer[\krelease_r]{\jRf{\Gamma}{R(x,y)}{\Delta}}
+   {\infer[\kstore_r]{\jUnf{\Gamma}{}{R(x,y)}{\Delta}}
+   {\deduce{\jUnf{\Gamma}{}{}{\Delta,R(x,y)}}{}}}
+   & 
+   \infer[\kinit_l]{\jLf{\Gamma}{R(y,y)}{\Delta}}
+  {}}}}
+\]	
+%
+In order to apply the rule $\kinit_l$ in this derivation, it must be
+the case that $R(y,y) \in\Delta$, that is, $R(y,y)$ is in the conclusion sequent. The atomic predicate $R(x,y)$ appear stored in the leaf, so it is in the premis. 
+%
+This derivation justifies the following (unfocused) synthetic inference rule in \LK,
+on unpolarized formulas % computed by this synthetic rule 
+\[
+  \infer[kt_n]{\Gamma\seq \Delta, R(y,y)}
+        {\Gamma\seq \Delta, R(x,y)}	
+\]
+If, however, the polarity of $R$ is {\em positive}, then the following (unfocused) synthetic inference rule in \LK\ will be derived
+\[
+  \infer[kt_p]{\Gamma,R(x,y)\seq \Delta}
+        {\Gamma, R(y,y)\seq \Delta}	
+\]
+
+\end{example}

@@ -1,0 +1,102 @@
+%!TEX root = main.tex
+% !TEX spellcheck = en-US
+
+Consider the axiom $\neg \alpha\vee\neg\neg\alpha$
+and its polarized atomic version $\negd{\neg P \veep \neg\neg P}$ with $P$ positive,
+where $\negd{B}$ denotes (the always
+negative formula) $B\wedgen\ntrue$, and $\neg B=B\impl \pfalse$,  for any
+polarized formula $B$. The focused derivation in \LJF\ corresponding to this axiom is
+\[
+\infer={\jLf{\Gamma}{\negd{\neg P \veep \neg\neg P}}{C}}
+{\infer[\veep_l]{\jUnf{\Gamma}{\neg P \veep \neg\neg P}{}{C}}
+{\infer[\kstore_l]{\jUnf{\Gamma}{\neg P}{}{C}}
+{\deduce{\jUnf{\Gamma,\neg P}{}{}{C}}{\pi_1}}
+&
+\infer[\kstore_l]{\jUnf{\Gamma}{\neg\neg P}{}{C}}
+{\deduce{\jUnf{\Gamma,\neg\neg P}{}{}{C}}{\pi_2}}}}
+\]
+Since neither $\neg P$ nor $\neg\neg P$ are atomic formulas, this derivation does not correspond to an inference rule on atoms. And forcing a second focus step over such formulas in any of the continuations $\pi_i$ may turn the resulting system unsound. 
+
+This means that, in a possible derivation, it may be the case that $\neg P,\neg\neg P$ are used or not. If they are, then $\pi_1,\pi_2$ have the following shapes, respectively
+\[
+\deduce{\jUnf{\Gamma,\neg P}{}{}{C}}
+{\deduce{\vdots}
+{\infer={\jLf{\Gamma_1}{\neg P}{C_1}}
+{\infer{\jRf{\Gamma_1}{P}{}}{}}}}
+\qquad
+\deduce{\jUnf{\Gamma,\neg\neg P}{}{}{C}}
+{\deduce{\vdots}
+{\infer={\jLf{\Gamma_2}{\neg\neg P}{C_2}}
+{\deduce{\jUnf{\Gamma_2,P}{}{}{}}{}}}}
+\]
+This means that $P\in\Gamma_1$ and the derivations together would justify the system of rules
+\[
+\infer[r]{\Gamma\vdash C}
+      {\deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\infer[r_1]{\Gamma_1,P\vdash }{}}}\quad&\quad
+       \deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\infer[r_2]{\Gamma_2\vdash C_2}
+                             {\deduce{\Gamma_2,P\vdash }{}}}}}
+\]
+That is, the rules $r_i$ may be applied, with the condition that $r$ should have been already applied, in a bottom-up reading of rules. This has a natural deduction flavor, when rules carry on some information of derivations, like the {\em discharging of formulas}.
+
+The {\em
+systems of rules}~\cite{Neg16} is an extension of the \emph{axioms-as-rules
+formalism}, since it allows for different sequent rules connected by
+conditions on the order of their applicability and with the possibly
+of sharing meta-variables for formulas or sets of formulas.
+%
+
+We observe, however, the method presented in~\cite{Neg16}  only applies to a class of
+generalized geometric implications, and $\neg \alpha\vee\neg\neg\alpha$ does not fall into this class. As shown in~\cite{DBLP:journals/apal/MarinMPV22}, polarities and focusing generalize the approaches based on geometric axioms.
+
+In~\cite{DBLP:journals/tocl/CiabattoniG18}, Ciabattoni and Genco also presented a general view of two-level system of rules, called 2-systems. We present next a polarized version of 2-systems.
+\begin{definition}
+A  {\em polarized 2-system} is a set of sequent rules $\{(r_1), . . . , (r_k ), (r)\}$ that can only be applied according to the following schema
+\[
+\infer[r]{\Gamma\vdash C}
+      {\deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\pi_1}}\quad\ldots\quad
+       \deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\pi_k}}}
+\]
+where each derivation $\pi_i$, for $1\leq i \leq k$ may contain several applications of
+\[
+\infer[r_i]{S_i}
+{S_{i_1}\qquad\ldots\qquad S_{i_{n_i}}}
+\]
+where $S_i,S_{i_j}$ are sequents that act on the same multisets of (atomic) formulas, $1\leq i\leq k, 1\leq j\leq n_i$. 
+\end{definition}
+\begin{example}
+If $N$ is a negative atom in $\negd{\neg N \veep \neg\neg N}$, then the correspondent polarized 2-system is 
+\[
+\infer[r]{\Gamma\vdash C}
+      {\deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\infer[r_1]{\Gamma_1\vdash C_1}{\Gamma_1\vdash N}}}\quad&\quad
+       \deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\infer[r_2]{\Gamma_2\vdash C_2}
+                             {\deduce{\Gamma_2,N\vdash }{}}}}}
+\]
+\end{example}
+The next example is the well known \emph{linearity axiom} $(\varphi\to \psi)\vee (\psi\to \varphi)$.
+\begin{example}\label{ex:linearity}
+Instantiated to positive atomic formulas $P,Q$  the linearity axiom becomes $\delayop^-[(P\impl Q)\veep (Q\impl P)]$. It gives rise to the polarized 2-system 
+\[
+\infer{\Gamma\vdash C}
+      {\deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\infer{\Gamma_1,P\vdash C_1}{\Gamma_1,P,Q\vdash C_1}}}\quad&\quad
+       \deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                             {\infer{\Gamma_2,Q\vdash C_2}{\Gamma_2,Q,P\vdash C_2}}}}
+\]
+\end{example}
+\begin{claim} Polarized 2-systems correspond to the class of
+$\mathcal{N}_4$ formulas.
+\end{claim}

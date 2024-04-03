@@ -1,0 +1,77 @@
+%!TEX root = main.tex
+% !TEX spellcheck = en-US
+
+This method finds a very interesting application in a better understanding between classical and intuitionistic behaviors in ecumenical systems.
+
+In~\cite{DBLP:journals/apal/Kurokawa09}, Kurokawa proposed an hypersequent calculus for 
+{\em intuitionistic logic with classical atoms} $IPC_{CA}$, which is
+propositional intuitionistic logic augmented with a class of propositional variables with  the decidability property. The axioms of $IPC_{CA}$ are the ones of $IPC$ plus the excluded middle restricted to classical atoms
+\[
+X\vee\neg X \qquad X \mbox{ is a classical propositional variable}
+\]
+The hypersequent calculus $sLIC$ has all the ordinary rules of the hypersequent version  of the propositional sequent calculus $\LJ$ for intuitionistic logic plus the Atomic Classical Splitting rules (ACS)
+\[
+\infer[(1)]{G\mid \Gamma\vdash A\mid X\vdash }{G\mid \Gamma, X\vdash A}\qquad
+\infer[(2)]{G\mid \Gamma\vdash\; \mid X\vdash Y}{G\mid \Gamma, X\vdash Y}
+\]
+First of all, we observe that (2) is derivable in $sLIC$, so it will not be addressed here. Second, as noted in~\cite{DBLP:journals/apal/Kurokawa09}, (1) can be generalized to arbitrary classical contexts (represented by $\Gamma^\circ$), that is, containing only formulas built from classical atomic variables (see the rule $(1^\circ$) below).
+
+The logic $IPC_{CA}$ is a conservative extension of both classical and intuitionistic logics, and 
+$sLIC$ has all the expected good proof theoretical properties.
+
+Consider the axiom $\alpha\vee\neg\alpha$ and its polarized atomic version $\negd{P \veep \neg P}$ with $P$ a positive atom.  The focused derivation
+\[
+\infer={\jLf{\Gamma}{\negd{P \veep \neg P}}{C}}
+{\infer[\veep_l]{\jUnf{\Gamma}{P \veep \neg P}{}{C}}
+{\infer[\kstore_l]{\jUnf{\Gamma}{P}{}{C}}
+{\deduce{\jUnf{\Gamma,P}{}{}{C}}
+{}}
+&
+\infer[\kstore_l]{\jUnf{\Gamma}{\neg P}{}{C}}
+{\deduce{\jUnf{\Gamma,\neg P}{}{}{C}}
+{\deduce{\vdots}
+{\infer={\jLf{\Gamma_1}{\neg P}{C_1}}
+{\infer{\jRf{\Gamma_1}{P}{}}{}}}}}}}
+\]
+justifies the polarized 2-system
+\[
+\infer[(1_2)]{\Gamma\vdash C}
+      {\deduce{\Gamma,P\vdash C\strut}
+              \quad&\quad
+       \deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\infer[r_1]{\Gamma_1,P\vdash C_1}
+                             {}}}}
+\]
+This is transformed in the hypersequent rule (see Example 5.1 in~\cite{DBLP:journals/tocl/CiabattoniG18})
+\[
+\infer[(1_h)]{G\mid \Gamma\vdash A\mid \Gamma_1,P\vdash B}{G\mid \Gamma, P\vdash A}
+\]
+which is the weakened version of rule (1) for the (classical) atom $P$. This rule can be then 
+be {\em completed}\footnote{\red{EP. I did not check the details, since this completion should be done restricting the variables to the classical case.}}, giving rise to the General Classical Splitting (GCS)
+\[
+\infer[(1^\circ)]{G\mid \Gamma_1\vdash A\mid \Gamma_2^\circ\vdash B}{G\mid \Gamma_1, \Gamma_2^\circ\vdash A}
+\]
+Finally, as shown in~\cite{DBLP:journals/tocl/CiabattoniG18}, 2-systems can be reformulated as natural deduction systems. The rule $(1_s)$ then becomes
+\[
+\infer[Em]{C}
+{\deduce{C}
+{\deduce{\vdots}{[P]}}&
+{\deduce{C}
+{\deduce{\vdots}{[\neg P]}}}}
+\]
+which is von Plato's rule for the excluded middle presented in~\cite{vonPlato}, restricted to classical variables. We observe that such a rule can also be generalized to arbitrary  classical formulas (and this all is being considered by Luiz Carlos in his recent draft).
+
+\subsection{To think}
+It would be good to:
+\begin{enumerate}
+\item think what happens for n-systems, n>2;
+\item  investigate how these axioms-as-rules frameworks for geometric/bipolar can be exported to natural deduction and tableaux systems. I guess that we will get only the negative translation.
+\item equality can be seen as a (non-logical) predicate axiomatized in first-order logic.  In that setting, the axioms of reflexivity, symmetry, transitivity and congruence, etc would need to be added. On the other hand, equality can be seen as a logical connective.  In this setting, the axioms of reflexivity, symmetry, transitivity and congruence, etc are all directly provable. Given the focusing theorem available for this equality, producing synthetic inference rules should be straightforward and more interesting. We could try to understand this better.
+\item check whether the work on Glivenko can be extended to bipolars (remembering, bipolars are a superset of geometric to which the focusing approach works);
+\item expand focusing to infinitary rules;
+\item can we propose interesting proof systems to strong implication?
+\item understand a better way of dealing with systems of rules. Dale  added labels to stored formulas. Maybe they can be seen as indices in natural deduction discharges?
+\item now that we have polarized Prawitz' ecumenical systems, we could try to add relational definitions to systems and understand better modal extensions;
+\item build a web interface for transforming axioms into rules.
+\end{enumerate}

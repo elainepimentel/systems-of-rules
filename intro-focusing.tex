@@ -1,0 +1,112 @@
+%!TEX root = main.tex
+% !TEX spellcheck = en-US
+
+Suppose that, in intuitionistic logic, we would like to try to prove the following sequent in intuitionistic logic
+\[
+A\iimp B, C\wedge D\seq p
+\]
+where $p$ is an atomic formula. There are two ways of proceeding with proof search (hence in a bottom-up reading of rules): either apply the conjunction left rule or the implication left rule.
+%many ways of doing so. For example, we could start by applying a rule over the main connective of $F$, or one of the formulas in $\Gamma$, if they exist. Another possibility would be start with 
+
+If we decide for the first, assuming (the multiplicative version of) the conjunction left rule, the derivation would look like
+\[
+\infer[\wedge_{l_M}]{A\iimp B, C\wedge D\seq p}
+{\deduce{A\iimp B, C, D\seq p}{
+\deduce{}{\vdots}}}
+\] 
+Since $(\wedge_{l_M})$ is an invertible rule~\cite{troelstra00book}, its application does not affect provability in the sense that, if the conclusion is provable, so is the premise.
+
+Now, if instead we decide to apply the left rule for implication\footnote{We will avoid the discussion on copying the  implication to the left premise here. See~\cite{DBLP:journals/jsyml/Dyckhoff92}.}
+\[
+\infer[\iimp_{l}]{A\iimp B, C\wedge D\seq p}{C\wedge D\seq A & B, C\wedge D\seq p}
+\] 
+then provability may be lost, since $(\iimp_{l})$ is not invertible w.r.t. the left premise, that is, it may be the case that the conclusion sequent is provable but the left premise sequent is not.
+
+Hence, when  searching for a proof of $A\iimp B, C\wedge D\seq p$ we can {\em always} start by applying the $(\wedge_{l_M})$ --  {\em don't care non-determinism} -- postponing making decisions, like applying $(\iimp_{l})$, until there are no more invertible options left. At that point, a decision has to be made: which non-invertible step should be taken --  {\em don't know non-determinism}. 
+
+This is the essence of focusing~\cite{andreoli92jlc}: separate the proof steps into unfocused (no changes in provability) and focused (decisions must be made). In the focused step, once we decide to {\em focus on} (or work on) a formula, this focus is maintained, bottom-up, after the application of the rule. We mark the focused formulas with the downarrow symbol $\Downarrow$. The focused left rule for the implication is
+\[
+\infer[\iimp_{l}]{\jLf{\Gamma}{A\iimp B}{C}}{\jRf{\Gamma}{A}{} & \jLf{\Gamma}{B}{C}}
+\] 
+We read this as: if we decide to decompose $A\iimp B$ on the left, we should continue the proof search by maintaining the focus  on $A$ on the right and $B$ on the left.
+
+But what about {\em atomic formulas}? Suppose that $A,B$ are atomic formulas in the focused derivation above. It is
+        possible to impose two different ``protocols'' for dealing with the atomic case.  The $Q$-protocol insists that the left premise above is trivial, meaning that it is proved by
+        the initial rule.  On the other hand, focusing should be lost (represented by the uparrow $\Uparrow$) in the right premise
+\[
+\infer[\iimp_{l}]{\jLf{\Gamma}{A\iimp B}{C}}
+{\infer[\kinit]{\jRf{\Gamma}{A}{}}{} & 
+\infer{\jLf{\Gamma}{B}{C}}{\jUnf{\Gamma}{B}{C}{}}}
+\]  
+        Following that protocol, we have that it should be the case that
+        $A\in\Gamma$.  Thus, if we set $\Gamma'$
+        to be the result of removing all occurrences of $A$
+        from $\Gamma$, then the (unfocused) derived inference rule from the derivation above becomes
+\[
+  \infer[\iimp_{l_Q}]
+        {\Gamma', A, A\iimp B \seq C}
+        {\Gamma' , B\seq C}
+\]
+        The second protocol, the $T$-protocol, insists that the right-most
+        premise is trivial and focus should be lost in the left premise
+\[
+\infer[\iimp_{l}]{\jLf{\Gamma}{A\iimp B}{C}}
+{\infer{\jRf{\Gamma}{A}{}}{\jUnf{\Gamma}{}{A}{}} & 
+\infer[\kinit]{\jLf{\Gamma}{B}{C}}{}}
+\]   
+That is,
+        $B$ and $C$ are the same atomic formula.       
+Thus,  the (unfocused) derived inference rule from the derivation above becomes
+\[
+  \infer[\iimp_{l_T}]
+        {\Gamma, A\iimp B \seq B}
+        {\Gamma \seq A}
+\]
+The names for the $Q$ and $T$ protocols comes from Danos, Joinet, and
+Schellinx~\cite{danos93wll}: in the $Q$ protocol, the tail (``queue'')
+of an implication yields a trivial premise while in the $T$ protocol,
+the head (``t\^ete'') of an implication yields a trivial premise.
+
+A more modern and flexible presentation of the $Q$ and $T$ protocols
+speaks, instead, of the \emph{polarity} of formulas.
+%
+In particular, if all atomic formulas have a {\em positive polarity}, the
+$Q$-protocol is enforced, while if all atomic formulas have a {\em negative
+polarity}, the $T$-protocol is enforced.
+
+Now that focusing is understood for implication and atoms, what can be said about the other connectives? For example, in the case of conjunction, we adopted the (invertible) {\em multiplicative version} of the left rule, that is
+\[
+\infer[\wedge_{l_M}]{\Gamma, A\wedge B\seq C}{\Gamma, A, B\seq C}
+\] 
+%This rule incorporates the left contraction rule. Gentzen's original rules correspond to 
+The (non-invertible) {\em additive version} is the following, where a choice has to be made during proof search
+\[
+ \infer[\wedge_{l_{i}}]{A_1\wedge A_2, \Gamma \seq C}{A_i, \Gamma \seq C}
+\]
+Such multiplicative/additive, invertible/non-invertible flavors can be captured in a single proof system by splitting the conjunction into two connectives: 
+$\wedgep$ and $\wedgen$, with {\em unfocused/focused} left rules 
+%Of course we have $A\wedgen B$ is logically equivalent to $A\wedgep B$, so while provability is maintained, the form of the resulting proofs can be completely different.
+\[
+  \infer[\wedgep_{l}]{\jUnf{\Gamma}{A\wedgep B,\Theta}{}{C}}{\jUnf{\Gamma}{A , B, \Theta}{}{C}}
+  \qquad
+ \infer[\wedgen_{l_i}]{\jLf{\Gamma}{A_1 \wedgen A_2}{C}}{\jLf{\Gamma}{A_i}{C}}
+ \]
+
+
+In \cite{liang07csl,LiaMil09} Miller and Liang proposed the  \LKF and \LJF focused proof
+systems for classical and intuitionistic logics, respectively.
+%
+Those systems 
+extend both the notion of focusing and polarity to
+all formulas. 
+
+In such systems, {\em focused rule applications} imply that focus is transferred from conclusion to premises in derivations. This process goes on until either the focused phase ends (depending on the {\em polarity} of the focused formula), or the derivation ends.
+Once the focus is \emph{released}, the formula is eagerly decomposed into subformulas, which are ultimately {\em stored} in the context. 
+%
+We will describe this in detail in the next section.
+
+{\em Some historical remarks.} The focusing discipline is based on the notion of {\em uniform proofs}~\cite{miller91apal} and it was discovered by Andreoli in~\cite{andreoli92jlc}, who showed that it is complete for linear logic~\cite{DBLP:journals/tcs/Girard87}, which naturally contains the multiplicative and additive versions of disjunction and conjunction. In intuitionistic logic focusing gives rise to  call-by-value~\cite{dyckhoff06cie}  and call-by-name~\cite{herbelin94csl} calculi, since using the $Q$-protocol the proof-search semantics of the
+implication is given by 
+\emph{forward-chaining}, while using the $T$-protocol, the proof-search semantics of the
+ implication is given by
+\emph{back-chaining}.

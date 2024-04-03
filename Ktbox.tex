@@ -1,0 +1,73 @@
+%!TEX root = main.tex
+% !TEX spellcheck = en-US
+
+The modal logic $\KTb$ is `one step away' from  $\K\T$ in the sense that in any shift-reflexive (Euclidean) frame the subframe induced by all worlds reachable from some fixed world is reflexive (totally connected)~\cite{DBLP:conf/tableaux/Lang23}. Hence a labeled system for $\KTb$ would be the system depicted in Figure~\ref{fig:labk} for $\K$ plus the rule $kt_p$ in Section~\ref{sec:bipol}, for example.
+
+\begin{figure}[t]%\scriptsize
+{\sc Initial rule}
+\[
+  \infer[\init]{{x:P,\Gamma}\vdash{\Delta, x:P}}{}
+%  \qquad
+%  \infer[\initR]{{x \rel y, \Gamma}\vdash{\Delta, x\rel y}}{}
+\]
+{\sc Structural rules}	
+\[
+  \infer[C_l]{\varphi, \Gamma \vdash \Delta}{\varphi, \varphi, \Gamma \vdash \Delta}
+  \qquad
+  \infer[C_r]{\Gamma \vdash \Delta, \psi}{\Gamma \vdash \Delta, \psi, \psi}
+\]
+{\sc Propositional rules}
+\[
+  \infer[\lwedge_1]{x:A\wedge B, \Gamma \vdash \Delta}{x:A, \Gamma \vdash \Delta}
+  \quad
+    \infer[\lwedge_2]{x:A\wedge B, \Gamma \vdash \Delta}{x:B, \Gamma \vdash \Delta}
+ \quad
+  \infer[\rwedge]{\Gamma \vdash \Delta, x:A \wedge B}{\Gamma \vdash \Delta, x:A & \Gamma \vdash \Delta, x:B}	
+\]
+\[
+  \infer[\lvee]{x:A\vee B, \Gamma \vdash \Delta}{x:A,\Gamma \vdash \Delta & x:B,\Gamma \vdash \Delta}
+  \quad
+  \infer[\rvee_1]{\Gamma \vdash \Delta, x:A \vee B}{\Gamma \vdash \Delta, x:A}
+  \quad
+  \infer[\rvee_2]{\Gamma \vdash \Delta, x:A \vee B}{\Gamma \vdash \Delta, x:B}
+\]
+\[
+  \infer[\limpl]{x:A\impl B, \Gamma \vdash \Delta_1,\Delta_2}{\Gamma \vdash \Delta_1, x:A & x:B,\Gamma \vdash \Delta_2}
+  \qquad
+  \infer[\rimpl]{\Gamma \vdash \Delta, x:A \impl B}{x:A, \Gamma \vdash \Delta, x:B}
+\]
+\[
+  \infer[f]{x:f, \Gamma \vdash \Delta}{}
+  \qquad
+  \infer[t]{\Gamma \vdash \Delta,x:t}{}
+\]
+{\sc Modal rules}
+\[
+  \infer[\rbox]{\Gamma \vdash \Delta, x:\square A}{x \rel y, \Gamma \vdash \Delta, y:A} \qquad
+  \infer[\lbox]{x \rel y,x:\Box A, \Gamma \vdash \Delta}{x \rel y, y:A,\Gamma \vdash \Delta}
+\]
+\caption{Labeled system for the modal logic $\K$. $P$ is an atomic formula
+  and the eigenvariable $y$ does not occur free in any formula of the
+  conclusion of rule $\rbox$.}
+\label{fig:labk}
+\end{figure}	
+
+\subsection{A possible roadmap}
+\begin{enumerate}
+\item It is easy to show that the rules $\rbox,\lbox$ ``simulate'' the rule 
+\[
+\infer[\K]{\Box\Gamma\seq\Box A}{\Gamma\seq A}
+\]
+This is formally stated in~\cite{DBLP:conf/tableaux/PimentelRL19}. It would be interesting to simulate the 2-system
+with the rule
+\[
+\infer[\K]{\Box\Gamma\seq\Box A}
+{\deduce{\Gamma\seq A}
+{\deduce{\vdots}
+{\infer[\T]{\Box B,\Gamma',\seq\Delta'}{B,\Gamma',\seq\Delta'}}}}
+\]
+I think this is not difficult, in fact.
+\item I am not sure it is possible to extend the work in~\cite{DBLP:journals/tocl/CiabattoniG18} to modalities. If it is, then we could translate directly the 2-system into hypersequents.
+\item  In any case, it would be interesting to see if it is possible to extend Ciabattoni's ideas to the first-order case. Not sure how this would help here, but in any case it could be interesting.
+\item  I have some other ideas of applications of all that to the ecumenical setting, if someone is interested.
+\end{enumerate}

@@ -1,0 +1,387 @@
+%!TEX root = main.tex
+% !TEX spellcheck = en-US
+
+\LKF and \LJF ~\cite{LiaMil09}can accommodate both the $Q$ and $T$ protocols as well
+as a mix of those protocols.
+%
+The proof system \LKF, for first-order classical logic, and the
+proof system \LJF, for first-order intuitionistic logic, are
+presented in Figures~\ref{fig:lkf} and~\ref{fig:ljf}, respectively.
+
+In order to obtain their flexibility in capturing various focusing
+regimes, the \LKF and \LJF proof systems use \emph{polarized}
+formulas.
+%
+A \emph{polarized classical (first-order) formula} is a formula built
+using atomic formulas, 
+the usual first-order quantifiers $\forall$ and $\exists$, the implication
+$\impl$, and polarized versions of the logical connectives and
+constants, i.e., $\ntrue$, $\ptrue$,$\nfalse$, $\pfalse$, $\veen$,
+$\veep$, $\wedgen$, $\wedgep$.
+%
+A \emph{polarized intuitionistic (first-order) formula} is a polarized
+classical formula in which the logical connectives $\nfalse$ and
+$\veen$ do not occur.
+%
+The positive and negative versions of connectives and constants
+have identical truth conditions but different inference rules
+inside the polarized proof systems.
+%
+For example, the left introduction rule for $\wedgep$ is invertible
+while the left introduction rule for $\wedgen$ is not invertible.
+
+%We shall also find it necessary to use \emph{delays}: if $B$ is a
+%polarized formula then we define $\negd{B}$ to be (the always
+%negative) $B\wedgen\ntrue$ and $\posd{B}$ to be (the always positive)
+%$B\wedgep\ptrue$.
+%%
+%Equivalently, we can take $\posd{\cdot}$ to be the 1-ary version of
+%either the binary $\veep$ or $\wedgep$ and
+%take $\negd{\cdot}$ to be the 1-ary version of either
+%the binary $\veen$ or $\wedgen$.
+%%
+%(The 0-ary version of these four connectives correspond to the
+%logical units $\pfalse$, $\ptrue$, $\nfalse$, 
+%%or 
+%$\ntrue$.)
+
+If a formula's top-level connective is $\ptrue$,
+$\pfalse$, $\veep$, $\wedgep$, or $\exists$, then that formula is
+\emph{positive}.
+%
+If a formula's top-level connective is $\ntrue$, $\nfalse$,
+$\veen$, $\wedgen$, $\impl$, or $\forall$, then it is \emph{negative}.
+%
+Note that in the intuitionistic system \LJF, we have only one
+disjunction and one falsum, both of which exist only with positive
+polarity.
+%
+The way to form the negation of the polarized formula $B$ is with the
+formula $B\impl\pfalse$: this formula has negative polarity no matter
+the polarity of $B$.
+
+%\ednote{MV: We said above that $\nfalse$ does not occur in the
+%intuitionistic language. EP. I think that it should be $\pfalse$.} 
+
+In both \LKF and \LJF, every polarized formula is classified as
+positive or negative.
+%
+This means that we must also provide a polarity to atomic formulas.
+%
+As it turns out, this assignment of polarity to atomic formulas can,
+in principle, be arbitrary.
+%
+%In particular, an \emph{atomic bias assignment} is a function
+%$\bias{\cdot}$ that maps atomic formulas to the set of two tokens
+%$\{pos,~neg\}$: if $\bias{A}$ is $pos$ then that atomic formula is
+%positive and if $\bias{A}$ is $neg$ then that atomic formula is
+%negative.
+%%
+%We may ask that all atomic formulas are positive, that
+%they are all negative, or we can mix polarity
+%assignments. 
+%%
+%In particular, the atomic bias assignment $\biasp{\cdot}$ assigns all
+%atoms a positive polarity while $\biasn{\cdot}$ assigns all
+%atoms a negative polarity.
+%%
+%We shall assume that an atomic bias
+%assignment is also \emph{stable under substitution}: that is, for all
+%substitutions $\theta$,  $\bias{\theta A} = \bias{A}$.
+%%
+%In first-order logic, this is equivalent to saying that such bias
+%assignments are \emph{predicate determined}: that is, if atoms $A$ and
+%$A'$ have the same predicate head, then $\bias{A}=\bias{A'}$.
+
+%We say that the pair $\tup{\delta,\hat B}$ is a \emph{polarization of}
+%$B$ if $\bias{\cdot}$ is an atomic bias assignment and if every
+%occurrence of $\true$, $\wedge$, $\false$, and $\vee$ in $B$ is
+%labeled with either the $+$ or $-$ annotation.
+%%
+%If $B$ has $n$ occurrences of these logical connectives then there are
+%$2^n$ different ways to place these $+$ or $-$ symbols.
+%%
+%We shall also allow the insertion of any number of $\posd{\cdot}$ and
+%$\negd{\cdot}$ into $\hat B$ as well.
+%%
+%In other words, the polarized formula $\tup{\delta,C}$ is a
+%polarization of $B$ if deleting all delays and all $+$ and $-$
+%annotations on logical connectives of $C$ results in $B$.
+%
+Note that we use $\impl$, $\forall$, and $\exists$ in both unpolarized
+as well as polarized formulas: we can do this since the polarity of
+these connectives is not ambiguous.
+%
+In classical logic, the polarity of $\true$, $\wedge$, $\false$, and
+$\vee$ is ambiguous and all of these can be positive or negative.
+%
+In intuitionistic logic, only the polarity of $\true$ and $\wedge$
+is ambiguous.
+%
+In both of these logics, however, the polarity of atoms is equally
+ambiguous.
+%
+%Finally, if $\tup{\delta,\hat B}$ is a polarization of $B$, we shall
+%generally drop explicit reference to $\delta$ and simply say that
+%$\hat B$ is a polarization of $B$: often, the atomic bias assignment
+%is either not important or can be inferred from context.
+
+
+\subsection{Focused proof systems}
+\label{sec:focused ps}
+
+
+\begin{figure}
+	{\sc Asynchronous Rules}
+\[
+  \infer[\kern-2pt\veen_r]{\jUnf{\Gamma}{\Sigma}{A \veen\kern-3pt B, \Omega}{\Delta}}
+                 {\jUnf{\Gamma}{\Sigma}{A,B, \Omega}{\Delta}}   
+  \qquad 
+  \infer[\kern-2pt\wedgen_r]{\jUnf{\Gamma}{\Sigma}{A \wedgen B, \Omega}{\Delta}}
+                   {\jUnf{\Gamma}{\Sigma}{A, \Omega}{\Delta}
+                    & 
+                    \jUnf{\Gamma}{\Sigma}{B, \Omega}{\Delta}}
+\]
+\[
+  \infer[\wedgep_l]{\jUnf{\Gamma}{A\wedgep B,\Sigma}{\Omega}{\Delta}}
+                   {\jUnf{\Gamma}{A , B, \Sigma}{\Omega}{\Delta}}
+  \qquad
+  \infer[\veep_l]{\jUnf{\Gamma}{A\veep B,\Sigma}{\Omega}{\Delta}}
+                 {\jUnf{\Gamma}{A,\Sigma}{\Omega}{\Delta}
+                  & 
+                  \jUnf{\Gamma}{B,\Sigma}{\Omega}{\Delta}}
+\]
+\[
+  \infer[\forall_r]{\jUnf{\Gamma}{}{\forall x.B, \Omega}{\Delta}}
+                   {\jUnf{\Gamma}{}{[y/x]B, \Omega}{\Delta}}	
+  \qquad
+  \infer[\exists_l]{\jUnf{\Gamma}{\exists x.B, \Sigma}{\Omega}{\Delta}}
+                   {\jUnf{\Gamma}{[y/x]B,\Sigma}{\Omega}{\Delta}}
+\]
+\[
+  \infer[\kern-2pt\impl_r]{\jUnf{\Gamma}{\Sigma}{A \impl B, \Omega}{\Delta}}
+                 {\jUnf{\Gamma}{\Sigma,A}{B,\Omega}{\Delta}}
+  \qquad
+  \infer[\kern-2pt\ptrue_l]{\jUnf{\Gamma}{\ptrue\kern-2pt, \Sigma}{\Omega}{\Delta}}
+                  {\jUnf{\Gamma}{\Sigma}{\Omega}{\Delta}}
+  \qquad
+  \infer[\kern-2pt\nfalse_r]{\jUnf{\Gamma}{\Sigma}{\nfalse\kern-2pt,\Omega}{\Delta}}
+                            {\jUnf{\Gamma}{\Sigma}{\Omega}{\Delta}}
+\]
+\[
+  \infer[\ntrue_r]{\jUnf{\Gamma}{\Sigma}{\ntrue\kern-3pt,\Omega}{\Delta}}{}
+  \qquad
+  \infer[\kern-2pt\pfalse_l]{\jUnf{\Gamma}{\pfalse\kern-2pt,\Sigma}{\Omega}{\Delta}}{}
+\]
+	
+\medskip{\sc Synchronous Rules}	
+
+\[ 
+  \infer[\impl_l]{\jLf{\Gamma}{A\impl B}{\Delta}}
+                 {\jRf{\Gamma}{A}{\Delta} &  \jLf{\Gamma}{B}{\Delta}}
+  \quad	
+  \infer[\veen_l]{\jLf{\Gamma}{A \veen\kern-3pt B}{\Delta}}
+                 {\jLf{\Gamma}{A}{\Delta}
+                  & 
+                  \jLf{\Gamma}{B}{\Delta}}
+  \quad
+  \infer[\kern -2pt\wedgen_l]{\jLf{\Gamma}{A_1 \wedgen\kern-3pt A_2}{\Delta}}
+                   {\jLf{\Gamma}{A_i}{\Delta}}
+\]
+\[
+  \infer[\wedgep_r]{\jRf{\Gamma}{A \wedgep B}{\Delta}}
+                   {\jRf{\Gamma}{A}{\Delta}
+                    & 
+                    \jRf{\Gamma}{B}{\Delta}}
+  \qquad
+  \infer[\veep_r]{\jRf{\Gamma}{A_1 \veep A_2}{\Delta}}
+                 {\jRf{\Gamma}{A_i}{\Delta}}
+\]
+\[
+  \infer[\forall_l]{\jLf{\Gamma}{\forall x.B}{\Delta}}
+                   {\jLf{\Gamma}{[t/x]B}{\Delta}}
+  \quad
+  \infer[\exists_r]{\jRf{\Gamma}{\exists x.B}{\Delta}}
+                   {\jRf{\Gamma}{[t/x]B}{\Delta}}
+  \quad
+  \infer[\ptrue_r]{\jRf{\Gamma}{\ptrue}{\Delta}}{}
+  \quad
+  \infer[\nfalse_l]{\jLf{\Gamma}{\nfalse}{\Delta}}{}
+\]
+
+\medskip{\sc Identity rules}
+	
+\[
+  \infer[\kinit_l]{\jLf{\Gamma}{N_a}{N_a, \Delta}}{}
+  \qquad
+  \infer[\kinit_r]{\jRf{\Gamma,P_a}{P_a}{\Delta}}{}
+%	\qquad 
+%	\infer[cut]{\jUnf{\Gamma}{}{}{\Delta}}
+%	{\jUnf{\Gamma}{}{F}{\Delta}
+%	& 
+%	\jUnf{\Gamma}{F}{}{\Delta}}
+\]
+	
+\medskip{\sc Structural rules}
+	
+\[
+  \infer[\kdecide_l]{\jUnf{\Gamma,N}{}{}{\Delta}}
+                    {\jLf{\Gamma,N}{N}{\Delta}}
+  \quad
+  \infer[\kdecide_r]{\jUnf{\Gamma}{}{}{P, \Delta}}
+                    {\jRf{\Gamma}{P}{P, \Delta}}
+  \quad
+  \infer[\krelease_l]{\jLf{\Gamma}{P}{\Delta}}
+                     {\jUnf{\Gamma}{P}{}{\Delta}}
+  \quad
+  \infer[\krelease_r]{\jRf{\Gamma}{N}{\Delta}}
+                     {\jUnf{\Gamma}{}{N}{\Delta}}
+\]
+\[
+  \infer[\kstore_l]{\jUnf{\Gamma}{C,\Sigma}{\Omega}{\Delta}}
+                   {\jUnf{C,\Gamma}{\Sigma}{\Omega}{\Delta}}
+  \qquad
+  \infer[\kstore_r]{\jUnf{\Gamma}{}{D, \Omega}{\Delta}}
+                   {\jUnf{\Gamma}{}{\Omega}{D, \Delta}}
+\]
+	
+Here, $P$ is positive, $N$ is negative, $C$ is a negative formula or
+positive atom, $D$ a positive formula or negative atom, $N_a$ is
+a negative atom, and $P_a$ is a positive atom.  Other formulas
+are arbitrary. In the rules $\forall_r$  and $\exists_l$ the
+eigenvariable $y$ does not occur free in any formula of the
+conclusion.
+\caption{The focused classical sequent calculus \LKF.}
+\label{fig:lkf}
+\end{figure}	
+
+\begin{figure}
+{\sc Asynchronous Rules}
+
+\[
+  \infer[\impl_r]{\jUnfG{\Sigma}{A \supset B}}{\jUnfG{A,\Sigma}{B}}   
+  \qquad
+  \infer[\wedgen_r]{\jUnfG{\Sigma}{A \wedgen B}}
+                   {\jUnfG{\Sigma}{A} \quad \jUnfG{\Sigma}{B}}
+\]
+\[
+  \infer[\wedgep_l]{\jUnfGamb{A\wedgep B,\Sigma}}{\jUnfGamb{A , B, \Sigma}}
+  \qquad
+  \infer[\veep_l]{\jUnfGamb{A\veep B,\Sigma}}
+        {\jUnfGamb{A,\Sigma}\quad \jUnfGamb{B,\Sigma}}
+\]
+\[
+  \infer[\forall_r]{\jUnfG{\Sigma}{\forall x.B}}{\jUnfG{\Sigma}{[y/x]B}}
+  \qquad
+  \infer[\exists_l]{\jUnfGamb{\exists x.B, \Sigma}}{\jUnfGamb{[y/x]B,\Sigma}}
+ \]
+\[
+  \infer[\ntrue_r]{\jUnfG{\Sigma}{\ntrue}}{}\qquad
+  \infer[\ptrue_l]{\jUnfGamb{\ptrue, \Sigma}}{\jUnfGamb{\Sigma}}
+   \qquad
+  \infer[\pfalse_l]{\jUnfGamb{\pfalse, \Sigma}}{}
+\]
+
+\medskip{\sc Synchronous Rules}
+
+\[ 
+  \infer[\impl_l]{\jLfG{A \impl B}}{  \jRfG{A}\quad \jLfG{B}}
+  \qquad
+  \infer[\veep_r]{ \jRfG{A_1 \veep A_2}}{\jRfG{A_i}}
+  \qquad
+  \infer[\wedgen_l]{\jLfG {A_1 \wedgen A_2}}{\jLfG{A_i}}
+\]
+\[
+  \infer[\wedgep_r]{\jRfG{A \wedgep B}}{\jRfG{A} \quad \jRfG{B}}
+  \quad
+  \infer[\forall_l]{\jLfG{\forall x.B}}{\jLfG{[t/x]B}}
+  \quad
+  \infer[\exists_r]{\jRfG{\exists x.B}}{\jRfG{[t/x]B}}
+  \quad
+  \infer[\ptrue_r]{\jRfG{\ptrue}}{}
+\]
+
+\medskip{\sc Identity rules}
+
+\[
+  \infer[\kinit_l]{\jLf{\Gamma}{N_a}{N_a}}{}
+  \qquad
+  \infer[\kinit_r]{\jRf{\Gamma,P_a}{P_a}}{}
+  \qquad
+%  \infer[cut]{\jUnf{\Gamma}{}{}{R}}
+%             {\jUnf{\Gamma}{}{F}{}\qquad \jUnf{\Gamma}{F}{}{R}}
+\]
+
+\medskip{\sc Structural rules}
+
+\[
+  \infer[\kern -2pt \kdecide_l]{\jUnf{\Gamma,N}{}{}{R}}{\jLf{\Gamma,N}{N}{R}}
+  \quad
+  \infer[\kern -2 pt \kdecide_r]{\jUnf{\Gamma}{}{}{P}}{\jRf{\Gamma}{P}}
+  \quad
+  \infer[\krelease_l]{\jLf{\Gamma}{P}{R}}{\jUnf{\Gamma}{P}{}{R}}
+  \quad
+  \infer[\krelease_r]{\jRf{\Gamma}{N}}{ \jUnf{\Gamma}{}{N}{}}
+\]
+\[
+\infer[\kstore_l]{\jUnfamb{\Gamma}{C,\Sigma}{}}
+                 {\jUnfamb{C,\Gamma}{\Sigma}{}}
+  \qquad
+  \infer[\kstore_r]{\jUnf{\Gamma}{}{D}{}}{\jUnf{\Gamma}{}{}{D}}
+\]
+
+Here, $P$ is positive, $N$ is negative, $C$ is a negative formula or
+positive atom, $D$ a positive formula or negative atom, $N_a$ is a
+negative atom, and $P_a$ is a positive atom.  Other formulas are
+arbitrary. $\Rscr$ denotes $\Delta_1 \Uparrow \Delta_2$ where the
+union of $\Delta_1$ and $\Delta_2$ contains at most one formula.  
+In the rules $\forall_r$  and $\exists_l$ the
+eigenvariable $y$ does not occur free in any formula of the
+conclusion.
+\caption{The focused intuitionistic sequent calculus \LJF.}
+\label{fig:ljf}
+\end{figure}	
+
+The inference rules of \LKF and \LJF presented in Figures~\ref{fig:lkf} and~\ref{fig:ljf}, respectively, involve three kinds of sequents 
+\begin{itemize}
+\item $\jUnf{\Gamma}{\Sigma}{\Omega}{\Delta}$ belongs to the {\em asynchronous phase}. During this phase, all negative (resp. positive) formulas in  $\Omega$ (resp. $\Sigma$) are introduced and all atoms and positive (resp. negative) formulas  are stored in the context $\Delta$ (resp. $\Gamma$);
+\item $\jLf{\Gamma}{B}{\Delta},\quad\hbox{and}\quad
+  \jRf{\Gamma}{B}{\Delta}$ belongs to the {\em synchronous phase}, where all positive connectives at the root of $B$ are introduced. 
+\end{itemize}
+Here $\Gamma$, $\Sigma$, $\Omega$ and $\Delta$ are
+multisets of polarized formulas and $B$ is a polarized formula.
+%
+The formula occurrence $B$ in a $\Downarrow$-sequent is called the
+\emph{focus} of that sequent.
+
+The dynamics of the different phases is detailed below.
+
+\noindent
+{\bf Asynchronous Phase.} Asunchronous rules can be applied eagerly, in any order.
+This process includes storing formulas: note that the rules $\kstore_r, \kstore_l$ move, to the 
+contexts $\Gamma/\Delta$, atomic or negative/positive formulas since they cannot be decomposed during the asynchronous phase.
+
+The asynchronous phase ends when $\Sigma,\Omega$ in unfocused sequents are empty. A decision rule $\mathsf{D_l}$ or  $\mathsf{D_r}$ is then applied,  and
+a synchronous phase starts by {\em focusing} on a non-atomic formula, either negative on the left or positive on the right.
+
+\noindent
+{\bf Synchronous Phase.} Once we focus on a formula, the proof  follows by applying synchronous rules, where  the focus persists on the decomposed subformulas until either: the proof ends with an instance of an axiom;
+a negative (resp. positive) formula  on the right (resp. left) is reached, and the synchronous phase  ends with the application of one of the release rules $\krelease_r,\krelease_l$.
+
+
+There are two initial rules, $\kinit_r,\kinit_l$, acting on right positive atoms and left negative atoms, respectively, meaning that derivations should necessarily end when focusing on such formulas.
+
+
+The system  \LJF is depicted in a separate figure for the sake of clarity.
+%
+However, one can notice that, similarly to what we have for \LJ and
+\LK in the original Gentzen formulations, \LJF can be seen as a
+restriction of \LKF, where the rules for $\nfalse$ and $\veen$ are
+omitted and only one formula is admitted in the succedent of sequents.  In
+particular, this implies that $(i)$ in the left rule for $\impl$, the
+right context of the conclusion is not present in the left premise;
+$(ii)$ in the rule $\kdecide_r$, the formula placed under focus is
+not subjected to contraction; and $(iii)$ a sequent of the form $\jRf{\Gamma}{B}{\Delta}$, when used in an
+\LJF proof, is such that $\Delta$ is empty.
+%
+In that case, we write that sequent as simply $\jRf{\Gamma}{B}{}$.
