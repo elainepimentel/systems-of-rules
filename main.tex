@@ -1,0 +1,70 @@
+\documentclass{llncs}
+\usepackage{xspace}
+\usepackage{proof}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{leftidx}
+\usepackage{cmll}
+\usepackage{amssymb}
+\usepackage{graphicx} % for rotatebox
+\usepackage{rotating}
+\usepackage{subcaption}
+%\usepackage[hide]{ed}
+\usepackage[show]{ed}
+\usepackage[colorlinks,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{xifthen}
+
+\usepackage{collectbox}
+
+\makeatletter
+\newcommand{\mybox}{%
+    \collectbox{%
+        \setlength{\fboxsep}{1pt}%
+        \fbox{\BOXCONTENT}%
+    }%
+}
+\makeatother
+
+\bibliographystyle{alpha}
+\input{phead.tex}
+
+\title{Systems of rules}
+
+\author{Draft}
+\institute{\today}
+%\address{Dept. of Computer Science, University College London, UK}
+%\date{\vskip-20pt\noindent Original version: November 2021}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+In these notes we will briefly explain focusing, the axioms-as-rules approach and its possible application to systems of rules.
+\end{abstract}
+
+\section{What is focusing?}\label{sec:intro}
+\input{intro-focusing}
+
+
+\section{Polarization}\label{sec:polarization}
+\input{polarization}
+
+\section{Axioms to rules: bipoles}\label{sec:bipol}
+\input{bipoles}
+
+\section{Beyond bipoles: 2-systems}
+\input{2-systems}
+
+\section{From to 2-systems to hypersequents}
+\input{hypersequents}
+
+\section{A labeled system for $\KTb$}
+\input{KTbox}
+
+\section{2-systems and ecumenical systems}\label{sec:ec}
+\input{ecumenical}
+
+\bibliography{biblio}
+\end{document}
+
