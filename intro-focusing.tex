@@ -105,8 +105,10 @@ Once the focus is \emph{released}, the formula is eagerly decomposed into subfor
 %
 We will describe this in detail in the next section.
 
-{\em Some historical remarks.} The focusing discipline is based on the notion of {\em uniform proofs}~\cite{miller91apal} and it was discovered by Andreoli in~\cite{andreoli92jlc}, who showed that it is complete for linear logic~\cite{DBLP:journals/tcs/Girard87}, which naturally contains the multiplicative and additive versions of disjunction and conjunction. In intuitionistic logic focusing gives rise to  call-by-value~\cite{dyckhoff06cie}  and call-by-name~\cite{herbelin94csl} calculi, since using the $Q$-protocol the proof-search semantics of the
+{\em Some historical remarks.} Early work on the proof theory of proof search used the notion of uniform proofs, in which proofs are built using two phases: goal-reduction and backchaining~\cite{miller91apal}. Andreoli~\cite{andreoli92jlc} generalized that work by extending it to linear logic and introducing polarities. His proof system included both additive and multiplicative versions of conjunction and disjunctions, and he showed that focused proofs are complete for linear logic~\cite{DBLP:journals/tcs/Girard87}.
+
+\magenta{E.P: rephrase that: In intuitionistic logic focusing gives rise to  call-by-value \cite{dyckhoff06cie}  and call-by-name~\cite{herbelin94csl} calculi, since using the $Q$-protocol the proof-search semantics of the
 implication is given by 
 \emph{forward-chaining}, while using the $T$-protocol, the proof-search semantics of the
  implication is given by
-\emph{back-chaining}.
+\emph{back-chaining}.}

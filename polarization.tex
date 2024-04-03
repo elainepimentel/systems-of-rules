@@ -44,6 +44,13 @@ while the left introduction rule for $\wedgen$ is not invertible.
 %logical units $\pfalse$, $\ptrue$, $\nfalse$, 
 %%or 
 %$\ntrue$.)
+In both \LKF and \LJF, every polarized formula is classified as
+positive or negative.
+%
+This means that we must also provide a polarity to atomic formulas.
+%
+As it turns out, this assignment of polarity to atomic formulas can,
+in principle, be arbitrary.
 
 If a formula's top-level connective is $\ptrue$,
 $\pfalse$, $\veep$, $\wedgep$, or $\exists$, then that formula is
@@ -63,13 +70,6 @@ the polarity of $B$.
 %\ednote{MV: We said above that $\nfalse$ does not occur in the
 %intuitionistic language. EP. I think that it should be $\pfalse$.} 
 
-In both \LKF and \LJF, every polarized formula is classified as
-positive or negative.
-%
-This means that we must also provide a polarity to atomic formulas.
-%
-As it turns out, this assignment of polarity to atomic formulas can,
-in principle, be arbitrary.
 %
 %In particular, an \emph{atomic bias assignment} is a function
 %$\bias{\cdot}$ that maps atomic formulas to the set of two tokens
@@ -152,8 +152,8 @@ ambiguous.
                   \jUnf{\Gamma}{B,\Sigma}{\Omega}{\Delta}}
 \]
 \[
-  \infer[\forall_r]{\jUnf{\Gamma}{}{\forall x.B, \Omega}{\Delta}}
-                   {\jUnf{\Gamma}{}{[y/x]B, \Omega}{\Delta}}	
+  \infer[\forall_r]{\jUnf{\Gamma}{\Sigma}{\forall x.B, \Omega}{\Delta}}
+                   {\jUnf{\Gamma}{\Sigma}{[y/x]B, \Omega}{\Delta}}	
   \qquad
   \infer[\exists_l]{\jUnf{\Gamma}{\exists x.B, \Sigma}{\Omega}{\Delta}}
                    {\jUnf{\Gamma}{[y/x]B,\Sigma}{\Omega}{\Delta}}
@@ -357,7 +357,7 @@ The formula occurrence $B$ in a $\Downarrow$-sequent is called the
 The dynamics of the different phases is detailed below.
 
 \noindent
-{\bf Asynchronous Phase.} Asunchronous rules can be applied eagerly, in any order.
+{\bf Asynchronous Phase.} Asynchronous rules can be applied eagerly, in any order.
 This process includes storing formulas: note that the rules $\kstore_r, \kstore_l$ move, to the 
 contexts $\Gamma/\Delta$, atomic or negative/positive formulas since they cannot be decomposed during the asynchronous phase.
 
