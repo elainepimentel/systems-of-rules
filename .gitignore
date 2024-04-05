@@ -1,0 +1,16 @@
+*.aux
+*.bbl
+*.blg
+*.fls
+*.log
+*.lp
+*.lpo
+*.nav
+*.out
+*.pag
+*.pdf
+*.rel
+*.snm
+*.toc
+*.vrb
+*.vtc
