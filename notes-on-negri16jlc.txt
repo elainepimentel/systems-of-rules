@@ -24,6 +24,6 @@ A big problem for accounting for a “system of rules” is coming up with a bet
 
 When there is an isomorphism between two classes of things (in this case, axioms and inference rules), why pick one over the other? The inference rules are written using horizontal lines, commas, turnstiles, etc. Formulas are written using connectives, quantifiers, and atoms. In general, inference rules contain less structure (such as disjunctive branching), so we need normal forms of formulas to correspond more precisely with inference rules.
 
-Sara argues that her generalized inference rules allow for proving independence results, etc. My guess is that a simple focused proof system will achieve the same thing. So the real question is, "Why does this work to derive synthetic rules in the first place?"
+Sara argues that her generalized inference rules allow for proving independence results, etc. My guess is that a simple focused proof system will achieve the same thing. So the real question is, "Why do this work to derive synthetic rules in the first place?"
 
 I'm not sure of the answer.  Maybe one does this because the topic is floating around in the literature.
