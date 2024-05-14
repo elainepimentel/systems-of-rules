@@ -52,6 +52,34 @@
 
    category theory, universal properties, etc
 
+* Generalize previous work by using polarized formulas instead
+  There is a gap between unpolarized and polarized.
+  We can handle pos and neg atoms.  See discussion about Tseitin
+  constants next.
+
+* Another way to reduce the order of rules - Tseitin constants
+  We could go into that a bit.  There is a bit about this in
+  Manighetti's thesis.
+
+  If we limit all formula to be of order 2, then the only thing that
+  is stored (on the left) are atomic formulas.  
+
+  Consider using Tseitin constants with the linear arity axiom.
+    forall p, q [ (p -> q) \/ (q -> p) ]
+  Assuming that p and q are given negative polarity, this formula is a
+  member of N3.  Let's rewrite this as follows (daring to use
+  higher-order quantification).
+
+    forall p, q [ (c p q) \/ (d p q) ]    
+    (c p q) equiv (p -> q), ie: (c p q) -> p -> q, (p -> q) -> (c p q)
+    (d p q) equiv (q -> p), ie: (d p q) -> q -> p, (q -> p) -> (d p q) 
+
+    Here, c and d are non-logical predicates.  They should have
+    positive polarity.  Thus, instead of storing (p -> q) on the left,
+    we store the atomic formula (c p q).  Instead of focusing on (p ->
+    q), we can focus on ((c p q) -> p -> q).  This will produce the
+    same effect.
+
 * Important related work
    - PS-H's paper on a natural extension to ND, JSL 1984.
    - Arnon Avron: Gentzenizing Schroeder-Heister's Natural Extension
