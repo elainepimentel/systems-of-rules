@@ -1,0 +1,199 @@
+\documentclass[runningheads]{llncs}
+
+\usepackage{xspace}
+\usepackage{proof}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cmll}
+\usepackage[colorlinks,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{xifthen}
+
+\newcommand{\lP}{$\lambda$Prolog\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\blue}[1]{{\color[rgb]{0,0,1} #1}}
+
+\newcommand{\DM}[1]{{\color[rgb]{0.23, 0.74, 0.23}\smallskip\par\noindent\textbf{DM: #1}}\smallskip}
+\newcommand{\EP}[1]{\smallskip\par\noindent\red{#1}\smallskip}
+
+\newcommand\proofsystem[1]{\mbox{\slshape #1}\xspace}
+\newcommand\LK   {\proofsystem{LK}}
+\newcommand\LJ   {\proofsystem{LJ}}
+%% \newcommand\LKT  {\proofsystem{LKT}}
+%% \newcommand\LKQ  {\proofsystem{LKQ}}
+%% \newcommand\LKF  {\proofsystem{LKF}}
+%% \newcommand\aLKF {\hbox{\proofsystem{LKF}\kern-2pt$^a$}\xspace}
+%% \newcommand\LKU  {\proofsystem{LKU}}
+%% \newcommand\LJT  {\proofsystem{LJT}}
+%% \newcommand\LJQ  {\proofsystem{LJQ}}
+%% \newcommand\LJF  {\proofsystem{LJF}}
+%% \newcommand\aLJF {\hbox{\proofsystem{LJF}\kern-2pt$^a$}\xspace}
+%% \newcommand\LKpos{\proofsystem{LKpos}}
+%% \newcommand\LKneg{\proofsystem{LKneg}}
+%% \newcommand\negclass[2]{\mathcal{N}_{#1}^{#2}}
+%% \newcommand\posclass[2]{\mathcal{P}_{#1}^{#2}}
+
+%% \newcommand{\tup}[1]{\langle #1\rangle}
+
+\newcommand{\false}{f\/}
+\newcommand{\imp}{\supset}
+\newcommand{\nfalse}{f^-}
+\newcommand{\ntrue}{t^-}
+\newcommand{\pfalse}{f^+}
+\newcommand{\ptrue}{t^+}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\true }{t\/}
+\newcommand{\veen}{\vee^{\!-}}
+\newcommand{\veepn}{\vee^{\!\pm}}
+\newcommand{\veep}{\vee^{\!+}}
+\newcommand{\wedgen}{\wedge^{\!-}}
+\newcommand{\wedgepn}{\wedge^{\!\pm}}
+\newcommand{\wedgep}{\wedge^{\!+}}
+
+\newcommand{\twoseq}[2]{#1\vdash #2}
+\newcommand{\Twoseq}[3]{#1:#2\vdash #3}
+\newcommand{\R}[2]{R #1 #2}
+
+\begin{document}
+\title{
+%      A system of rules for sequent calculus\\(an abstract)\\
+%      --- or ---\\
+       Higher-level rules for sequent calculus\\(an abstract)
+}
+\author{Dale Miller\inst{1}%\orcidID{0000-0003-0274-4954}
+        \and
+        Elaine Pimentel\inst{2}%\orcidID{0000-0002-7113-0801}
+}
+\institute{
+  Inria-Saclay \& LIX, Ecole Polytechnique, Palaiseau, France\\
+%  \email{dale.miller@inria.fr}
+  \and
+  Dept. of Computer Science, University College London, UK \\
+%  \email{e.pimentel@ucl.ac.uk}
+}
+
+\maketitle              
+
+There has been a long-term interest in the trade-offs between
+representing theories as collections of formulas accepted as axioms
+and assumptions or as collections of inference rules that do not
+involve logical connectives.
+
+% Early work on an extreme perspective
+
+In the setting of propositional intuitionistic logic, there was an early
+paper on reducing all logical assumptions to inference rules.
+Schroeder-Heister~\cite{schroeder-heister84} considered a
+generalization of natural deduction where rules and not just formulas
+can be assumed and discharged.  He showed that such rules are equally
+expressive to Gentzen's natural deduction (where only formulas can be
+assumed and discharged).  Later, Avron \cite{avron90ndjfl} reduced
+this extended system to the sequent calculus presentation in which no
+inference rules were assumed or discharged.  The LF
+\cite{harper93jacm} specification framework generalized this work on
+natural deduction to quantificational intuitionistic logic while
+simultaneously encoding the extended natural deduction proofs using a
+term representation within that dependently typed $\lambda$-calculus.
+
+% Early work on replacing axioms with inference rules
+
+Moving from natural deduction to sequent calculus permits treating
+assumptions as either inference rules or as formulas in \emph{both}
+intuitionistic and classical logic proofs.  In particular, it is
+natural to ask whether or not an \LJ or \LK proof of the sequent
+$\twoseq{\Gamma}{\Delta}$ can be built where the formulas in $\Gamma$
+(the assumptions) are replaced with inference rules.  It was shown in
+\cite{negri03aml} that when assumptions are \emph{geometric formulas},
+this replacement is possible For example, if the multiset of
+assumptions is of the form $\Gamma, \forall x\forall y\forall
+z.[\R{x}{z}\imp\R{z}{y}\imp\R{x}{y}]$ then the assumption stating the
+transitivity of the predicate $R$ can be replaced by one of the
+following inference rules instead.
+\[
+  \infer[\hbox{backchain}]
+        {\twoseq{\Gamma}{\R{x}{y}}}
+        {\twoseq{\Gamma}{\R{x}{z}} & \twoseq{\Gamma}{\R{z}{y}}}
+  \qquad
+  \infer[\hbox{forwardchain}]
+        {\twoseq{\Gamma,\R{x}{z},\R{z}{y}}{B}}
+        {\twoseq{\Gamma,\R{x}{z},\R{z}{y},\R{x}{y}}{B}}
+\]
+In this way, we have replaced a formula with five occurrences of
+logical connectives with one of two rules, neither of which contains
+logical connectives.  If the only assumptions are, say, Horn clauses,
+it is possible to have a complete proof system for atomic consequences
+of such clauses using a proof system involving only atomic formulas.
+
+
+While it is possible to generalize the restriction to geometric
+formulas a bit to \emph{bipoles} by considering
+polarity~\cite{marin22apal}, it is interesting to ask to what extent
+can non-bipole formulas be replaced with rules in the sequent setting.
+Such a question was addressed in \cite{negri16jlc}, where
+\emph{generalized geometric formulas} are treated using a \emph{system
+of rules}, a setting in which an inference rule can allow some of its
+premises to have additional inference rules available.  These
+additional inference rules are scoped over particular proofs of
+premises.
+%
+We will show that such a scoping of inference rules is a direct
+reading of inference rules in a polarized proof system.  For example,
+the (polarized) formula
+\[
+  \forall x\forall y\exists z(x\le z\wedgep y\le z\wedgep\forall w(x\le w\wedgep y\le w\imp z\le w)) 
+\]
+yields the synthetic inference rule (terminology from
+\cite{marin22apal})
+\[
+  \infer[(*)]
+        {\Twoseq{\Sigma}{\Gamma}{\Delta}}
+        {\Twoseq{\Sigma,z}{\forall w(x\le w\wedgep y\le w\imp z\le w),x\le z,y\le z,\Gamma}{\Delta}}
+\]
+Here, sequents are prefixed with a list of variables, \eg $\Sigma$,
+that are the eigenvariables that may appear in the formulas of that
+sequent: this prefix is intended to \emph{bind} variables over the
+sequent it precedes.  Note that the prefix of the conclusion is
+different from the prefix of the premise.  The availability of the
+additional assumption $\forall w(x\le w\wedgep y\le w\imp z\le w)$ in
+the premise corresponds exactly to having either one of the following
+two inference rules scoped over that premise
+\[
+  \infer
+        {\Twoseq{\Sigma,z}{\Gamma}{z\le w}}
+        {\Twoseq{\Sigma,z}{\Gamma}{x\le w} & \twoseq{\Gamma}{y\le w}}
+  \qquad
+  \infer[,]
+        {\Twoseq{\Sigma,z}{\Gamma,x\le w,y\le w}{\Delta}}
+        {\Twoseq{\Sigma,z}{\Gamma,x\le w,y\le w, z\le w}{\Delta}}
+\]
+depending on whether or not the polarity of the $\le$ predicate is
+negative or positive, respectively.  Thus, we can rewrite the
+inference figure $(*)$ so that it does not mention any logical
+connectives by stipulating that one of these two inference rules is
+available to prove that premise.
+
+It is also possible to directly relate 
+
+The common implementation technique involving Tseitin constants are
+often introduced in implementations of computational logic systems in
+order to reduce the nesting of conjunctions and disjunctions \cite{???}
+and implications \cite{???}.  We will point out how these constants are
+used to reduce assumptions to collections of bipoles (at the cost of
+introducing new predicate constants).
+
+\bibliography{../../../Dropbox/Writing/references/master}
+%\bibliography{extract} % Switch this with the line above
+
+\bibliographystyle{splncs04}
+
+% Formulas have their advantages: easier to formalize in proof
+% assistants and they are more compact wrt non-determinism (dnf/cnf is
+% needed generally to make inference rules).
+
+\end{document}
+
+
+% LocalWords:  Avron forwardchain Tseitin
