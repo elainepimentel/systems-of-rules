@@ -1,0 +1,96 @@
+* Planning: Abstract for the Proof Society meeting in Birmingham 9-13 Sept
+  https://proofsociety2024.com/
+* Deadline for 2 page abstract: 17 May 2024
+  Abstract deadline: May 17
+  Notification: June 7
+  Final version: June 14
+  School: 9-11 September
+  Workshop: 11-13 September
+
+  "For the Workshop, we solicit submissions of short abstracts of *up
+   to 2 pages* (not including references), to be presented as a short
+   talk.  There are no formal published proceedings, but accepted
+   abstracts will be made available for the workshop. Please submit
+   your abstracts via easychair:
+   https://easychair.org/conferences/?conf=ps24".
+
+* Topic: Using LJF / LKF to go beyond bipoles
+
+   - A generalization of a "system of rules" 
+
+   - Use schema variables (higher-order variables) within the LJF and
+     LKF setting.  
+
+   - Need to use the notion of "near-focused proofs" since the
+     (higher-order) substitution into a focused proof is not
+     focused. Note also that the schema variables can have either pos
+     or neg polarities.
+
+   - It is interesting to consider focusing on formulas that do not
+     have schema variables.
+
+     + one oplus one - yields "superposition"
+
+     + one par one - yields mix, but only works with classical logic
+       since we need the multiplicative disjunction.  The usual
+       presentation of mix is as an inference rule that yields these
+       implications.  Here, we have the converse: if you accept these
+       formulas as axioms, you get the inference rules.  See
+       https://www.pls-lab.org/en/Mix_rule.
+
+* Cut elimination is automatic
+  Discussing the cut rule is very important in this abstract. ￼From
+  the MMPV paper, sometime should be automatic.  However:
+  "analyticity" probably needs to be argued separately and may need to
+  be qualified (subformulas except for atoms....)
+  
+* Important examples to consider
+
+   first-order Godel-Dummett logic.
+
+   Hilbert's axioms for geometry, see also early work by Ketonen. 
+
+   category theory, universal properties, etc
+
+* Generalize previous work by using polarized formulas instead
+  There is a gap between unpolarized and polarized.
+  We can handle pos and neg atoms.  See discussion about Tseitin
+  constants next.
+
+* Another way to reduce the order of rules - Tseitin constants
+  We could go into that a bit.  There is a bit about this in
+  Manighetti's thesis.
+
+  If we limit all formula to be of order 2, then the only thing that
+  is stored (on the left) are atomic formulas.  
+
+  Consider using Tseitin constants with the linear arity axiom.
+    forall p, q [ (p -> q) \/ (q -> p) ]
+  Assuming that p and q are given negative polarity, this formula is a
+  member of N3.  Let's rewrite this as follows (daring to use
+  higher-order quantification).
+
+    forall p, q [ (c p q) \/ (d p q) ]    
+    (c p q) equiv (p -> q), ie: (c p q) -> p -> q, (p -> q) -> (c p q)
+    (d p q) equiv (q -> p), ie: (d p q) -> q -> p, (q -> p) -> (d p q) 
+
+    Here, c and d are non-logical predicates.  They should have
+    positive polarity.  Thus, instead of storing (p -> q) on the left,
+    we store the atomic formula (c p q).  Instead of focusing on (p ->
+    q), we can focus on ((c p q) -> p -> q).  This will produce the
+    same effect.
+
+* Important related work
+   - PS-H's paper on a natural extension to ND, JSL 1984.
+   - Arnon Avron: Gentzenizing Schroeder-Heister's Natural Extension
+     of Natural Deduction, Notre Dame Journal of Formal Logic, Volume
+     31, Number 1, Winter 1990.
+   - Harper, Honsell, Plotkin. LF.
+   - Negri and others (axioms to inference rules)
+   - Ciabattoni and Genco
+   - early work by Ciabattoni on structural rules and the polarity
+     hierarchy.
+
+* Title: 
+
+
