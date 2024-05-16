@@ -158,7 +158,7 @@ two inference rules scoped over that premise
 \[
   \infer
         {\Twoseq{\Sigma,z}{\Gamma}{z\le w}}
-        {\Twoseq{\Sigma,z}{\Gamma}{x\le w} & \twoseq{\Gamma}{y\le w}}
+        {\Twoseq{\Sigma,z}{\Gamma}{x\le w} & \Twoseq{\Sigma,z}{\Gamma}{y\le w}}
   \qquad
   \infer[,]
         {\Twoseq{\Sigma,z}{\Gamma,x\le w,y\le w}{\Delta}}
@@ -174,9 +174,9 @@ We will also point out how Tseitin predicate symbols, often introduced
 into formulas to reduce their logical complexity~\cite{blair86cor}, can
 be used to make scoped rules available globally.
 
-\bibliography{../../../Dropbox/Writing/references/master}
+%\bibliography{../../../Dropbox/Writing/references/master}
 % Switch the following with the line above if master.bib is not available
-%\bibliography{extract,local} % Do not edit extract.bib.  Add to local.bib.
+\bibliography{extract,local} % Do not edit extract.bib.  Add to local.bib.
 
 \bibliographystyle{splncs04}
 \end{document}
