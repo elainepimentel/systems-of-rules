@@ -16,8 +16,8 @@
 \newcommand{\green}[1]{\textcolor{green}{#1}}
 \newcommand{\blue}[1]{{\color[rgb]{0,0,1} #1}}
 
-\newcommand{\DM}[1]{{\color[rgb]{0.23, 0.74, 0.23}\smallskip\par\noindent\textbf{DM: #1}}\smallskip}
-\newcommand{\EP}[1]{\smallskip\par\noindent\red{#1}\smallskip}
+\newcommand{\DM}[1]{\smallskip\par\noindent\red{DM #1}\smallskip}
+\newcommand{\EP}[1]{\smallskip\par\noindent\red{EP #1}\smallskip}
 
 \newcommand\proofsystem[1]{\mbox{\slshape #1}\xspace}
 \newcommand\LK   {\proofsystem{LK}}
@@ -77,41 +77,34 @@
 
 \maketitle              
 
-There has been a long-term interest in the trade-offs between
-representing theories as collections of formulas accepted as axioms
-and assumptions or as collections of inference rules that do not
-involve logical connectives.
+Theories over a base logic can be represented in two different ways:
+as collections of formulas accepted as axioms and assumptions or as
+collections of inference rules that do not involve logical
+connectives.
 
-% Early work on an extreme perspective
+Schroeder-Heister~\cite{schroeder-heister84} and Avron
+\cite{avron90ndjfl} showed the equivalence in propositional
+intuitionistic logic between conventional natural deduction (where
+formulas can be assumed and discharged) and natural deduction with
+higher-level rules (where atomic formulas and rules can be assumed and
+discharged).  The LF \cite{harper93jacm} specification framework
+generalized this work on natural deduction to quantificational
+intuitionistic logic while simultaneously encoding the extended
+natural deduction proofs using a term representation within a
+dependently typed $\lambda$-calculus.
 
-In the setting of propositional intuitionistic logic, there was an early
-paper on reducing all logical assumptions to inference rules.
-Schroeder-Heister~\cite{schroeder-heister84} considered a
-generalization of natural deduction where rules and not just formulas
-can be assumed and discharged.  He showed that such rules are equally
-expressive to Gentzen's natural deduction (where only formulas can be
-assumed and discharged).  Later, Avron \cite{avron90ndjfl} reduced
-this extended system to the sequent calculus presentation in which no
-inference rules were assumed or discharged.  The LF
-\cite{harper93jacm} specification framework generalized this work on
-natural deduction to quantificational intuitionistic logic while
-simultaneously encoding the extended natural deduction proofs using a
-term representation within that dependently typed $\lambda$-calculus.
-
-% Early work on replacing axioms with inference rules
-
-Moving from natural deduction to sequent calculus permits treating
-assumptions as either inference rules or as formulas in \emph{both}
-intuitionistic and classical logic proofs.  In particular, it is
+Moving from natural deduction to sequent calculus permits developing
+approaches to higher-level rules for both classical and intuitionistic
+logic proofs~\cite{ciabattoni18tocl,negri03aml}. In particular, it is
 natural to ask whether or not an \LJ or \LK proof of the sequent
 $\twoseq{\Gamma}{\Delta}$ can be built where the formulas in $\Gamma$
-(the assumptions) are replaced with inference rules.  It was shown in
-\cite{negri03aml} that when assumptions are \emph{geometric formulas},
-this replacement is possible For example, if the multiset of
-assumptions is of the form $\Gamma, \forall x\forall y\forall
+(the assumptions) are replaced with inference rules. It was shown in
+\cite{negri03aml} that this replacement is possible when assumptions
+are \emph{geometric formulas}. For example, if the multiset of
+assumptions is $\Gamma, \forall x\forall y\forall
 z.[\R{x}{z}\imp\R{z}{y}\imp\R{x}{y}]$ then the assumption stating the
 transitivity of the predicate $R$ can be replaced by one of the
-following inference rules instead.
+following inference rules.
 \[
   \infer[\hbox{backchain}]
         {\twoseq{\Gamma}{\R{x}{y}}}
@@ -121,36 +114,38 @@ following inference rules instead.
         {\twoseq{\Gamma,\R{x}{z},\R{z}{y}}{B}}
         {\twoseq{\Gamma,\R{x}{z},\R{z}{y},\R{x}{y}}{B}}
 \]
-In this way, we have replaced a formula with five occurrences of
-logical connectives with one of two rules, neither of which contains
-logical connectives.  If the only assumptions are, say, Horn clauses,
-it is possible to have a complete proof system for atomic consequences
-of such clauses using a proof system involving only atomic formulas.
-
+In this way, we have replaced a formula containing five occurrences of
+logical connectives with one of two rules, neither containing logical
+connectives. If the only assumptions are, say, Horn clauses, it is
+possible to have a complete proof system for atomic consequences of
+such clauses using a proof system involving only atomic formulas.
 
 While it is possible to generalize the restriction to geometric
 formulas a bit to \emph{bipoles} by considering
 polarity~\cite{marin22apal}, it is interesting to ask to what extent
-can non-bipole formulas be replaced with rules in the sequent setting.
-Such a question was addressed in \cite{negri16jlc}, where
-\emph{generalized geometric formulas} are treated using a \emph{system
-of rules}, a setting in which an inference rule can allow some of its
-premises to have additional inference rules available.  These
-additional inference rules are scoped over particular proofs of
-premises.
-%
-We will show that such a scoping of inference rules is a direct
-reading of inference rules in a polarized proof system.  For example,
-the (polarized) formula
+can non-bipole formulas be replaced with higher-level rules in the
+sequent setting.  Such a question was addressed in \cite{negri16jlc},
+where \emph{generalized geometric formulas} are treated using a
+\emph{system of rules}, a setting in which an inference rule can allow
+some of its premises to have additional inference rules available.
+These additional inference rules are scoped over particular proofs of
+premises.  We will show that such a scoping of inference rules is a
+direct reading of inference rules in a polarized proof system.  For
+example, focusing on the (polarized) formula that states the
+existence of least upper bounds
 \[
-  \forall x\forall y\exists z(x\le z\wedgep y\le z\wedgep\forall w(x\le w\wedgep y\le w\imp z\le w)) 
+  \forall x\forall y\exists z(x\le z\wedgep y\le z\wedgep
+              \forall w(x\le w\wedgep y\le w\imp z\le w)),
 \]
 yields the synthetic inference rule (terminology from
 \cite{marin22apal})
 \[
-  \infer[(*)]
+  \infer[(*).]
         {\Twoseq{\Sigma}{\Gamma}{\Delta}}
-        {\Twoseq{\Sigma,z}{\forall w(x\le w\wedgep y\le w\imp z\le w),x\le z,y\le z,\Gamma}{\Delta}}
+        {\Twoseq{\Sigma,z}
+                {\forall w(x\le w\wedgep y\le w\imp z\le w),
+                   x\le z,y\le z,\Gamma}
+                {\Delta}}
 \]
 Here, sequents are prefixed with a list of variables, \eg $\Sigma$,
 that are the eigenvariables that may appear in the formulas of that
@@ -175,25 +170,19 @@ inference figure $(*)$ so that it does not mention any logical
 connectives by stipulating that one of these two inference rules is
 available to prove that premise.
 
-It is also possible to directly relate 
-
-The common implementation technique involving Tseitin constants are
-often introduced in implementations of computational logic systems in
-order to reduce the nesting of conjunctions and disjunctions \cite{???}
-and implications \cite{???}.  We will point out how these constants are
-used to reduce assumptions to collections of bipoles (at the cost of
-introducing new predicate constants).
+We will also point out how Tseitin predicate symbols, often introduced
+into formulas to reduce their logical complexity~\cite{blair86cor}, can
+be used to make scoped rules available globally.
 
 \bibliography{../../../Dropbox/Writing/references/master}
-%\bibliography{extract} % Switch this with the line above
+% Switch the following with the line above if master.bib is not available
+%\bibliography{extract,local} % Do not edit extract.bib.  Add to local.bib.
 
 \bibliographystyle{splncs04}
+\end{document}
 
 % Formulas have their advantages: easier to formalize in proof
 % assistants and they are more compact wrt non-determinism (dnf/cnf is
 % needed generally to make inference rules).
-
-\end{document}
-
 
 % LocalWords:  Avron forwardchain Tseitin
