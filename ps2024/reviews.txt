@@ -1,0 +1,87 @@
+Dear Dale Miller,
+
+I am pleased to inform you that your submission,
+
+12 Higher-level rules for sequent calculus
+Dale Miller, Elaine Pimentel
+
+has been accepted for presentation at the Proof Society workshop!
+
+Please find the reviews for your submission below. Further information
+about final versions and registration will be communicated next week. 
+
+Kind regards,
+Anupam Das
+On behalf of the PS24 PC
+
+SUBMISSION: 12
+TITLE: Higher-level rules for sequent calculus
+
+
+----------------------- REVIEW 1 ---------------------
+SUBMISSION: 12
+TITLE: Higher-level rules for sequent calculus
+AUTHORS: Dale Miller and Elaine Pimentel
+
+----------- Overall evaluation -----------
+SCORE: 2 (accept)
+----- TEXT:
+This abstract presents work in a line of research that enhances
+sequent calculi to direct proof search with rules for theories with
+the use of polarities. This is appropriate for the conference. A note
+on notation: the established LJ is not correct, it should be LI (K for
+Klassisch, I for Intuitionistisch). Gentzen used Sütterlin characters,
+standardly printed in Fraktur, whose I upper case resembles a J, hence
+the wrong transcription in Latin alphabet (see von Plato's book "Saved
+from the Cellar" for the tables of Sütterlin characters). 
+
+----------------------- REVIEW 2 ---------------------
+SUBMISSION: 12
+TITLE: Higher-level rules for sequent calculus
+AUTHORS: Dale Miller and Elaine Pimentel
+
+----------- Overall evaluation -----------
+SCORE: 2 (accept)
+----- TEXT:
+This abstract concerns the introduction of higher-level rules in
+sequent calculus. In the context where additional inference rules are
+scoped over particular proofs of premises, the authors link the
+scoping of inference rules with their reading in a polarized proof
+system.
+
+----------------------- REVIEW 3 ---------------------
+SUBMISSION: 12
+TITLE: Higher-level rules for sequent calculus
+AUTHORS: Dale Miller and Elaine Pimentel
+
+----------- Overall evaluation -----------
+SCORE: 3 (strong accept)
+----- TEXT:
+The authors examine developing approaches to higher-level rules for
+both classical and intuitionistic logic proofs. They explore replacing
+assumptions with inference rules, particularly for geometric formulas,
+in sequent calculi. Additionally, they show how Tseitin predicate
+symbols can be used to make scoped rules available globally. The
+abstract is well-written and it includes examples which helps the
+reader. 
+
+----------------------- REVIEW 4 ---------------------
+SUBMISSION: 12
+TITLE: Higher-level rules for sequent calculus
+AUTHORS: Dale Miller and Elaine Pimentel
+
+----------- Overall evaluation -----------
+SCORE: 1 (weak accept)
+----- TEXT:
+This submission concerns higher-level rules for the sequent
+calculus. In particular, this means investigating "whether or not an
+LJ or LK proof of the sequent Γ ⊢ ∆ can be built where the formulas in
+Γ (the assumptions) are replaced with inference rules. It was shown in
+[6] that this replacement is possible when assumptions are geometric
+formulas." The above seems to suggest that the sequent will now
+contain inference rules but the subsequent discussion refers to the
+addition of inference rules to the sequent calculus (rather than the
+sequent itself). The topic is interesting although the abstract is not
+very clear: in addition to the ambiguity above, it is not clear what
+precise research problem(s) are resolved or investigated in this work.
+
