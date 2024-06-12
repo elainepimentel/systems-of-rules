@@ -1,13 +1,18 @@
-\documentclass[runningheads]{llncs}
+\documentclass[bsl,meeting]{asl}
+\AbstractsOn
+\pagestyle{plain}
+\def\urladdr#1{\endgraf\noindent{\it URL Address}: {\tt #1}.}
+\newcommand{\NP}{}
 
 \usepackage{xspace}
 \usepackage{proof}
 \usepackage{xcolor}
-\usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{cmll}
 \usepackage[colorlinks,linkcolor=blue,citecolor=blue]{hyperref}
 \usepackage{xifthen}
+
+\begin{document}
 
 \newcommand{\lP}{$\lambda$Prolog\xspace}
 \newcommand{\ie}{i.e.,\xspace}
@@ -22,21 +27,6 @@
 \newcommand\proofsystem[1]{\mbox{\slshape #1}\xspace}
 \newcommand\LK   {\proofsystem{LK}}
 \newcommand\LJ   {\proofsystem{LJ}}
-%% \newcommand\LKT  {\proofsystem{LKT}}
-%% \newcommand\LKQ  {\proofsystem{LKQ}}
-%% \newcommand\LKF  {\proofsystem{LKF}}
-%% \newcommand\aLKF {\hbox{\proofsystem{LKF}\kern-2pt$^a$}\xspace}
-%% \newcommand\LKU  {\proofsystem{LKU}}
-%% \newcommand\LJT  {\proofsystem{LJT}}
-%% \newcommand\LJQ  {\proofsystem{LJQ}}
-%% \newcommand\LJF  {\proofsystem{LJF}}
-%% \newcommand\aLJF {\hbox{\proofsystem{LJF}\kern-2pt$^a$}\xspace}
-%% \newcommand\LKpos{\proofsystem{LKpos}}
-%% \newcommand\LKneg{\proofsystem{LKneg}}
-%% \newcommand\negclass[2]{\mathcal{N}_{#1}^{#2}}
-%% \newcommand\posclass[2]{\mathcal{P}_{#1}^{#2}}
-
-%% \newcommand{\tup}[1]{\langle #1\rangle}
 
 \newcommand{\false}{f\/}
 \newcommand{\imp}{\supset}
@@ -57,25 +47,15 @@
 \newcommand{\Twoseq}[3]{#1:#2\vdash #3}
 \newcommand{\R}[2]{R #1 #2}
 
-\begin{document}
-\title{
-%      A system of rules for sequent calculus\\(an abstract)\\
-%      --- or ---\\
-       Higher-level rules for sequent calculus\\(an abstract)
-}
-\author{Dale Miller\inst{1}%\orcidID{0000-0003-0274-4954}
-        \and
-        Elaine Pimentel\inst{2}%\orcidID{0000-0002-7113-0801}
-}
-\institute{
-  Inria-Saclay \& LIX, Ecole Polytechnique, Palaiseau, France\\
-%  \email{dale.miller@inria.fr}
-  \and
-  Dept. of Computer Science, University College London, UK \\
-%  \email{e.pimentel@ucl.ac.uk}
-}
+\thispagestyle{empty}
 
-\maketitle              
+\NP  
+\absauth{Dale Miller and Elaine Pimentel}
+\meettitle{Higher-level rules for sequent calculus (an abstract)}
+\affil{Inria-Saclay \& LIX, \'Ecole Polytechnique, Palaiseau, France}
+\meetemail{dale.miller@inria.fr}
+\affil{Department of Computer Science, University College London, UK}
+\meetemail{e.pimentel@ucl.ac.uk}
 
 Theories over a base logic can be represented in two different ways:
 as collections of formulas accepted as axioms and assumptions or as
@@ -174,9 +154,9 @@ We will also point out how Tseitin predicate symbols, often introduced
 into formulas to reduce their logical complexity~\cite{blair86cor}, can
 be used to make scoped rules available globally.
 
-%\bibliography{../../../Dropbox/Writing/references/master}
+\bibliography{../../../Dropbox/Writing/references/master}
 % Switch the following with the line above if master.bib is not available
-\bibliography{extract,local} % Do not edit extract.bib.  Add to local.bib.
+% \bibliography{extract,local} % Do not edit extract.bib.  Add refs to local.bib.
 
 \bibliographystyle{splncs04}
 \end{document}
