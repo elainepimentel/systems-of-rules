@@ -1,0 +1,17 @@
+3 June 2024
+============
+
+Negative bias on atoms only means that non-bipoles (using just, say,
+=> and forall) like PS-H's natural extension of natural deduction.
+This is because the "barb" of synthetic rules is just an atom on the
+right hand side of the sequent.  Such synthetic rules can look a lot
+like natural deduction.
+
+But if we add positive bias atoms, then the barb of synthetic rules
+can contain also atoms on the left-hand side.  This looks less like
+natural deduction.  So we take sequent calculus more seriously to
+display such synthetic rules.
+
+Note that positive bias seems to be used in the linearity axiom
+(Goedel-Dummett logic).  Also, the story about Tseitin constants seems
+to also need positive bias atoms.
