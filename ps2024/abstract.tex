@@ -3,26 +3,17 @@
 \pagestyle{plain}
 \def\urladdr#1{\endgraf\noindent{\it URL Address}: {\tt #1}.}
 \newcommand{\NP}{}
+% Use this definition for \doi instead of the default one loaded by splncs04.
+\newcommand{\doi}[1]{\url{https://doi.org/#1}}
 
 \usepackage{xspace}
 \usepackage{proof}
-\usepackage{xcolor}
 \usepackage{amssymb}
-\usepackage{cmll}
 \usepackage[colorlinks,linkcolor=blue,citecolor=blue]{hyperref}
-\usepackage{xifthen}
 
 \begin{document}
 
-\newcommand{\lP}{$\lambda$Prolog\xspace}
-\newcommand{\ie}{i.e.,\xspace}
 \newcommand{\eg}{e.g.,\xspace}
-\newcommand{\red}[1]{\textcolor{red}{#1}}
-\newcommand{\green}[1]{\textcolor{green}{#1}}
-\newcommand{\blue}[1]{{\color[rgb]{0,0,1} #1}}
-
-\newcommand{\DM}[1]{\smallskip\par\noindent\red{DM #1}\smallskip}
-\newcommand{\EP}[1]{\smallskip\par\noindent\red{EP #1}\smallskip}
 
 \newcommand\proofsystem[1]{\mbox{\slshape #1}\xspace}
 \newcommand\LK   {\proofsystem{LK}}
@@ -57,7 +48,9 @@
 \affil{Department of Computer Science, University College London, UK}
 \meetemail{e.pimentel@ucl.ac.uk}
 
-Theories over a base logic can be represented in two different ways:
+\medskip
+
+Theories over a base logic are typically represented in two ways:
 as collections of formulas accepted as axioms and assumptions or as
 collections of inference rules that do not involve logical
 connectives.
@@ -95,7 +88,7 @@ following inference rules.
         {\twoseq{\Gamma,\R{x}{z},\R{z}{y},\R{x}{y}}{B}}
 \]
 In this way, we have replaced a formula containing five occurrences of
-logical connectives with one of two rules, neither containing logical
+logical connectives with one of these two rules, neither containing logical
 connectives. If the only assumptions are, say, Horn clauses, it is
 possible to have a complete proof system for atomic consequences of
 such clauses using a proof system involving only atomic formulas.
@@ -138,7 +131,8 @@ two inference rules scoped over that premise
 \[
   \infer
         {\Twoseq{\Sigma,z}{\Gamma}{z\le w}}
-        {\Twoseq{\Sigma,z}{\Gamma}{x\le w} & \Twoseq{\Sigma,z}{\Gamma}{y\le w}}
+        {\Twoseq{\Sigma,z}{\Gamma}{x\le w} & 
+         \Twoseq{\Sigma,z}{\Gamma}{y\le w}}
   \qquad
   \infer[,]
         {\Twoseq{\Sigma,z}{\Gamma,x\le w,y\le w}{\Delta}}
@@ -154,8 +148,51 @@ We will also point out how Tseitin predicate symbols, often introduced
 into formulas to reduce their logical complexity~\cite{blair86cor}, can
 be used to make scoped rules available globally.
 
+\medskip
+\begin{thebibliography}{1}
 
-\bibliography{../../../Dropbox/Writing/references/master}
+\bibitem{avron90ndjfl}
+Avron, A.: Gentzenizing {Schroeder-Heister's} natural extension of natural
+  deduction. Notre Dame Journal of Formal Logic  \textbf{31}(1),  127--135
+  (1990). \doi{10.1305/ndjfl/1093635337}
+
+\bibitem{blair86cor}
+Blair, C.E., Jeroslow, R.G., Lowe, J.K.: Some results and experiments in
+  programming techniques for propositional logic. Computers and Operations
+  Research  \textbf{13}(5),  633--645 (1986).
+  \doi{10.1016/0305-0548(86)90056-0}
+
+\bibitem{ciabattoni18tocl}
+Ciabattoni, A., Genco, F.A.: Hypersequents and systems of rules: Embeddings and
+  applications. {ACM} Trans. Comput. Log.  \textbf{19}(2),  11:1--11:27 (2018).
+  \doi{10.1145/3180075}
+
+\bibitem{harper93jacm}
+Harper, R., Honsell, F., Plotkin, G.: A framework for defining logics. Journal
+  of the ACM  \textbf{40}(1),  143--184 (1993). \doi{10.1145/138027.138060}
+
+\bibitem{marin22apal}
+Marin, S., Miller, D., Pimentel, E., Volpe, M.: From axioms to synthetic
+  inference rules via focusing. Annals of Pure and Applied Logic
+  \textbf{173}(5),  1--32 (2022). \doi{10.1016/j.apal.2022.103091}
+
+\bibitem{negri03aml}
+Negri, S.: Contraction-free sequent calculi for geometric theories with an
+  application to {Barr's} theorem. Archive for Mathematical Logic  \textbf{42},
+   389--401 (2003). \doi{10.1007/s001530100124}
+
+\bibitem{negri16jlc}
+Negri, S.: Proof analysis beyond geometric theories: from rule systems to
+  systems of rules. Journal of Logic and Computation  \textbf{26}(2),  513--537
+  (2016). \doi{10.1093/LOGCOM/EXU037}
+
+\bibitem{schroeder-heister84}
+Schroeder-Heister, P.: A natural extension of natural deduction. Journal of
+  Symbolic Logic  \textbf{49}(4),  1284--1300 (1984). \doi{10.2307/2274279}
+
+\end{thebibliography}
+
+% \bibliography{../../../Dropbox/Writing/references/master}
 % Switch the following with the line above if master.bib is not available
 % \bibliography{extract,local} % Do not edit extract.bib.  Add refs to local.bib.
 

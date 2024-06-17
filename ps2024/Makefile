@@ -5,13 +5,13 @@ VIEWER = okular
 
 $(DOC).pdf: $(DOC).tex $(AUX)
 	pdflatex $(DOC).tex
-	bibtex $(DOC)
-	aux2bib $(DOC).aux > extract.bib
+#	bibtex $(DOC)
+#	aux2bib $(DOC).aux > extract.bib
 
 force: 
 	pdflatex $(DOC).tex
-	bibtex $(DOC)
-	aux2bib $(DOC).aux > extract.bib
+#	bibtex $(DOC)
+#	aux2bib $(DOC).aux > extract.bib
 
 show: $(DOC).pdf
 	$(VIEWER) $(DOC).pdf&
