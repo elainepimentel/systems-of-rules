@@ -502,6 +502,13 @@ where $\frak{U}_1,\ldots \frak{U}_n$ are arithmetic axiom formulae.''}
 Some naive attempts: 
 }
 
+\only<10->{
+\medskip
+
+No that naive attempts: 
+}
+
+
 \only<6-7>{
 \medskip
 
@@ -544,6 +551,8 @@ Assume $\vdash P\impl Q$ and $\vdash P$.
 
 
 \only<10-11>{
+
+\medskip
 			\emphdr{Add non-logical rules of inference:}\semiproofadjust
 			$$
 			\infer[\emphdb{P\impl Q}]{\Gamma, P\seq C}{\Gamma, Q\seq C}\qquad
@@ -558,32 +567,28 @@ Assume $\vdash P\impl Q$ and $\vdash P$.
 				{\infer{Q\seq Q}{}}}
 			$$
 		}
+\end{overlayarea}
+\end{frame}
+
+\begin{frame}{A fresh view to an old problem}
+
+\begin{overlayarea}{\textwidth}{5cm}			
 		
-		\only<12->{
-			\emphdr{A fresh view to an old problem:} 
-		}
-		
-		\only<13->{
+		\only<1->{
 			Combining the classification of axioms into a \emphdb{polarities' hierarchy} (inspired by [Ciabattoni et al.])
-		}
-		
-		\only<14->{
 			with a systematic construction of inference rules from axioms using \emphdb{focusing} [Andreoli],
-		}
-		
-		\only<15->{
 			{justifies} the introduction of the class of \emphdr{bipolar axioms}.
 		}
 		
 		\begin{itemize}
-			\item<16-> \emphdb{Systematically} compute inference rules from
+			\item<2-> \emphdb{Systematically} compute inference rules from
 			{bipolar axioms} (\emphdr{$\lambda$-Prolog prototype});
 			
-			\item<17-> \emphdr{Uniform} presentation for \emphdb{classical} and \emphdb{intuitionistic} first order systems;
+			\item<3-> \emphdr{Uniform} presentation for \emphdb{classical} and \emphdb{intuitionistic} first order systems;
 			
-			\item<18-> \emphdb{Generalization} of the literature (e.g.~on \emphdr{geometric theories} [Negri et al, Vigan\`o, Simpson]);
+			\item<4-> \emphdb{Generalization} of the literature (e.g.~on \emphdr{geometric theories} [Negri et al, Vigan\`o, Simpson]);
 			
-			\item<19> \emphdr{Cut-elimination} \emphdb{guaranteed} for
+			\item<5> \emphdr{Cut-elimination} \emphdb{guaranteed} for
 			the system with the new inferences, via focusing.
 		\end{itemize}
 
