@@ -40,26 +40,6 @@
 \setbeamerfont{itemize subitem}{size=\tiny}
 \setbeamertemplate{enumerate item}[circle]
 
-%\setbeamertemplate{navigation symbols}{}
-%%\setbeamertemplate{blocks}[rounded][shadow=false]
-%\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
-%%\setbeamertemplate{part page}[default][colsep=-4bp,rounded=true]
-%\setbeamertemplate{section page}{
-%	\begin{beamercolorbox}[center]{section title}%sep=8pt,wd=\textwidth,
-%		\usebeamerfont{section title}\insertsection\par
-%	\end{beamercolorbox}
-%}
-%
-%\setbeamertemplate{footline}[frame number]
-%
-%\setbeamersize{text margin left=1cm}
-%\setbeamersize{text margin right=1cm}
-%
-%\setbeamercolor{alerted text}{fg=blue}
-%\setbeamercolor{title}{bg=Grey!10}
-%\setbeamercolor{frametitle}{bg=Grey!10}
-%%\setbeamercolor{sectiontitle}{fg=LightBlue,bg=Grey!10}
-%%\setbeamercolor{headline}{bg=DarkBlue}
 
 \definecolor{LightBlue}{rgb}{0,0,0.8}
 \definecolor{DarkGreen}{rgb}{0.15,0.50,0.30}
@@ -144,50 +124,9 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% MACROS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\proofadjust{\vadjust{\nobreak\vskip-2.7ex\nobreak}}
-\def\semiproofadjust{\vadjust{\nobreak\vskip-1.3ex\nobreak}}
-
-\newcommand{\eg}{e.g.,}
-\newcommand{\lP}{$\lambda$Prolog}
-
-\newcommand{\axioms}{\mathcal{T}}
-\newcommand{\tup}[1]{\langle #1\rangle}
-
+%% Some macros
+\newcommand{\seq}{\Rightarrow}
 \newcommand{\impl}{\supset}
-\newcommand{\seq}{\vdash}
-
-\newcommand{\limpl}{L{\impl}}
-
-\newcommand{\relfo}{R}
-
-\newcommand{\truen}{t^-}
-\newcommand{\truep}{t^+}
-\newcommand{\falsen}{f^-}
-\newcommand{\falsep}{f^+}
-\newcommand{\wedgep}{\wedge^{\!+}}
-\newcommand{\wedgen}{\wedge^{\!-}}
-\newcommand{\veep}{\vee^{\!+}}
-\newcommand{\veen}{\vee^{\!-}}
-
-\newcommand{\wedgepn}{\wedge^{\!\pm}}
-\newcommand{\veepn}{\vee^{\!\pm}}
-
-\newcommand{\Seq}[2]{#1\vdash #2}
-\newcommand{\labelleft}[1]{\deduce[\hbox{#1}]{\strut}{}}
-
-\newcommand{\jLf}[3]{#1\; {\Downarrow #2} \vdash #3}% left focused sequent
-\newcommand{\jRf}[3]{#1 \vdash {#2 \Downarrow}\;#3}% right focused sequent
-\newcommand{\jUnf}[4]{#1 \mathbin\Uparrow #2 \vdash  #3 \mathbin\Uparrow #4}% unfocused sequent
-
-\newcommand{\jUnfG   }[2]{\jUnf{\Gamma}{#1}{#2}{{}}}           % unf sequ with \Gamma
-\newcommand{\jUnfGamb}[1]{\Gamma\mathbin\Uparrow#1\vdash \Rscr}% unf sequ with \Gamma
-\newcommand{\Rscr}{\Delta_1\mathbin\Uparrow\Delta_2}                % Used for an ambiguous rhs
-\newcommand{\jLfG    }[1]{\jLf{\Gamma}{#1}{E}}                 % left foc seq with \Gamma 
-\newcommand{\jRfG    }[1]{\jRf{\Gamma}{#1}}                    % right foc seq with \Gamma
-\newcommand{\jUnfamb }[3]{#1\mathbin\Uparrow#2\vdash#3 \Rscr}  % unfocused sequent
 
 \newcommand{\krelease}{\mathsf{R}}
 \newcommand{\kstore}{\mathsf{s}}
@@ -197,35 +136,12 @@
 \newcommand\posclass[2]{\mathcal{P}_{#1}^{#2}}
 
 \newcommand{\xitem}{\pause\item}
-\newcommand{\Ascr}{\mathcal{A}}
-\newcommand{\Bscr}{\mathcal{B}}
-\newcommand{\Cscr}{\mathcal{C}}
 
 \newcommand{\fib}{\mathsf{fib}}
 
+\def\proofadjust{\vadjust{\nobreak\vskip-2.7ex\nobreak}}
+\def\semiproofadjust{\vadjust{\nobreak\vskip-1.3ex\nobreak}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% General stuff
-\newcommand*\mdelim[3]{%
-	\mathopen{}\left#1%
-	#3%
-	\right#2\mathclose{}%
-}
-
-\newcommand*{\set}[1]{\mdelim{\lbrace}{\rbrace}{#1}}
-
-\newcommand*{\EMP}{\varnothing}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% focus
-\newcommand*{\foc}[1]{{\fboxsep 1pt\fboxrule 0pt\fcolorbox{white}{blue!08}{$\langle#1\rangle$}}}
-\def\posf#1{\textcolor{DarkGreen}{#1}}
-\def\negf#1{\textcolor{orange}{#1}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% First order
-\newcommand*{\subst}[2]{(#1/#2)}
-\newcommand*{\term}[1]{#1}%{\mathtt{#1}}%#1}%{
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -551,134 +467,47 @@
 	How to incorporate \emphdr{inference rules} encoding axioms into existing proof systems 
 	
 	for \emphdb{classical and intuitionistic logics}?
+}
+
+\only<2-4>{
+\medskip
+
+Gentzen: consistency of the arithmetic without complete induction.
+\bigskip
+
+\begin{tabular}{lcl}
+\includegraphics[scale=0.5]{figs/gentzen1} &\qquad& \includegraphics[scale=0.3]{figs/gentzen3}\\
+\includegraphics[scale=0.5]{figs/gentzen2}& & %{\small Credit: Eckhart Menzler-Trott}
+\end{tabular}
 }	
+\only<3>{
+\begin{center}
+{\em ``If our arithmetic is inconsistent, there exists a [cut-free] $\LK$ derivation with endsequent
+\[
+\frak{U}_1,\ldots \frak{U}_n\seq
+\] 
+where $\frak{U}_1,\ldots \frak{U}_n$ are arithmetic axiom formulae.''}
+\end{center}
+}
 
-\only<2>{	
-	\bigskip
-	
-	\textbf{A fresh view to an old problem: }
-	
-	The combination of \emph{bipolars} and \emph{focusing} provides \empha{simple rules for atomic formulas}.
-	}
-\end{overlayarea}
-\end{frame}
+\only<4>{
+\bigskip
+\begin{center}
+{\em Add mathematical theories to first-order logic!}
+\end{center}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\only<5-9>{
+\medskip
 
+Some naive attempts: 
+}
 
-\begin{frame}{\alt<1-13>{Motivation}{In this talk}}
-	\scalebox{.7}{
-		\begin{tikzpicture}
-		\node[] at (-1.5,1)  {Object};
-		\node[] at (-1.5,-2)  {\large Reasoning};
-		\draw[dotted] (-2,0) -- (8,0);
-		%
-		\uncover<2->{
-			\draw [fill=blue!20, thick, rounded corners=7pt] (0,1.5) rectangle (3,0.5);
-			\node[] (i) at (1.5,1)  {First order logic};
-		}
-		%
-		\uncover<3->{
-			\draw [fill=blue!20, thick, rounded corners=7pt] (0,-0.5) rectangle (3,-3.5);
-			\node[] at (1.5,-2)  {\large Sequent calculus};
-			\draw[->,>=latex,ultra thick] (1.5,0.4)--(1.5,-0.5);
-		}
-		%
-		\uncover<4->{
-			\draw [fill=red!20, thick, rounded corners=7pt] (4,1.5) rectangle (7,0.5);
-			\node[] at (5.5,1)  {Mathematical theory};
-		}
-		%
-		\only<5-11>{
-			\draw [thick, rounded corners=7pt] (4,-0.5) rectangle (7,-3.5);
-		}
-		%
-		\only<4-13>{
-			\draw[->,>=latex,ultra thick] (5.5,0.4)--(5.5,-0.5);
-		}
-		%
-		\only<5>{
-			\node[] at (5.5,-2)  {\LARGE ?};
-		}
-		%
-		\only<6-7>{
-			\node[] at (5.5,-2)  {\large Non-logical axioms};
-		}
-		%
-		\only<8-9>{
-			\node[] at (5.5,-1.7)  {\large Mathematical};
-			\node[] at (5.5,-2.2)  {\large basic sequents};
-		}
-		%
-		\only<10-11>{
-			\node[] at (5.5,-1.7)  {\large Axioms as};
-			\node[] at (5.5,-2.2)  {\large theories};
-		}
-		%
-		\only<7,9,11>{
-			\node[] at (3.5,-2)  {\large \Lightning};
-		}
-		%
-		\uncover<12->{
-			\draw [fill=red!20, thick, rounded corners=7pt] (4,-0.5) rectangle (7,-3.5);
-			\node[]  at (5.5,-2)  {\large Inference rules};
-		}
-		%
-		\uncover<4-5,13->{
-			%\node[] at (3.5,-2)  {\large \Sun};
-			\draw [thick, rounded corners=7pt] (-0.2,-0.3) rectangle (7.2,-3.7);
-		}
-		%
-		\uncover<15->{
-			\node[red] at (11,1)  {\LARGE Which ones and why?};
-			\draw[red,->,>=latex,ultra thick] (5.5,0.4)--(5.5,-0.5);
-		}
-		%
-		\uncover<16->{
-			\node[blue] at (11,-1)  {\LARGE bipolars + focusing};
-			\node[] at (11,-1.5)  {\LARGE =};
-			\node[blue] at (11,-2)  {\LARGE synthetic inference rules};
-			\node[] at (11,-2.5)  {\LARGE for atoms};
-			\draw[blue,->,>=latex,ultra thick] (5.5,0.4)--(5.5,-0.5);
-		}
-		\end{tikzpicture}
-	}
-	\begin{overlayarea}{\textwidth}{3cm}
-		\only<3>{
-			\smallskip
-			Advantages of sequent systems~\cite{gentzen35} as frameworks
-			\begin{itemize}
-				\item simple calculi;
-				\item good proof theoretical properties (cut-elimination, consistency);
-				\item can be easily implemented ($\lambda$-Prolog, rewriting).
-			\end{itemize}
-		}
-		
-		\only<4-5>{
-			\begin{alertblock}{Nice idea:}<4-5>
-				Add mathematical theories to first order logics and reason about them using all the machinery already built for the sequent framework. 
-			\end{alertblock}
-		}
-		
-		\only<5>{
-			\small
-			So nice that many (nice \smiley) people pursued it:
-			\begin{itemize}
-				\item[$\star$] Sara Negri, Jan von Plato, and Roy Dyckhoff, in \emphdr{first-order logic}~\cite{NegVPl98,10.2307/24327109};
-				
-				\item[$\star$]  as well as, Alex Simpson~\cite{Sim94}, Luca Vigan\`{o}~\cite{Vig00}, Agata Ciabattoni~\cite{DBLP:conf/lics/CiabattoniGT08}, 
-				%
-				in fragments of first-order logic such as \emphdr{modal and substructural logics};
-				
-				\item[$\star$]  and Gilles Dowek~\cite{DBLP:conf/rta/DowekW05,DBLP:conf/fscd/BlanquiDGHT21}, in \emphdr{Deduction Modulo Theories/Axioms for Math}.
-			\end{itemize}
-		}
-		
-		\only<6-7>{
-			\emphdr{Add non-logical axioms~\cite{NegVPl98}}: assume $\vdash P\impl Q$ and $\vdash P$. 
+\only<6-7>{
+\medskip
+
+\emphdo{Add non-logical axioms:} 
+
+Assume $\vdash P\impl Q$ and $\vdash P$. 
 			Then\semiproofadjust
 			$$
 			\infer[cut]{\vdash Q}
@@ -689,16 +518,18 @@
 					{\infer{P\vdash P}{}&
 						\infer{Q\vdash Q}{}}}}
 			$$
-		}
-		
-		\only<7>{
-			\emphdb{Girard}: The {\em Hauptsatz} fails for systems with proper axioms.~\cite{girard87book}
-		}
-		
-		\only<8-9>{
-			\emphdr{Add mathematical basic sequents~\cite{NegVPl98}}: 
-			%
-			assume $P\vdash  Q$ and $\vdash P$. Then\semiproofadjust
+}
+\only<7>{
+\medskip
+
+\emphdb{Girard}: The {\em Hauptsatz} fails for systems with proper axioms.}
+
+\only<8-9>{
+\medskip
+
+\emphdo{Add mathematical basic sequents}: 
+			
+			Assume $P\vdash  Q$ and $\vdash P$. Then\semiproofadjust
 			$$
 			\infer[cut]{\vdash Q}
 			{\infer{\vdash P}{}&
@@ -706,72 +537,60 @@
 			$$
 		}
 		
-		\only<9>{
-			\emphdb{Gentzen}: {\em Hauptsatz} doesn't extend to basic sequents as premises.~\cite{gentzen-set}
+\only<9>{
+			\emphdb{Gentzen}: {\em Hauptsatz} doesn't extend to basic sequents as premises.
 		}
-		
-		\only<10-11>{
-			\emphdr{Add axioms as theories~\cite{NegVPl98}}: 
-			$$
-			\infer[\impl_l]{P, P\impl Q\vdash Q}
-			{\infer{P\vdash P}{}&
-				\infer{Q\vdash Q}{}}
-			$$
-		}
-		
-		\only<11>{
-			\emphdb{Gentzen's} consistency proof of elementary arithmetic.~\cite{gentzen-Mathematische}	
-		}
-		
-		\only<12-13>{
-			\emphdr{Add non-logical rules of inference~\cite{Sim94,NegVPl98}}:\semiproofadjust
+
+
+
+\only<10-11>{
+			\emphdr{Add non-logical rules of inference:}\semiproofadjust
 			$$
 			\infer[\emphdb{P\impl Q}]{\Gamma, P\seq C}{\Gamma, Q\seq C}\qquad
 			\infer[\emphdb{P}]{\Gamma\seq C}{\Gamma, P\seq C}
 			$$
 		}	
 		
-		\only<13>{
-			%\emphdb{Negri and Van Plato}	%and others~\cite{Sim94,Vig00,DBLP:conf/lics/CiabattoniGT08}
-			The sequent $\seq Q$ now has the (cut-free) proof\semiproofadjust
+		\only<11>{
+						The sequent $\seq Q$ now has the (cut-free) proof\semiproofadjust
 			$$
 			\infer[\emphdb{P}]{\seq Q}{\infer[\emphdb{P\impl Q}]{P\seq Q}
 				{\infer{Q\seq Q}{}}}
 			$$
 		}
 		
-		\only<14->{
+		\only<12->{
 			\emphdr{A fresh view to an old problem:} 
 		}
 		
-		\only<17->{
-			Combining the classification of axioms into a \emphdb{polarities' hierarchy} (inspired by~\cite{DBLP:conf/lics/CiabattoniGT08})
+		\only<13->{
+			Combining the classification of axioms into a \emphdb{polarities' hierarchy} (inspired by [Ciabattoni et al.])
 		}
 		
-		\only<18->{
-			with a systematic construction of inference rules from axioms using \emphdb{focusing}~\cite{andreoli92jlc},
+		\only<14->{
+			with a systematic construction of inference rules from axioms using \emphdb{focusing} [Andreoli],
 		}
 		
-		\only<19->{
+		\only<15->{
 			{justifies} the introduction of the class of \emphdr{bipolar axioms}.
 		}
 		
 		\begin{itemize}
-			\item<20-> \emphdb{Systematically} compute inference rules from
+			\item<16-> \emphdb{Systematically} compute inference rules from
 			{bipolar axioms} (\emphdr{$\lambda$-Prolog prototype});
 			
-			\item<21-> \emphdr{Uniform} presentation for \emphdb{classical} and \emphdb{intuitionistic} first order systems;
+			\item<17-> \emphdr{Uniform} presentation for \emphdb{classical} and \emphdb{intuitionistic} first order systems;
 			
-			\item<22-> \emphdb{Generalization} of the literature (e.g.~on \emphdr{geometric theories} \cite{Neg03,NegVPl14,Neg16,DBLP:conf/tableaux/CiabattoniMS13} and \cite{Vig00});
+			\item<18-> \emphdb{Generalization} of the literature (e.g.~on \emphdr{geometric theories} [Negri et al, Vigan\`o, Simpson]);
 			
-			\item<23> \emphdr{Cut-elimination} \emphdb{guaranteed} for
+			\item<19> \emphdr{Cut-elimination} \emphdb{guaranteed} for
 			the system with the new inferences, via focusing.
 		\end{itemize}
-		
-	\end{overlayarea}
-	
+
+\end{overlayarea}
 \end{frame}
 
+\end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
