@@ -140,19 +140,6 @@ negative atom or has a top-level negative connective.
 \only<1>{	
 			\medskip
 		
-%		$
-%		\begin{array}{l@{\ \coloncolonequals\ }c@{\ \mid\ }c@{\ \mid\ }c@{\ \mid\ }c@{\ \mid\ }c@{\ \mid\ }c@{\ \mid\ }c}
-%		\multicolumn{8}{l}{
-%			\text{$\negclass{0}{}$ and $\posclass{0}{}$  consist of \emphdr{all} atoms and}
-%			\medskip
-%		}
-%		\\
-%		\negf{\negclass{n+1}{}} & \posf{\posclass{n}{}} & \negclass{n+1}{} \wedgen \negclass{n+1}{} & \truen  & \negclass{n+1}{} \veen \negclass{n+1}{} & \falsen&  \forall x \negclass{n+1}{}  & \posclass{n+1}{} \impl \negclass{n+1}{}
-%		\\
-%		\posf{\posclass{n+1}{}} & \negf{\negclass{n}{}}  & \posclass{n+1}{} \wedgep \posclass{n+1}{} &  \truep& \posclass{n+1}{} \veep \posclass{n+1}{} & \falsep   & \exists x \posclass{n+1}{}
-%		\end{array}
-%		$
-%
 
 \begin{center}
 \includegraphics[scale=0.8]{figs/h5}
@@ -243,43 +230,23 @@ negative atom or has a top-level negative connective.
 			$\infer{\Gamma \seq \Delta}{\Gamma_1 \seq \Delta_1 \quad\ldots\quad \Gamma_n\seq\Delta_n}$};
 			\end{tikzpicture}
 			}
-
-%\bigskip
-%		
-%		\begin{itemize}
-%			\item<4-> \emphdb{Systematically} compute inference rules from
-%			{bipolar axioms} (\emphdr{$\lambda$-Prolog prototype});
-%			
-%			\item<4-> \emphdr{Uniform} presentation for \emphdb{classical} and \emphdb{intuitionistic} first order systems;
-%			
-%			\item<4-> \emphdb{Generalization} of the literature (e.g.~on \emphdr{geometric theories} [Negri et al, Vigan\`o, Simpson]);
-%			
-%			\item<4> \emphdr{Cut-elimination} \emphdb{guaranteed} for
-%			the system with the new inferences, via focusing.
-%		\end{itemize}
-
 \end{overlayarea}
 \end{frame}
 
-\begin{frame}\frametitle{The main result [Marin, Miller, Pimentel \& Volpe]}	
+\begin{frame}\frametitle{The main results [Marin, Miller, Pimentel \& Volpe]}	
 	
 	\begin{block}{}
-		\textbf{Theorem.} 
+		\textbf{Theorem 1.} 
 		Bipolar axioms correspond to sequent inference rules.
 	\end{block}
-
-%	\bigskip
-%		
-%	\begin{block}{}
-%		\textbf{Theorem 2.}
-%		Let $\LK\tup{\axioms}$/$\LJ\tup{\axioms}$ denote the
-%	extension of $\LK$/$\LJ$ with the synthetic inference rules 
-%	corresponding to a bipole for each $B\in\axioms$.
-%	
-%		The cut rule is admissible for the proof systems
-%		$\LK\tup{\axioms}$/$\LJ\tup{\axioms}$.
-%	\end{block}
-%
+	
+	\bigskip
+	
+	\begin{block}{}
+		\textbf{Theorem 2.} 
+		The cut rule is admissible in the extension of $\LK/\LJ$ with the  inference rules
+corresponding to bipolar axioms.
+	\end{block}
 
 
 \end{frame}
@@ -508,7 +475,8 @@ negative atom or has a top-level negative connective.
 %\end{frame}
 
 
-\begin{frame}\frametitle{Example: Horn clauses as bipoles}
+\begin{frame}\frametitle{\only<1-4>{Example: Horn clauses as bipoles} \only<5>{Other examples}}
+
 \only<1>{\[
 		\forall \overline{z}(P_1 \wedge \ldots \wedge P_m \, \impl \, Q)
 		\]}
@@ -527,10 +495,6 @@ negative atom or has a top-level negative connective.
 		
 \bigskip
 
-%\uncover<2->{		
-%Even more choices in the selection of polarities while still remaining bipolar formulas!}
-%
-%\bigskip 
 
 \begin{overlayarea}{\textwidth}{2cm}
 \only<3>{
@@ -552,9 +516,28 @@ $$\infer[BC]
 \begin{center}
 \emph{Back-chaining}\\
 \emph{[Vigan\`o]}
-\end{center}}
+\end{center}
+}
+\only<5>{
+\begin{center}
+Geometric, co-geometric, universal axioms...
+\end{center}
+\medskip
+\[\negf{\forall \overline{z}} (P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, \posf{\exists \overline{x}_1} \hat{M_1} \veepn \ldots \veepn \posf{\exists \overline{x}_n} \hat{M_n} )
+		\]
+		\smallskip
+\[
+		\negf{\forall \overline{z}} (\negf{\forall \overline{x}_1} \hat{M_1} \wedgepn \ldots \wedgepn \negf{\forall \overline{x}_n} \hat{M_n}  \, \negf{\impl} \, \negf{P_1^{-} \veen} \ldots \negf{\veen P_m^{-}} ) 
+		\]
+		\smallskip
+\[
+		\negf{\forall \overline{z}}(P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, Q_1^{\pm} \veepn \ldots \veepn Q_n^{\pm})
+		\]
+}
 \end{overlayarea}
 \end{frame}
+
+
 
 
 \end{document}
