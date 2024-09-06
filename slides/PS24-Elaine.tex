@@ -30,7 +30,7 @@
 \only<2-3>{
 \medskip
 
-\emphdo{Gentzen:} Add mathematical theories to first-order logic.
+\emphdb{Gentzen:} Add mathematical theories to first-order logic.
 
 \begin{center}
 {\em Consistency of the arithmetic without complete induction.}
@@ -104,10 +104,23 @@ Assume $\vdash P\impl Q$ and $\vdash P$.
 \begin{frame}
 \frametitle{Polarities of connectives}
 
-\textbf{First-order classical and intuitionistic language:}
-$$A\coloncolonequals P(x) \mid A \wedge A \mid t \mid A \vee A \mid f \mid A \impl A \mid \exists x\, A \mid \forall x\, A$$
+\textbf{{Polarization is a feature of linear logic: $\otimes$, $\&$,
+    $\oplus$, $\parr$}}
+\begin{itemize}
+  \item If the right-introduction rule is invertible, the connective
+    is \negf{negative}.
+  \item If the left-introduction rule is invertible, the connective
+    is \posf{postive}.
+  \item De Morgan duality flips polarity.  Polarity for atoms is
+    assigned arbitrarily.
+\end{itemize}
+\vfill
+\pause
 
-\medskip
+\textbf{First-order classical and intuitionistic language:}
+$$A\coloncolonequals P(x) \mid A \wedge A \mid t \mid A \vee A 
+        \mid f \mid A \impl A \mid \exists x\, A \mid \forall x\, A$$
+\vfill
 
 \textbf{{Polarized connectives:}}
 \begin{itemize}
@@ -115,13 +128,13 @@ $$A\coloncolonequals P(x) \mid A \wedge A \mid t \mid A \vee A \mid f \mid A \im
 \begin{itemize}
 \item \posf{positive} and \negf{negative} versions of the logical connectives and constants: 
 \[\wedgen, \wedgep, \truen, \truep,\veen, \veep, \falsen, \falsep\]
-\item first-order quantifiers: $\forall$ \negf{negative} and $\exists$ \posf{positive}.
 \end{itemize}
 \item In \emphdr{intuitionistic logic} 
 \begin{itemize}
 \item polarized classical connectives and constants where $\falsen,\veen$ do not occur;
 \item \negf{negative} implication: $\impl$.
 \end{itemize}
+\item First-order quantifiers: $\forall$ \negf{negative} and $\exists$ \posf{positive}.
 \item A formula is \posf{positive} if it is a positive atom or has a
 top-level positive connective.
 \item A formula is \negf{negative} if it is a
@@ -129,123 +142,98 @@ negative atom or has a top-level negative connective.
 \end{itemize}
 \end{frame}
 
-
 \begin{frame}{A fresh view to an old problem}
 
 \begin{overlayarea}{\textwidth}{7cm}			
-		
-		\only<1->{
-			Combining the classification of axioms into a \emphdb{polarities' hierarchy} [Ciabattoni et al.]
-}
-\only<1>{	
-			\medskip
-		
-
-\begin{center}
-\includegraphics[scale=0.8]{figs/h5}
-\end{center}
-}
-\only<1>{
-\medskip 
-{\small $(\forall x\posf{P_1}\wedgen\posf{P_2})\wedgen(\forall y{B(y)}\wedgen \posf{P_3})$}
-	\parbox[c]{2.5cm}{
-		\scalebox{.65}{
-			\begin{tikzpicture}[sibling distance=7em,level distance=4ex, level 2/.style={sibling distance =4em}]
-			\node (neg 1) {$\wedgen$\strut}
-			child { node {\rlap{$\wedgen$}\phantom{$\vee$}}
-				child { node {$\forall$}
-					child[level distance=3ex] {node[itria] {\smash{\posf{$P_1$}}}}}
-				child {
+ \only<1->{Combining the \emphdb{polarities' hierarchy} [Ciabattoni et al.] with a}
+ \only<1>{\medskip
+          \begin{center}
+          \includegraphics[scale=0.8]{figs/h5}
+          \end{center}}
+ \only<1>{\[\hbox{e.g., if $B$ is in $\posf{{\mathcal P}_0}$ then }
+            \forall x\exists y\forall z. B\hbox{ is in }\negf{{\mathcal N}_3}.\]
+  \medskip
+  {\small $(\forall x\posf{P_1}\wedgen\posf{P_2})\wedgen(\forall y{B(y)}\wedgen \posf{P_3})$}
+  \qquad
+  \parbox[c]{2.5cm}{
+     \scalebox{.65}{
+       \begin{tikzpicture}[sibling distance=7em,level distance=4ex, level 2/.style={sibling distance =4em}]
+           \node (neg 1) {$\wedgen$\strut}
+		child { node {\rlap{$\wedgen$}\phantom{$\vee$}}
+			child { node {$\forall$}
+				child[level distance=3ex] {node[itria] {\smash{\posf{$P_1$}}}}}
+			child {
 					child[level distance=1ex] {node[itria] {\smash{\posf{$P_2$}}}}}}
 			child { node {\rlap{$\wedgen$}\phantom{$\vee$}}
 				child { node {$\forall$}
 					child[level distance=5.5ex] {node {${B(y)}$}}}
 				child {
 					child[level distance=1ex] {node[itria] {\smash{\posf{$P_3$}}}}}};
-			\end{tikzpicture}}}
-%
-	$\bm\rightarrow$
-%
-		\parbox[c]{2.5cm}{
-		\scalebox{.65}{
-			\begin{tikzpicture}[sibling distance=4em,level distance=3.2ex]
-			\node[ellipse,draw = orange,fill = orange!10] (neg2) {\negf{$\mathsf{neg}$}}
-			child {
-				child [level distance=-1ex]{node[itria] {\smash{\posf{$P_1$}}}}}
-			child {
-				child [level distance=-1ex]{node[itria] {\smash{\posf{$P_2$}}}}}
-			child [level distance=6ex]{node {{$B(y)$}}}
-			child {
-				child [level distance=-1ex]{node[itria] {\smash{\posf{$P_3$}}}}};
-			\end{tikzpicture}}}
-			
-\medskip
-
-\begin{center}
-\emphdr{Bipolar} = $\mathcal{N}_2$\\
-(polarities flip at most twice)
-\end{center}
-}
+      \end{tikzpicture}}}
+   $\qquad\bm\rightarrow\quad$
+	\parbox[c]{2.5cm}{
+	\scalebox{.65}{
+		\begin{tikzpicture}[sibling distance=4em,level distance=3.2ex]
+		\node[ellipse,draw = orange,fill = orange!10] (neg2) {\negf{$\mathsf{neg}$}}
+		child {
+			child [level distance=-1ex]{node[itria] {\smash{\posf{$P_1$}}}}}
+		child {
+			child [level distance=-1ex]{node[itria] {\smash{\posf{$P_2$}}}}}
+		child [level distance=6ex]{node {{$B(y)$}}}
+		child {
+			child [level distance=-1ex]{node[itria] {\smash{\posf{$P_3$}}}}};
+		\end{tikzpicture}}}
+  \medskip
+  \begin{center}
+  \emphdr{Bipolar} = $\mathcal{N}_2$\\
+  (polarities flip at most twice)
+  \end{center}}
 
 \only<2->{
-
 \medskip
-
-			with a systematic construction of inference rules from axioms using \emphdo{focusing} [Andreoli],
-		}
+systematic construction of synthetic rules from axioms using
+\emphdb{focusing} [Andreoli 1912],}
 \only<2>{
-
 \medskip
-
-		\begin{tikzpicture}
-		\node at (-1.9,2.5) {$\jUnf{\Gamma_1}{\cdot}{\cdot}{\Delta_1}  \quad\ldots\quad \jUnf{\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
-		\node at (-1.5,-1.4) {$\infer[\kern -2pt D_l]{
-				\jUnf{\Gamma,B}{\cdot}{\cdot}{\Delta}}{
-				\jLf{\Gamma,B}{B}{\Delta}}$};
-		
-		\node at (0,0) {\includegraphics[scale=0.65]{figs/focusing}};
-		
-		\end{tikzpicture}
-}
-\only<3->{
-
-\medskip
-
-\emph{justifies} the introduction of the class of \emphdr{bipolar axioms}.}
-\only<3>{
-
-\medskip
-
+	\begin{tikzpicture}
+	\node at (-1.9,2.5) {$\jUnf{\Gamma,\Gamma_1}{\cdot}{\cdot}{\Delta_1}\,\cdots\,\jUnf{\Gamma,\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
+	\node at (-1.5,-1.4) {\kern -30pt\raisebox{8pt}{$(B\in\Gamma)~~$}$\infer[\kern -2pt D_l]{
+			\jUnf{\Gamma}{\cdot}{\cdot}{\Delta}}{
+			\jLf{\Gamma}{B}{\Delta}}$};
+	\node at (0,0) {\includegraphics[scale=0.65]{figs/focusing}};
+		\end{tikzpicture}}
+\only<3->{\medskip\emph{justifies} the introduction of the class of
+          \emphdr{bipolar axioms}. Here, $B\in\mathcal{N}_2$.}
+\only<3>{\medskip
 \begin{tikzpicture}
-		\node at (-1.9,2.5) {$\jUnf{\Gamma_1}{\cdot}{\cdot}{\Delta_1}  \quad\ldots\quad \jUnf{\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
-		\node at (-1.5,-1.4) {$\infer[\kern -2pt D_l]{
-				\jUnf{\Gamma,B}{\cdot}{\cdot}{\Delta}}{
-				\jLf{\Gamma,B}{B}{\Delta}}$};
-				
-\node at (-2.2,0.7) {\includegraphics[scale=0.65]{figs/focusing2}};
-		%
-		\node at (4,1) {\textbf{Corresponding synthetic rule}};
-		\node at (4,0.5) {(in $\LK$ or $\LJ$)};
-		\node at (4,-0.5) {
-			$\infer{\Gamma \seq \Delta}{\Gamma_1 \seq \Delta_1 \quad\ldots\quad \Gamma_n\seq\Delta_n}$};
-			\end{tikzpicture}
-			}
+	\node at (-1.9,2.5) {$\jUnf{\Gamma,\Gamma_1}{\cdot}{\cdot}{\Delta_1}\;\ldots\;\jUnf{\Gamma,\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
+	\node at (-1.5,-1.4) {\kern -30pt\raisebox{8pt}{$(B\in\Gamma)~~$}$\infer[\kern -2pt D_l]{
+			\jUnf{\Gamma}{\cdot}{\cdot}{\Delta}}{
+			\jLf{\Gamma}{B}{\Delta}}$};
+        \node at (-2.2,0.7) {\includegraphics[scale=0.65]{figs/focusing2}};
+	\node at (4,1) {\textbf{Corresponding synthetic rule}};
+	\node at (4,0.5) {(in $\LK$ or $\LJ$)};
+	\node at (4,-0.5) {
+		$\infer{\Gamma \seq \Delta}{\Gamma,\Gamma_1 \seq \Delta_1 \quad\ldots\quad \Gamma,\Gamma_n\seq\Delta_n}$};
+\end{tikzpicture}}
 \end{overlayarea}
 \end{frame}
 
-\begin{frame}\frametitle{The main results [Marin, Miller, Pimentel \& Volpe]}	
+\begin{frame}
+\frametitle{The main results [Marin, Miller, Pimentel \& Volpe, 2022]}	
 	
 	\begin{block}{}
 		\textbf{Theorem 1.} 
-		Bipolar axioms correspond to sequent inference rules.
+		Synthetic rules built from bipolar axioms 
+                \emph{involve only atomic formulas}.
 	\end{block}
 	
 	\bigskip
 	
 	\begin{block}{}
 		\textbf{Theorem 2.} 
-		The cut rule is admissible in the extension of $\LK/\LJ$ with the  inference rules
-corresponding to bipolar axioms.
+		The cut rule is admissible in the extension of $\LK/\LJ$ with 
+                synthetic rules corresponding to bipolar axioms.
 	\end{block}
 
 
