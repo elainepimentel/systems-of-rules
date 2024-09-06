@@ -1,13 +1,12 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% BEAMER SETTINGS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Beamer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \usecolortheme{dolphin}
 \useinnertheme{rounded}
 \useoutertheme{infolines}
 
-%\setbeamertemplate{blocks}[rounded]%[shadow]
 \setbeamercolor{block body alerted}{bg=alerted text.fg!10}
 \setbeamercolor{block title alerted}{bg=alerted text.fg!20}
 \setbeamercolor{block body}{bg=structure!10}
@@ -16,7 +15,6 @@
 \setbeamercolor{block title example}{bg=green!20}
 
 \setbeamertemplate{headline}[default]
-%\setbeamertemplate{footline}[frame number]
 \setbeamertemplate{navigation symbols}{}
 
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
@@ -25,27 +23,6 @@
 \setbeamerfont{itemize item}{size=\large}
 \setbeamerfont{itemize subitem}{size=\tiny}
 \setbeamertemplate{enumerate item}[circle]
-
-%\setbeamertemplate{navigation symbols}{}
-%%\setbeamertemplate{blocks}[rounded][shadow=false]
-%\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
-%%\setbeamertemplate{part page}[default][colsep=-4bp,rounded=true]
-%\setbeamertemplate{section page}{
-%	\begin{beamercolorbox}[center]{section title}%sep=8pt,wd=\textwidth,
-%		\usebeamerfont{section title}\insertsection\par
-%	\end{beamercolorbox}
-%}
-%
-%\setbeamertemplate{footline}[frame number]
-%
-%\setbeamersize{text margin left=1cm}
-%\setbeamersize{text margin right=1cm}
-%
-%\setbeamercolor{alerted text}{fg=blue}
-%\setbeamercolor{title}{bg=Grey!10}
-%\setbeamercolor{frametitle}{bg=Grey!10}
-%%\setbeamercolor{sectiontitle}{fg=LightBlue,bg=Grey!10}
-%%\setbeamercolor{headline}{bg=DarkBlue}
 
 \definecolor{LightBlue}{rgb}{0,0,0.8}
 \definecolor{DarkGreen}{rgb}{0.15,0.50,0.30}
@@ -95,44 +72,31 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% PACKAGES
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{proof}
 
-%\usepackage{amssymb}
 \usepackage{bm}
 \usepackage{colonequals}
 
 \usepackage[weather]{ifsym} %weather symbols
 \usepackage{wasysym} %smiley
 
-%\usepackage{array}
-%\usepackage{multirow,bigdelim}
-
 \usepackage{tikz}
-\usetikzlibrary{arrows,shapes,backgrounds,positioning}%,shapes.callouts,shapes.geometric}
+\usetikzlibrary{arrows,shapes,backgrounds,positioning}%shapes.callouts,shapes.geometric
 \tikzset{
 	itria/.style={
-		draw,dashed, %shape border uses incircle,
+		draw,dashed, %shape border uses incircle
 		isosceles triangle,shape border rotate=90,yshift=-7ex}
 }
 
 
-%\usepackage[curve]{xy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Focus
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\usepackage{virginialake}
-%\vlnostructuressyntax % to avoid conflicts with macros definition
-%\vlnosmallleftlabels
-%
-\newcommand{\vlhtr}[2]{\vlpd{#1}{}{#2}}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% MACROS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\proofadjust{\vadjust{\nobreak\vskip-2.7ex\nobreak}}
 \def\semiproofadjust{\vadjust{\nobreak\vskip-1.3ex\nobreak}}
 
@@ -161,7 +125,7 @@
 \newcommand{\wedgepn}{\wedge^{\!\pm}}
 \newcommand{\veepn}{\vee^{\!\pm}}
 
-\newcommand{\Seq}[2]{#1\vdash #2}
+\newcommand{\Seq}[2]{#1\seq #2}
 \newcommand{\labelleft}[1]{\deduce[\hbox{#1}]{\strut}{}}
 
 \newcommand{\jLf}[3]{#1\; {\Downarrow #2} \vdash #3}% left focused sequent
@@ -182,336 +146,17 @@
 \newcommand\negclass[2]{\mathcal{N}_{#1}^{#2}}
 \newcommand\posclass[2]{\mathcal{P}_{#1}^{#2}}
 
-\newcommand{\xitem}{\pause\item}
-\newcommand{\Ascr}{\mathcal{A}}
-\newcommand{\Bscr}{\mathcal{B}}
-\newcommand{\Cscr}{\mathcal{C}}
-
-\newcommand{\fib}{\mathsf{fib}}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% General stuff
-\newcommand*\mdelim[3]{%
-	\mathopen{}\left#1%
-	#3%
-	\right#2\mathclose{}%
-}
-
-\newcommand*{\set}[1]{\mdelim{\lbrace}{\rbrace}{#1}}
-
-\newcommand*{\EMP}{\varnothing}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% focus
-\newcommand*{\foc}[1]{{\fboxsep 1pt\fboxrule 0pt\fcolorbox{white}{blue!08}{$\langle#1\rangle$}}}
 \def\posf#1{\textcolor{DarkGreen}{#1}}
 \def\negf#1{\textcolor{orange}{#1}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% First order
-\newcommand*{\subst}[2]{(#1/#2)}
-\newcommand*{\term}[1]{#1}%{\mathtt{#1}}%#1}%{
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Logic
-\newcommand*{\ax}[1]{\mathsf{#1}}
-
-\newcommand{\forcesym}{\Vdash}
-%\newcommand{\nforcesym}{\nVdash}
-
-\newcommand{\force}[2]{#1\forcesym#2}
-%\newcommand{\nforce}[2]{#1\nforcesym#2}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Systems
-\newcommand*{\sys}[1]{\ensuremath{\mathsf{#1}}}%\xspace}
 
 
-\newcommand*{\K}{\sys{K}}
-%\newcommand*{\CK}{\sys{CK}}
-\newcommand*{\IK}{\sys{IK}}
-%\newcommand*{\X}{\sys{X}}
-
-%\renewcommand*{\o}{\mathsf{o}}%{}%
-%\newcommand*{\oK}{\o\K}
-%\newcommand*{\oKf}{\o\sys{K4}}
-%\newcommand*{\oKff}{\o\sys{K45}}
-%\newcommand*{\oIK}{\o\IK}
-
-%\newcommand*{\h}{\mathsf{h}}%{}%
-%\newcommand*{\hK}{\h\K}
-%\newcommand*{\hSfour}{\h\sys{S4}}
-
-%\newcommand*{\lab}{\mathsf{lab}}
-%\newcommand*{\labK}{\lab\K}
-%\newcommand*{\labIK}{\lab\IK}
-
-\newcommand*{\n}{\mathsf{n}}%{}%
-\newcommand*{\nK}{\sys{n}\K}
-%\newcommand*{\nK'}{\sys{n}\K'}
-%\newcommand*{\nIK}{\sys{n}\IK}
-
-\newcommand*{\f}{\mathsf{f}}
-\newcommand*{\fnK}{\f\nK}
-%\newcommand*{\fnIK}{\f\nIK}
-
-\newcommand*{\wf}{\mathsf{w}}
-\newcommand*{\wfnK}{\wf\nK}
-
-\newcommand*{\s}{\mathsf{s}}
-\newcommand*{\snK}{\s\nK}
-%\newcommand*{\snIK}{\s\nIK}
-
-%\newcommand*{\ii}{\mathsf{i}}
-%\newcommand*{\inK}{\ii\nK}
-%\newcommand*{\inIK}{\ii\nIK}
-%\newcommand{\iinK}{\iddot\nK}
-%\newcommand{\iinIK}{\iddot\nIK}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Systems
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\sys}[1]{\ensuremath{\mathsf{#1}}}
 
 \newcommand*{\LK}{\sys{LK}}
 \newcommand*{\LJ}{\sys{LJ}}
 \newcommand*{\LKF}{\sys{LKF}}
 \newcommand*{\LJF}{\sys{LJF}}
-%\newcommand*{\LMF}{\sys{LMF}}
-%\newcommand*{\LMFstar}[1][]{\LMF_\ast^{\mathsf{#1}}}
-%\newcommand*{\LMFo}[1][]{\LMF_\o^{\mathsf{#1}}}
-%%\newcommand*{\aLKF}{\hbox{\sys{LKF}\kern-2pt$^a$}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Connectives
-
-\newcommand*{\NEG}[1]{\bar{#1}}
-%\newcommand*{\NOT}{\neg}
-
-\newcommand*{\AND}{\mathbin{\scalebox{.85}{$\wedge$}}}%{\mathbin{\scalebox{.85}{\raise.1ex\hbox{\large$\wedge$}}}}
-\newcommand*{\PAND}{%
-	\mathbin{\smash{\scalebox{.65}{$\stackrel{\hbox{\scalebox{1}{\tiny$\bm+$}}}{\hbox{\large$\wedge$}}$}}}%
-}
-\newcommand*{\NAND}[1][]{%
-	\mathbin{\smash{\scalebox{.65}{$\stackrel{\hbox{\scalebox{1}{\tiny$\bm-$}}}{\hbox{\large$\wedge$}}$}}_{#1}}%
-}
-
-\newcommand*{\TOP}{\mathord{\scalebox{.85}{$\top$}}}
-\newcommand*{\PTOP}{%
-	\mathord{\smash{\scalebox{.7}{$\stackrel{\hbox{\scalebox{1}{\tiny$\bm+$}}}{\hbox{\large$\top$}}$}}}%
-}
-\newcommand*{\NTOP}{%
-	\mathord{\smash{\scalebox{.7}{$\stackrel{\hbox{\scalebox{1}{\tiny$\bm-$}}}{\hbox{\large$\top$}}$}}}%
-}
-
-\newcommand*{\OR}{\mathbin{\scalebox{.85}{$\vee$}}}%{\mathbin{\scalebox{.85}{\raise.1ex\hbox{\large$\vee$}}}}
-\newcommand*{\POR}{%
-	\mathbin{\smash{\scalebox{.7}{$\stackrel{\hbox{\scalebox{1}{\tiny$\bm+$}}}{\hbox{\large$\vee$}}$}}}%
-}
-\newcommand*{\NOR}{%
-	\mathbin{\smash{\scalebox{.7}{$\stackrel{\hbox{\scalebox{1}{\tiny$\bm-$}}}{\hbox{\large$\vee$}}$}}}%
-}
-
-\newcommand*{\BOT}{\mathord{\scalebox{.85}{$\bot$}}}
-%\newcommand*{\PBOT}{%
-%	\mathord{\smash{\scalebox{.7}{$\stackrel{\hbox{\scalebox{1}{\tiny$\bm+$}}}{\hbox{\scalebox{1}{\large$\bm\bot$}}}$}}}%
-%}
-%\newcommand*{\NBOT}{%
-%	\mathord{\smash{\scalebox{.7}{$\stackrel{\hbox{\scalebox{1}{\tiny$\bm-$}}}{\hbox{\large$\bm\bot$}}$}}}%
-%}
-
-\newcommand*{\IMP}{\mathbin{\scalebox{.85}{\raise.2ex\hbox{$\supset$}}}}%{\mathbin{\scalebox{.6}{\raise.4ex\hbox{\large$\bm\supset$}}}}%\supset}}%
-
-\newcommand*{\BOX}{\Box}%{\mathord{\medsquare}}
-\newcommand*{\DIA}{\Diamond}%{\mathord{\scalebox{.9}{\raise.2ex\hbox{$\meddiamond$}}}}
-
-\newcommand*{\SHP}{\mathord{\scalebox{.8}{\raise.2ex\hbox{\large$\downarrow$}}}}
-\newcommand*{\SHN}{\mathord{\scalebox{.8}{\raise.2ex\hbox{\large$\uparrow$}}}}
-
-\newcommand*{\FA}{\mathord{\scalebox{.9}{$\forall$}}}%{\mathord{\scalebox{.9}{\hbox{\large$\bm\forall$}}}}
-\newcommand*{\EX}{\mathord{\scalebox{.9}{$\exists$}}}%{\mathord{\scalebox{.9}{\hbox{\large$\bm\exists$}}}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Rules
-\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
-%\newcommand*{\invr}[1]{{#1}^{-1}}
-
-%\newcommand*{\rr}{\rn{r}}
-\newcommand*{\id}{\rn{ax}}
-%\newcommand*{\weak}{\rn{w}}
-%\newcommand*{\cont}{\rn{c}}
-%\newcommand*{\eweak}{\rn{ew}}
-%\newcommand*{\econt}{\rn{ec}}
-\newcommand*{\cut}{\rn{cut}}
-\newcommand{\init}{\mathsf{init}}
-%\newcommand*{\nec}{\rn{nec}}
-
-%\newcommand\bcutr {\mathsf{cut_1}}
-%\newcommand\fcutr {\mathsf{cut_2}}
-
-%\newcommand*{\isub}{\rn{isub}}
-%\newcommand*{\iid}{\rn{\iddot d}}
-%\newcommand{\idia}{\hbox{$\ddot{\rlap{$\phantom{X}$}\DIA}$}}
-%\newcommand{\ibox}{\hbox{$\ddot{\rlap{$\phantom{X}$}\BOX}$}}
-
-%\newcommand\Xdia        {\nrn[X]\DIA}
-%\newcommand\Xbr        {\nbrn{X}}
-
-%\newcommand*{\grs}{\rn{grs}}
-%\newcommand*{\urs}[1][]{\rn{urs_{#1}}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Rules per systems
-%\newcommand*{\orn}[2][]  {\rn{#2_{#1}^{\o}}} % ordinary seq
-%\newcommand*{\hrn}[2][]  {\rn{#2_{#1}^{\h}}} % hyper seq
-%\newcommand*{\labrn}[2][]  {\rn{#2_{#1}^{\lab}}} % labelled seq
-%\newcommand*{\frn}[2][]  {\rn{#2_{#1}^{\f}}} % focused
-\newcommand*{\nrn}[2][]  {\rn{#2_{#1}^{\n}}} % nested
-\newcommand*{\fnrn}[2][]  {\rn{#2_{#1}^{\f\n}}} % focused nested
-\newcommand*{\wfnrn}[2][]  {\rn{#2_{#1}^{\wf\n}}} % weakly focused nested
-\newcommand*{\snrn}[2][]  {\rn{#2_{#1}^{\s\n}}} % synthetic nested
-%\newcommand*{\inrn}[2][]  {\rn{#2_{#1}^{\ii\n}}} % indexed nested
-%\newcommand*{\starn}[1]  {\mathsf{#1}_\ast} % LMF*
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Structural rules
-%\newcommand*{\brn}[2][]{\rn{#2_{#1}^{\hbox{$\scriptscriptstyle[\mkern2mu]$}}}}%
-%\newcommand*{\brsym}{\mathord{\scalebox{.9}{$\BOXtimes$}}}
-%\newcommand*{\brn}[1]{\rn{\brsym_{#1}}} % \blacksquare
-%\newcommand*{\hbrn}[1]{\rn{\brsym_{#1}^{\h}}}
-%\newcommand*{\nbrn}[1]{\rn{\brsym_{#1}^{\n}}}
-%\newcommand*{\inbrn}[1]{\rn{\brsym_{#1}^{\ii\n}}}
-%\newcommand*{\labbrn}[1]{\rn{\brsym_{#1}^{\lab}}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Intuitionistic rules
-\newcommand*{\rrn}[2][]  {\rn{#2_{R#1}}}
-\newcommand*{\lrn}[2][]  {\rn{#2_{L#1}}}
-
-%\newcommand*{\rlabrn}[2][]  {\rn{#2_{R#1}^\lab}}
-%\newcommand*{\llabrn}[2][]  {\rn{#2_{L#1}^\lab}}
-
-\newcommand*{\rnrn}[2][]  {\rn{#2_{R#1}^{\n}}}
-\newcommand*{\lnrn}[2][]  {\rn{#2_{L#1}^{\n}}}
-
-\newcommand*{\rfnrn}[2][]  {\rn{#2_{R#1}^{\f\n}}}
-\newcommand*{\lfnrn}[2][]  {\rn{#2_{L#1}^{\f\n}}}
-
-\newcommand*{\rsnrn}[2][]  {\rn{#2_{R#1}^{\s\n}}}
-\newcommand*{\lsnrn}[2][]  {\rn{#2_{L#1}^{\s\n}}}
-
-%\newcommand*{\rinrn}[2][]  {\rn{#2_{R#1}^{\ii\n}}}
-%\newcommand*{\linrn}[2][]  {\rn{#2_{L#1}^{\ii\n}}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Nested sequents
-\makeatletter
-%\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
-\newcommand*{\BR}{%
-	\@ifnextchar\i{\br@two}{%
-		\@ifnextchar\bgroup{\br@one}{% 
-}}}
-\newcommand*{\br@one}[1]{%
-	\def\br@{#1}%
-	\mdelim{\lbrack}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
-}
-\newcommand*{\br@two}[3]{%
-	\def\br@{#3}%
-	\mdelim{\lbrack\strut^{#2}}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
-}
-
-%\newcommand*{\@makeoperator}[2]{
-%	\newcommand*{#1}{%
-%		\mathrm{#2}\mdelim{\lparen}{\rparen}
-%	}
-%}
-%\@makeoperator{\fm}{fm}
-%\@makeoperator{\depth}{dp}
-%\@makeoperator{\rank}{rk}
-%\@makeoperator{\height}{ht}
-%\@makeoperator{\tree}{tree}
-%\@makeoperator{\graph}{graph}
-\makeatother
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%contexts
-\makeatletter
-\newcommand*{\cxs}{%
-	\@ifnextchar\i{\cxs@two}{%
-		\@ifnextchar\bgroup{\cxs@one}{% % \bgroup is the same as {
-}}}
-\newcommand*{\cxs@one}[1]{%
-	\def\cxs@{#1}%
-	\mdelim{\lbrace}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #1\fi}%
-	\cxs@one@decor%
-}
-\newcommand*{\cxs@two}[3]{%
-	\def\cxs@{#3}%
-	\mdelim{\lbrace\strut^{#2}}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #3\fi}%
-	\cxs@one@decor%
-}
-\def\cxs@one@decor{%
-	\@ifnextchar_{\cxs@one@sub}{%
-		\@ifnextchar^{\cxs@one@sup}{%
-			\@ifnextchar\dots{\@firstoftwo{\dotsm\cxs@one@decor}}{%
-				\@ifnextchar[{\cxs@one@arg}%]
-				\cxs}}}%
-}
-\def\cxs@one@sub_#1{_{#1}\cxs@one@decor}
-\def\cxs@one@sup^#1{^{#1}\cxs@one@decor}
-\def\cxs@one@arg[#1]{{#1}\cxs@one@decor}
-
-%% Change these as needed, but keep the \cx@continuation at the end
-\def\cx@delete@always#1{{#1}^{\ast}\cx@continuation}
-\def\cx@delete@right#1*{{#1}^{\star}\cx@continuation}
-\def\cx@delete@focus#1\f{{#1}^{\scriptscriptstyle\not{\langle}{\rangle}}\cx@continuation}
-
-\def\cx@delete@star#1*{%
-	\@ifnextchar*{\cx@delete@right{#1}}{\cx@delete@always{#1}}%
-}
-
-\newcommand*{\@makecontextual}[2]{
-	\newcommand*{#1}{%
-		\@ifnextchar*{\cx@delete@star{#2}}{%
-			\@ifnextchar\f{\cx@delete@focus{#2}}{%
-				#2\cx@continuation}}%
-	}%
-}
-\newcommand*{\cx@continuation}[1][]{_{#1}\cxs}
-
-\@makecontextual{\Ex}{}
-
-\@makecontextual{\Cx}{\Gamma}%{{\color{DarkBlue}\Gamma}}
-\@makecontextual{\Dx}{\Delta}%{{\color{DarkBlue}\Delta}}
-\@makecontextual{\Lx}{\Lambda}%{{\color{DarkBlue}\Lambda}}
-\@makecontextual{\Rx}{\Pi}%{{\color{DarkBlue}\Pi}}
-
-\@makecontextual{\LLx}{\Omega}
-\@makecontextual{\RRx}{\Xi}
-\@makecontextual{\CCx}{\Sigma}
-\@makecontextual{\DDx}{\Theta}
-\makeatother
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Synthetic
-\newcommand*{\subf}{\mathbin{\setbox0=\hbox{$\in$}\copy0\kern-.8\wd0\box0}}
-%\newcommand*{\srn}[1][]{\rn{\hbox{\tiny${\bm\langle}\mkern 1mu{\bm\rangle}$}_{#1}^{\s\n}}}
-\newcommand*{\srn}[1][]{\rn{\DIAplus_{#1}^{\s\n}}}
-\newcommand*{\syngen}[2] {\left\{ #1 \right\}_{#2}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% focus
-\newcommand*{\sfoc}[1]{{\fboxsep 1pt\fboxrule 0pt\fcolorbox{white}{red!08}{$\langle#1\rangle$}}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Labels
-\newcommand*{\Labx}{\mathcal{L}}
-\newcommand*{\Rabx}{\mathcal{R}}
-\newcommand*{\Gx}{\mathcal{G}}
-\newcommand*{\labels}[2]{{\color{blue}{#1}\:\colon}{#2}}
-\newcommand*{\rel}{R}
-\newcommand*{\relp}{r}
-\newcommand*{\CC}{\mathcal{C}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Translation 
-%IK to LJF
-\newcommand*{\trL}[2][]{\lfloor#2\rfloor_{#1}}
-\newcommand*{\trR}[2][]{\lceil#2\rceil_{#1}}
 
 
