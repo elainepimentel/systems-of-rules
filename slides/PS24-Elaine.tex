@@ -4,15 +4,14 @@
 
 \title{Higher-level rules for sequent calculus}
 \author[Miller, Pimentel]{
-	\emph{Dale Miller} \\ {\small \'Ecole Polytechnique, France} \\\ \\ 
-	{\small Joint work with Elaine Pimentel}
+  \emph{Dale Miller} \\
+  {\small \'Ecole Polytechnique, France} \\[20pt]
+  {\small Joint work with Elaine Pimentel} \\[20pt]
+  {\small 6th International Workshop on Proof Theory, Birmingham}
 }
-
-
-
+\date{12 September}
 
 \begin{document}
-
 \begin{frame}
 	\titlepage
 \end{frame}	
@@ -196,7 +195,7 @@ systematic construction of synthetic rules from axioms using
 \only<2>{
 \medskip
 	\begin{tikzpicture}
-	\node at (-1.9,2.5) {$\jUnf{\Gamma,\Gamma_1}{\cdot}{\cdot}{\Delta_1}\,\cdots\,\jUnf{\Gamma,\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
+	\node at (-1.9,2.5) {$\jUnf{\Gamma,B,\Gamma_1}{\cdot}{\cdot}{\Delta_1}\,\cdots\,\jUnf{\Gamma,B,\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
 	\node at (-1.5,-1.4) {\kern -30pt\raisebox{8pt}{$(B\in\Gamma)~~$}$\infer[\kern -2pt D_l]{
 			\jUnf{\Gamma}{\cdot}{\cdot}{\Delta}}{
 			\jLf{\Gamma}{B}{\Delta}}$};
@@ -206,17 +205,19 @@ systematic construction of synthetic rules from axioms using
           \emphdr{bipolar axioms}. Here, $B\in\mathcal{N}_2$.}
 \only<3>{\medskip
 \begin{tikzpicture}
-	\node at (-1.9,2.5) {$\jUnf{\Gamma,\Gamma_1}{\cdot}{\cdot}{\Delta_1}\;\ldots\;\jUnf{\Gamma,\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
-	\node at (-1.5,-1.4) {\kern -30pt\raisebox{8pt}{$(B\in\Gamma)~~$}$\infer[\kern -2pt D_l]{
-			\jUnf{\Gamma}{\cdot}{\cdot}{\Delta}}{
-			\jLf{\Gamma}{B}{\Delta}}$};
+	\node at (-1.9,2.5) {$\jUnf{\Gamma,B,\Gamma_1}{\cdot}{\cdot}{\Delta_1}\;\ldots\;\jUnf{\Gamma,B,\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
+	\node at (-1.5,-1.4) {$\infer[\kern -2pt D_l]{
+			\jUnf{\Gamma,B}{\cdot}{\cdot}{\Delta}}{
+			\jLf{\Gamma,B}{B}{\Delta}}$};
         \node at (-2.2,0.7) {\includegraphics[scale=0.65]{figs/focusing2}};
 	\node at (4,1) {\textbf{Corresponding synthetic rule}};
 	\node at (4,0.5) {(in $\LK$ or $\LJ$)};
 	\node at (4,-0.5) {
-		$\infer{\Gamma \seq \Delta}{\Gamma,\Gamma_1 \seq \Delta_1 \quad\ldots\quad \Gamma,\Gamma_n\seq\Delta_n}$};
+          $\infer{\Gamma\seq\Delta}{\Gamma,\Gamma_1 \seq \Delta_1 \quad\ldots\quad \Gamma,\Gamma_n\seq\Delta_n}$};
 \end{tikzpicture}}
 \end{overlayarea}
+If $\Gamma\subseteq\mathcal{N}_{n}$  then
+$\Gamma_i\subseteq\mathcal{N}_{n-2}$, for all $i=1,\ldots,n$.
 \end{frame}
 
 \begin{frame}
