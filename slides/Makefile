@@ -1,11 +1,13 @@
-DOC=PS24-Elaine
+DOC=ps24
+EXTRAS=macros.tex
 EXTERNAL=ps2024talk
+VIEWER=okular
 
-$(DOC).pdf: $(DOC).tex
+$(DOC).pdf: $(DOC).tex $(EXTRAS)
 	pdflatex $(DOC)
 
 show: $(DOC).pdf
-	evince $(DOC).pdf &
+	$(VIEWER) $(DOC).pdf &
 
 force: 
 	pdflatex $(DOC)
