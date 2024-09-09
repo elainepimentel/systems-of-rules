@@ -213,7 +213,8 @@ systematic construction of synthetic rules from axioms using
 	\node at (4,1) {\textbf{Corresponding synthetic rule}};
 	\node at (4,0.5) {(in $\LK$ or $\LJ$)};
 	\node at (4,-0.5) {
-          $\infer{\Gamma\seq\Delta}{\Gamma,\Gamma_1 \seq \Delta_1 \quad\ldots\quad \Gamma,\Gamma_n\seq\Delta_n}$};
+          $\infer[B]{\Gamma\seq\Delta}
+                    {\Gamma,\Gamma_1\seq\Delta_1\quad\ldots\quad\Gamma,\Gamma_n\seq\Delta_n}$};
 \end{tikzpicture}}
 \end{overlayarea}
 If $\Gamma\subseteq\mathcal{N}_{n}$  then
@@ -527,6 +528,169 @@ Geometric, co-geometric, universal axioms...
 \end{frame}
 
 
+\begin{frame}
+\frametitle{Recapitulation}
+
+\begin{itemize}
+
+\item \textbf{Polarity of connectives:} invertibility vs
+  non-invertibility of introduction rules\\[10pt]
+
+\item \textbf{Focusing:} uses polarity to organize proofs into a
+  two-phase structure.\\[10pt]
+
+  These features of proofs arose within linear logic.  The \LKF and
+  \LJF proof system apply these features to classical and
+  intuitionistic logics.\\[10pt]
+
+\item \textbf{Synthetic inference rules:}
+\pause
+  \begin{itemize}
+  \item \textbf{Bipoles:} A flexible means exists to translate bipoles
+    ($\mathcal{N}_2$) to inference rules involving only atomic
+    formulas: see Marin, Miller, Pimentel, \& Volpe [2022].\\[6pt]
+\pause
+
+  \item \textbf{Non-bipoles:} The topic of the rest of this talk.
+    \begin{itemize}
+    \item Transform non-bipoles into bipoles.
+    \item Use a higher-level system of rules.
+    \end{itemize}
+  \end{itemize}
+
+\end{itemize}
+
+\end{frame}
 
 
+\begin{frame}
+\frametitle{One approach to treating non-bipoles: Remove them}
+
+Get rid of non-bipolar formulas by introducing new predicate symbols.
+
+\begin{itemize}
+\item Tseitin [1960's], Mints et al.~[1982].
+\item Andreoli: skolemization [1992], bipolarization [2001].
+\item Dyckhoff \& Negri: geometrisation [2015]
+\item See Dyckhoff \& Negri for many other names and references.
+\end{itemize}
+
+\vfill\pause
+With higher-order quantification, provability can be maintained.
+\[
+  (u\impl (p\impl q)\impl r) \impl s \dashv\vdash \exists x. 
+\left(\begin{array}{c}
+    (u\impl(x\impl r) \impl s) \wedge~\\
+    (x\impl (p\impl q))  \wedge~\\
+    ((p\impl q)\impl x)
+\end{array}
+\right)
+\]
+
+If you drop $\exists x$ for a new predicate symbol, the expressions
+are equisatisfiable.
+
+\newcommand{\sledom}{\Relbar\joinrel\mathrel{|}}
+
+\[
+  (u\impl (p\impl q)\impl r) \impl s \sledom \models
+\left(\begin{array}{c}
+    (u\impl (x\impl r) \impl s) \wedge~\\
+    (x\impl (p\impl q))  \wedge~\\
+    ((p\impl q)\impl x)
+\end{array}
+\right)
+\]
+\vfill
+With only implications, $B$ is of order $n$ if and only if $B\in\mathcal{N}_n$.
+\vfill
+\end{frame}
+
+\begin{frame}
+\frametitle{Another approach to treating non-bipoles: Higher-level of rules}
+
+Let $C$ denote $(u\impl (p\impl q)\impl r) \impl s)$.  (Assume that
+$s$ has negative polarity.)
+
+\[
+  \infer{\jUnf{\Gamma, C}{\cdot}{\cdot}{s}}{
+  \infer={\jLf{\Gamma, C}{(u\impl (p\impl q)\impl r) \impl s}{s}}{
+    \infer[\krelease_r]{\jRf{\Gamma,C}{u}}{
+       \infer[\kstore_l]{\jUnf{\Gamma,C}{\cdot}{u}{\cdot}}
+                        {\jUnf{\Gamma,C}{\cdot}{\cdot}{u}}}
+& 
+  \infer[\krelease_l]{\jRf{\Gamma,C}{(p\impl q)\impl r}}{
+  \infer{\jUnf{\Gamma,C}{\cdot}{(p\impl q)\impl r}{\cdot}}{
+  \infer{\jUnf{\Gamma,C}{p\impl q}{r}{\cdot}}{
+\jUnf{\Gamma,C,p\impl q}{\cdot}{\cdot}{r}
+}}}
+& 
+    \infer[\kinit_l]{\jLf{\Gamma,C}{s}{s}}{}
+}}
+\]
+This justifies the synthetic inference rule
+\[
+  \infer[C]{\Gamma\seq s}{ \Gamma\seq u & \Gamma,p\impl q \seq r}
+\]
+Unfortunately, this contains an occurrence of a logical connective.
+\vfill
+Of course, the $\mathcal{N}_1$ formula $p\impl q$ formula can be
+replaced by an inference rule.  This rule depends on polarity, of
+course. 
+\vfill
+\end{frame}
+
+\begin{frame}
+\frametitle{Higher-level of rules: an example}
+
+The synthetic rule for $C=(u\impl (p\impl q)\impl r) \impl s)$ (where 
+$s$ has negative polarity).
+\[\left[\quad\vcenter{
+  \infer[C]{\Gamma\seq s}{\Gamma\seq u
+   \quad &\quad
+   \infer{\Gamma\seq r}{
+     \deduce{\strut\vdots}{
+     \left(\vcenter{\hbox{Rule based on $p\impl q$}}\right)}}}
+}\quad\right]\]
+The second premise has an inference rule that is
+available to prove that premise.\pause  The shape of that rule depends on 
+the polarity of $p$ and $q$.  There are four possibilities.
+\[\qquad
+  \infer[(p-,~q-)]{\Psi\seq q}{\Psi\seq p}
+  \qquad 
+  \infer[(p-,~q+)]{\Psi\seq E}{\Psi\seq p & \Psi,q \seq E}
+\]
+\[
+  \infer[(p+,~q-)]{\Psi,p\seq q}{}
+  \qquad 
+  \infer[(p+,~q+)]{\Psi,p\seq E}{\Psi,p, q \seq E}
+\]
+For example,
+\[\left[\quad\vcenter{
+  \infer[C]{\Gamma\seq s}{\Gamma\seq u
+   \quad &\quad
+   \infer{\Gamma\seq r}{
+     \deduce{\strut\vdots}{
+     \left(\vcenter{\infer{\Psi,p\seq E}{\Psi,p, q \seq E}}\right)}}}
+  }\quad\right]
+\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Higher-level of rules: An example}
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Higher-level of rules in natural deduction}
+
+If we limit ourselves to negative connectives and negative atoms, then
+the sequent calculus is essentially natural deduction.
+
+Peter Schroeder-Heister, Arvon
+
+Edinburgh LF
+\end{frame}
 \end{document}
