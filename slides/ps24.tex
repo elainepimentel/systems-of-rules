@@ -676,11 +676,104 @@ For example,
 \]
 \end{frame}
 
+\newcommand{\Twoseq}[3]{{\color{darkred}#1:}\,#2\vdash #3}
+\newcommand{\lub   }[3]{\textsf{lub}~#1~#2~#3}
+
 \begin{frame}
-\frametitle{Higher-level of rules: An example}
+\frametitle{Higher-level of rules: An example with quantifiers}
 
+The (polarized) formula stating the existence of least upper bounds.
+\[
+  \forall x\forall y\exists z(x\le z\wedgep y\le z\wedgep
+              \forall w(x\le w\wedgep y\le w\impl z\le w)),
+\]
+Focusing on this formula yields the derivation.
+\[
+  \infer
+        {\Twoseq{\Sigma}{\Gamma}{\Delta}}
+        {\Twoseq{\Sigma,z}
+                {\forall w(x\le w\wedgep y\le w\impl z\le w),~
+                   x\le z,~y\le z,~\Gamma}
+                {\Delta}}
+\]
+Sequents are prefixed with a list of eigenvariables $\Sigma$ which are
+bound over the sequent.
+\vfill
 
+The assumption $\forall w(x\le w\wedgep y\le w\impl z\le w)$ can be
+converted to an inference rule (depending on the polarity of the $\le$
+predicate).  For example,
+\[
+  \infer{\Twoseq{\Sigma}{\Gamma}{\Delta}}
+        {\infer{\Twoseq{\Sigma,z}{\Gamma,x\le z,~y\le z}{\Delta}}
+               { \deduce{\strut\vdots}{
+     \left(\vcenter{
+  \infer{\Twoseq{\Sigma,z}{\Gamma}{z\le w}}
+        {\Twoseq{\Sigma,z}{\Gamma}{x\le w} \qquad
+         \Twoseq{\Sigma,z}{\Gamma}{y\le w}}
+     }\right)}}}
+\]
+There are no logical constant.  The \emph{scope} of variables is
+getting complicated.
+\end{frame}
 
+\begin{frame}
+\frametitle{Higher-level of rules: Continued}
+
+The $\mathcal{N}_3$ formula\quad
+$
+  \forall x\forall y\exists z(x\le z\wedgep y\le z\wedgep
+              \forall w(x\le w\wedgep y\le w\impl z\le w)),
+$
+can be bipolarized by introducing a new predicate ($\lub{x}{y}{z}$
+denotes $z$ is the least upper bound of $x$ and $y$).
+\[
+  \forall x\forall y\exists z.
+  \left[
+  \begin{array}{c}
+    (x\le z\wedgep y\le z\wedgep\lub{x}{y}{z})\wedgen~\\
+    \lub{x}{y}{z}\equiv \forall w.(x\le w\wedgep y\le w\impl z\le w))
+  \end{array}
+  \right]
+\]
+
+Moving quantifiers  **** CONTINUE HERE ***
+\[
+  \begin{array}{c}
+    \forall x\forall y\exists z.[(x\le z\wedgep y\le z\wedgep\lub{x}{y}{z})]
+      \wedgen~\\
+     \lub{x}{y}{z}\equiv \forall w.(x\le w\wedgep y\le w\impl z\le w))
+  \end{array}
+  \]
+
+%% Focusing on this formula yields the derivation.
+%% \[
+%%   \infer
+%%         {\Twoseq{\Sigma}{\Gamma}{\Delta}}
+%%         {\Twoseq{\Sigma,z}
+%%                 {\forall w(x\le w\wedgep y\le w\impl z\le w),~
+%%                    x\le z,~y\le z,~\Gamma}
+%%                 {\Delta}}
+%% \]
+%% Sequents are prefixed with a list of eigenvariables $\Sigma$ which are
+%% bound over the sequent.
+%% \vfill
+
+%% The assumption $\forall w(x\le w\wedgep y\le w\impl z\le w)$ can be
+%% converted to an inference rule (depending on the polarity of the $\le$
+%% predicate).  For example,
+%% \[
+%%   \infer{\Twoseq{\Sigma}{\Gamma}{\Delta}}
+%%         {\infer{\Twoseq{\Sigma,z}{\Gamma,x\le z,~y\le z}{\Delta}}
+%%                { \deduce{\strut\vdots}{
+%%      \left(\vcenter{
+%%   \infer{\Twoseq{\Sigma,z}{\Gamma}{z\le w}}
+%%         {\Twoseq{\Sigma,z}{\Gamma}{x\le w} \qquad
+%%          \Twoseq{\Sigma,z}{\Gamma}{y\le w}}
+%%      }\right)}}}
+%% \]
+%% There are no logical constant.  The \emph{scope} of variables is
+%% getting complicated.
 \end{frame}
 
 \begin{frame}
