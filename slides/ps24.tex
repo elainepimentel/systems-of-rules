@@ -5,11 +5,11 @@
 \title{Higher-level rules for sequent calculus}
 \author[Miller, Pimentel]{
   \emph{Dale Miller} \\
-  {\small \'Ecole Polytechnique, France} \\[20pt]
-  {\small Joint work with Elaine Pimentel} \\[20pt]
+  {\small Inria-Saclay \& Institut Polytechnique de Paris} \\[20pt]
+  {\small Joint work with Elaine Pimentel, UCL} \\[20pt]
   {\small 6th International Workshop on Proof Theory, Birmingham}
 }
-\date{12 September}
+\date{12 September 2024}
 
 \begin{document}
 \begin{frame}
@@ -109,7 +109,7 @@ Assume $\vdash P\impl Q$ and $\vdash P$.
   \item If the right-introduction rule is invertible, the connective
     is \negf{negative}.
   \item If the left-introduction rule is invertible, the connective
-    is \posf{postive}.
+    is \posf{positive}.
   \item De Morgan duality flips polarity.  Polarity for atoms is
     assigned arbitrarily.
 \end{itemize}
@@ -192,20 +192,20 @@ negative atom or has a top-level negative connective.
 \medskip
 systematic construction of synthetic rules from axioms using
 \emphdb{focusing} [Andreoli 1912],}
+\only<2->{\medskip\emph{justifies} the introduction of the class of
+          \emphdr{bipolar axioms}. Here, $B\in\mathcal{N}_2$.}
 \only<2>{
 \medskip
 	\begin{tikzpicture}
-	\node at (-1.9,2.5) {$\jUnf{\Gamma,B,\Gamma_1}{\cdot}{\cdot}{\Delta_1}\,\cdots\,\jUnf{\Gamma,B,\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
-	\node at (-1.5,-1.4) {\kern -30pt\raisebox{8pt}{$(B\in\Gamma)~~$}$\infer[\kern -2pt D_l]{
-			\jUnf{\Gamma}{\cdot}{\cdot}{\Delta}}{
-			\jLf{\Gamma}{B}{\Delta}}$};
+	\node at (-1.9,2.6) {$\jUnf{\Gamma,B,\Gamma_1}{\cdot}{\cdot}{\Delta_1}\,\cdots\,\jUnf{\Gamma,B,\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
+	\node at (-1.5,-1.4) {$\infer[\kern -2pt D_l]{
+			\jUnf{\Gamma,B}{\cdot}{\cdot}{\Delta}}{
+			\jLf{\Gamma,B}{B}{\Delta}}$};
 	\node at (0,0) {\includegraphics[scale=0.65]{figs/focusing}};
 		\end{tikzpicture}}
-\only<3->{\medskip\emph{justifies} the introduction of the class of
-          \emphdr{bipolar axioms}. Here, $B\in\mathcal{N}_2$.}
 \only<3>{\medskip
 \begin{tikzpicture}
-	\node at (-1.9,2.5) {$\jUnf{\Gamma,B,\Gamma_1}{\cdot}{\cdot}{\Delta_1}\;\ldots\;\jUnf{\Gamma,B,\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
+	\node at (-1.9,2.6) {$\jUnf{\Gamma,B,\Gamma_1}{\cdot}{\cdot}{\Delta_1}\;\ldots\;\jUnf{\Gamma,B,\Gamma_n}{\cdot}{\cdot}{\Delta_n}$};
 	\node at (-1.5,-1.4) {$\infer[\kern -2pt D_l]{
 			\jUnf{\Gamma,B}{\cdot}{\cdot}{\Delta}}{
 			\jLf{\Gamma,B}{B}{\Delta}}$};
@@ -217,8 +217,8 @@ systematic construction of synthetic rules from axioms using
                     {\Gamma,\Gamma_1\seq\Delta_1\quad\ldots\quad\Gamma,\Gamma_n\seq\Delta_n}$};
 \end{tikzpicture}}
 \end{overlayarea}
-If $\Gamma\subseteq\mathcal{N}_{n}$  then
-$\Gamma_i\subseteq\mathcal{N}_{n-2}$, for all $i=1,\ldots,n$.
+\only<2-3>{If $\Gamma\subseteq\mathcal{N}_{n}$  then
+$\Gamma_i\subseteq\mathcal{N}_{n-2}$, for all $i=1,\ldots,n$.}
 \end{frame}
 
 \begin{frame}
@@ -226,7 +226,7 @@ $\Gamma_i\subseteq\mathcal{N}_{n-2}$, for all $i=1,\ldots,n$.
 	
 	\begin{block}{}
 		\textbf{Theorem 1.} 
-		Synthetic rules built from bipolar axioms 
+		Synthetic rules built from bipolar ($\mathcal{N}_2$) axioms 
                 \emph{involve only atomic formulas}.
 	\end{block}
 	
@@ -541,7 +541,7 @@ Geometric, co-geometric, universal axioms...
 
   These features of proofs arose within linear logic.  The \LKF and
   \LJF proof system apply these features to classical and
-  intuitionistic logics.\\[10pt]
+  intuitionistic logics.  [Liang \& Miller, 2009]\\[10pt]
 
 \item \textbf{Synthetic inference rules:}
 \pause
@@ -551,7 +551,8 @@ Geometric, co-geometric, universal axioms...
     formulas: see Marin, Miller, Pimentel, \& Volpe [2022].\\[6pt]
 \pause
 
-  \item \textbf{Non-bipoles:} The topic of the rest of this talk.
+  \item \textbf{Non-bipoles:} The topic of the rest of this talk. Two
+    approaches:
     \begin{itemize}
     \item Transform non-bipoles into bipoles.
     \item Use a higher-level system of rules.
@@ -566,7 +567,8 @@ Geometric, co-geometric, universal axioms...
 \begin{frame}
 \frametitle{One approach to treating non-bipoles: Remove them}
 
-Get rid of non-bipolar formulas by introducing new predicate symbols.
+Transform non-bipolar formulas into bipolar formulas by introducing
+new predicate symbols.
 
 \begin{itemize}
 \item Tseitin [1960's], Mints et al.~[1982].
@@ -578,7 +580,7 @@ Get rid of non-bipolar formulas by introducing new predicate symbols.
 \vfill\pause
 With higher-order quantification, provability can be maintained.
 \[
-  (u\impl (p\impl q)\impl r) \impl s \dashv\vdash \exists x. 
+  (u\impl (p\impl q)\impl r) \impl s \dashv\vdash {\color{red}\exists x. }
 \left(\begin{array}{c}
     (u\impl(x\impl r) \impl s) \wedge~\\
     (x\impl (p\impl q))  \wedge~\\
@@ -586,7 +588,7 @@ With higher-order quantification, provability can be maintained.
 \end{array}
 \right)
 \]
-
+\pause
 If you drop $\exists x$ for a new predicate symbol, the expressions
 are equisatisfiable.
 
@@ -602,7 +604,7 @@ are equisatisfiable.
 \right)
 \]
 \vfill
-With only implications, $B$ is of order $n$ if and only if $B\in\mathcal{N}_n$.
+N.B.: With only implications, $B$ is of order $n$ if and only if $B\in\mathcal{N}_n$.
 \vfill
 \end{frame}
 
@@ -634,9 +636,8 @@ This justifies the synthetic inference rule
 \]
 Unfortunately, this contains an occurrence of a logical connective.
 \vfill
-Of course, the $\mathcal{N}_1$ formula $p\impl q$ formula can be
-replaced by an inference rule.  This rule depends on polarity, of
-course. 
+The $\mathcal{N}_1$ formula $p\impl q$ formula can be
+replaced by an inference rule: which rule depends on polarity.
 \vfill
 \end{frame}
 
@@ -698,7 +699,7 @@ Focusing on this formula yields the derivation.
 \]
 Sequents are prefixed with a list of eigenvariables $\Sigma$ which are
 bound over the sequent.
-\vfill
+\vfill\pause
 
 The assumption $\forall w(x\le w\wedgep y\le w\impl z\le w)$ can be
 converted to an inference rule (depending on the polarity of the $\le$
@@ -713,7 +714,7 @@ predicate).  For example,
          \Twoseq{\Sigma,z}{\Gamma}{y\le w}}
      }\right)}}}
 \]
-There are no logical constant.  The \emph{scope} of variables is
+There are no logical constants.  The \emph{scope} of variables is
 getting complicated.
 \end{frame}
 
@@ -725,65 +726,102 @@ $
   \forall x\forall y\exists z(x\le z\wedgep y\le z\wedgep
               \forall w(x\le w\wedgep y\le w\impl z\le w)),
 $
-can be bipolarized by introducing a new predicate ($\lub{x}{y}{z}$
-denotes $z$ is the least upper bound of $x$ and $y$).
+can be bipolarized by introducing a new predicate \textsf{lub} so that
+the atomic formula $(\lub{x}{y}{z})$ denotes the fact that $z$ is the
+least upper bound of $x$ and $y$. 
 \[
-  \forall x\forall y\exists z.
-  \left[
   \begin{array}{c}
-    (x\le z\wedgep y\le z\wedgep\lub{x}{y}{z})\wedgen~\\
-    \lub{x}{y}{z}\equiv \forall w.(x\le w\wedgep y\le w\impl z\le w))
+   \forall x\forall y\exists z.[ (x\le z\wedgep y\le z\wedgep\lub{x}{y}{z})]
+   \wedgen~\\[6pt]
+   \forall x\forall y\forall z.[ \lub{x}{y}{z}\equiv \forall w.(x\le w\wedgep y\le w\impl z\le w)]
   \end{array}
-  \right]
 \]
+\vfill
 
-Moving quantifiers  **** CONTINUE HERE ***
+Focusing on this formula yields the derivation.
 \[
-  \begin{array}{c}
-    \forall x\forall y\exists z.[(x\le z\wedgep y\le z\wedgep\lub{x}{y}{z})]
-      \wedgen~\\
-     \lub{x}{y}{z}\equiv \forall w.(x\le w\wedgep y\le w\impl z\le w))
-  \end{array}
-  \]
+  \infer
+        {\Twoseq{\Sigma}{\Gamma}{\Delta}}
+        {\Twoseq{\Sigma,z}
+                {\lub{x}{y}{z},~x\le z,~y\le z,~\Gamma}
+                {\Delta}}
+\]
+Now, sequents are prefixed with a list of eigenvariables that are
+bound over the sequent.
+\vfill
 
-%% Focusing on this formula yields the derivation.
-%% \[
-%%   \infer
-%%         {\Twoseq{\Sigma}{\Gamma}{\Delta}}
-%%         {\Twoseq{\Sigma,z}
-%%                 {\forall w(x\le w\wedgep y\le w\impl z\le w),~
-%%                    x\le z,~y\le z,~\Gamma}
-%%                 {\Delta}}
-%% \]
-%% Sequents are prefixed with a list of eigenvariables $\Sigma$ which are
-%% bound over the sequent.
-%% \vfill
+It seems more natural to use this formulation with a new predicate
+than the rule with a new scoped inference rule.
+\vfill
 
-%% The assumption $\forall w(x\le w\wedgep y\le w\impl z\le w)$ can be
-%% converted to an inference rule (depending on the polarity of the $\le$
-%% predicate).  For example,
-%% \[
-%%   \infer{\Twoseq{\Sigma}{\Gamma}{\Delta}}
-%%         {\infer{\Twoseq{\Sigma,z}{\Gamma,x\le z,~y\le z}{\Delta}}
-%%                { \deduce{\strut\vdots}{
-%%      \left(\vcenter{
-%%   \infer{\Twoseq{\Sigma,z}{\Gamma}{z\le w}}
-%%         {\Twoseq{\Sigma,z}{\Gamma}{x\le w} \qquad
-%%          \Twoseq{\Sigma,z}{\Gamma}{y\le w}}
-%%      }\right)}}}
-%% \]
-%% There are no logical constant.  The \emph{scope} of variables is
-%% getting complicated.
+Note: If the order relation is also known to be antisymmetric, then
+the \textsf{lub} predicate actually defines a function.  Moving from 
+relations to functions is another topic.
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Higher-level of rules in natural deduction}
 
-If we limit ourselves to negative connectives and negative atoms, then
-the sequent calculus is essentially natural deduction.
+If we limit ourselves to
+\begin{itemize}
+  \item negative connectives ($\impl$, $\wedge^-$,
+    $\forall$) and
+    \item negative polarized atoms,
+\end{itemize}
+then the sequent calculus is essentially natural deduction
+[Herbelin 1994, Esp{\'{\i}}rito Santo 2007].
 
-Peter Schroeder-Heister, Arvon
+\vfill
 
-Edinburgh LF
+Systems of higher-level rules in natural deduction have been
+considered long ago.
+
+\begin{itemize}
+\item Schroeder-Heister, A Natural Extension of Natural
+  Deduction, 1984.
+
+\item Avron, Gentzenizing Schroeder-Heister's Natural Extension of
+  Natural Deduction, 1990.
+
+\item  Harper, Honsell, Gordon Plotkin, "A Framework for Defining
+  Logics", 1987.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Higher-level of rules in sequent calculus}
+
+Following the papers by Marin, Miller, Pimentel, \& Volpe [2022] and
+by Miller \& Pimentel 2013, it seems that we should be able to
+describe systems of higher-level rules in the sequent calculus that
+account for
+\begin{itemize}
+\item intuitionistic, classical, linear proof systems,
+\item additive and multiplicative connectives,
+\item forward-chaining and back-chaining polarities, and 
+\item first-order quantification and eigenvariables.
+\end{itemize}
+\vfill
+
+Capturing these features of proof without using logical connectives
+seems a questionable pursuit since logical formulas have evolved to
+capture all these features, except for the polarity of atoms.
+\vfill
+
+\begin{itemize}
+\item The implications $\multimap$, $\Rightarrow$ do not 
+  have natural counterparts in inference rules.
+  
+\item The nesting of scopes for quantifiers ($\forall$, $\exists$) is
+  natural in logical formulas, while writing explicit binders in
+  inference rules is eschewed.
+\end{itemize}
+\vfill
+
 \end{frame}
 \end{document}
+
+% LocalWords:  Ciabattoni itria FC Vigan bipolarization darkred lub
+% LocalWords:  geometrisation bipolarized antisymmetric rito Avron
+% LocalWords:  Gentzenizing Heister's Honsell
