@@ -679,7 +679,8 @@ For example,
 \end{frame}
 
 \newcommand{\Twoseq}[3]{{\color{darkred}#1:}\,#2\vdash #3}
-\newcommand{\lub   }[3]{\textsf{lub}~#1~#2~#3}
+\newcommand{\LUB}{\textsf{\color{blue}lub}}
+\newcommand{\lub   }[3]{\LUB~#1~#2~#3}
 
 \begin{frame}
 \frametitle{Higher-level of rules: An example with quantifiers}
@@ -723,11 +724,11 @@ getting complicated.
 \frametitle{Higher-level of rules: Continued}
 
 The $\mathcal{N}_3$ formula\quad
-$
+\[
   \forall x\forall y\exists z(x\le z\wedgep y\le z\wedgep
               \forall w(x\le w\wedgep y\le w\impl z\le w)),
-$
-can be bipolarized by introducing a new predicate \textsf{lub} so that
+\]
+can be bipolarized by introducing a new predicate \LUB\xspace so that
 the atomic formula $(\lub{x}{y}{z})$ denotes the fact that $z$ is the
 least upper bound of $x$ and $y$. 
 \[
@@ -770,7 +771,7 @@ If we limit ourselves to
     $\forall$) and
     \item negative polarized atoms,
 \end{itemize}
-then the sequent calculus is essentially natural deduction
+then the sequent calculus is essentially natural deduction:
 [Herbelin 1994],\\[0pt] [Esp{\'{\i}}rito Santo 2007].
 
 \vfill
@@ -793,10 +794,9 @@ considered long ago.
 \begin{frame}
 \frametitle{Higher-level of rules in sequent calculus}
 
-Following the papers by Marin, Miller, Pimentel, \& Volpe [2022] and
-by Miller \& Pimentel 2013, it seems that we should be able to
-describe systems of higher-level rules in the sequent calculus that
-account for
+Using the papers [Marin, Miller, Pimentel, \& Volpe, 2022] and [Miller
+  \& Pimentel, 2013], we should be able to describe systems of
+higher-level rules for the sequent calculus that accounts for
 \begin{itemize}
 \item intuitionistic, classical, linear proof systems,
 \item additive and multiplicative connectives,
@@ -806,9 +806,9 @@ account for
 \vfill
 \pause
 
-However: Capturing these features of proof without using logical connectives
+However: Capturing these features without using logical connectives
 seems a questionable pursuit since logical formulas have evolved to
-capture all these features, except for the polarity of atoms.
+capture all these features (except for the polarity of atoms).
 \vfill
 
 \begin{itemize}
@@ -828,8 +828,8 @@ capture all these features, except for the polarity of atoms.
 
 \begin{itemize}
 
-\item We plan to consider how higher-level rules can be organized for
-  capturing the richness of inference in the sequent calculus for (at
+\item We plan to consider how higher-level rules can be organized to
+  capture the richness of inference in the sequent calculus for (at
   least) classical, intuitionistic, and linear logics.
 
 \vfill
@@ -841,13 +841,13 @@ capture all these features, except for the polarity of atoms.
 \begin{itemize}
   \item Developing these approaches in an interactive theorem
     prover (such as Abella) might provide an interesting setting to
-    explore these trade-off in various simple mathematical theories.
+    explore these trade-offs in various simple mathematical theories.
 \end{itemize}
 \vfill
 
-\item We hope to also understand the relations between higher-level
-  rules and more ``exotic'' proof systems: for example, hypersequents
-  [Ciabattoni \& Genco, 2018]. 
+\item We also hope to understand the relations between higher-level
+  rules and more “exotic” proof systems: hypersequents [Ciabattoni \&
+    Genco, 2018]. 
 \vfill
 \vfill
 \end{itemize}
