@@ -73,7 +73,7 @@ Assume $\vdash P\impl Q$ and $\vdash P$.
 \only<5>{
 \medskip
 
-\emphdb{Girard}: The {\em Hauptsatz} fails for systems with proper axioms.}
+The {\em Hauptsatz} fails for systems with proper axioms.}
 
 \only<6-7>{
 \medskip
@@ -466,67 +466,114 @@ $\Gamma_i\subseteq\mathcal{N}_{n-2}$, for all $i=1,\ldots,n$.}
 %\end{frame}
 
 
-\begin{frame}\frametitle{\only<1-4>{Example: Horn clauses as bipoles} \only<5>{Other examples}}
+\begin{frame}
+\frametitle{Example: Various clauses as bipoles}
 
-\only<1>{\[
-		\forall \overline{z}(P_1 \wedge \ldots \wedge P_m \, \impl \, Q)
-		\]}
-	
-\only<2>{\[
-		\negf{\forall \overline{z}}(P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, Q^{\pm})
-		\]}
-	
-\only<3>{\[
-	\negf{\forall \overline{z}}(\posf{P_1^{+}} \posf{\wedgep} \ldots \posf{\wedgep} \posf{P_m^{+}} \, \negf{\impl} \, \posf{Q^{+}} )
-	\]}
-
-\only<4>{\[
-	\negf{\forall \overline{z}}(\negf{P_1^{-} \wedgen} \ldots \negf{\wedgen P_m^{-}} \, \negf{\impl} \, \negf{Q^{-}})
-	\]}
-		
-\bigskip
-
-
-\begin{overlayarea}{\textwidth}{2cm}
-\only<3>{
-$$	\infer[FC]
+\[
+  \negf{\forall \overline{z}}(\posf{P_1^{+}} \posf{\wedgep} \ldots \posf{\wedgep} \posf{P_m^{+}} \, \negf{\impl} \, \posf{Q^{+}} )
+  \qquad
+  \vcenter{
+  \infer[FC]
 	{\emphdr{\overline{P}}, \Gamma'\vdash\Delta}
-	{\emphdr{Q}, \Gamma\vdash\Delta}	
-	$$
+	{\emphdr{\overline{P},Q}, \Gamma\vdash\Delta}}
+\]
 \begin{center}
-\emph{Forward-chaining} \\
+\emph{Forward-chaining} 
 \emph{[Simpson, Negri, Ciabattoni]}
 \end{center}
-}
-
-\only<4>{
-$$\infer[BC]
+\vfill
+\pause
+\[
+  \negf{\forall \overline{z}}(\negf{P_1^{-} \wedgen} \ldots \negf{\wedgen P_m^{-}} \, \negf{\impl} \, \negf{Q^{-}})
+  \qquad
+  \vcenter{
+  \infer[BC]
 	{\Gamma\vdash \emphdr{Q},\Delta'}
 	{\Gamma\vdash \emphdr{P_1}, \Delta & \ldots &\Gamma\vdash \emphdr{P_m}, \Delta}
-	$$
+   }
+\]
 \begin{center}
-\emph{Back-chaining}\\
+\emph{Back-chaining}
 \emph{[Vigan\`o]}
 \end{center}
-}
-\only<5>{
+\vfill
+\pause
 \begin{center}
-Geometric, co-geometric, universal axioms...
+Other examples: Geometric, co-geometric, universal axioms, $\ldots$
 \end{center}
 \medskip
 \[\negf{\forall \overline{z}} (P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, \posf{\exists \overline{x}_1} \hat{M_1} \veepn \ldots \veepn \posf{\exists \overline{x}_n} \hat{M_n} )
 		\]
-		\smallskip
 \[
 		\negf{\forall \overline{z}} (\negf{\forall \overline{x}_1} \hat{M_1} \wedgepn \ldots \wedgepn \negf{\forall \overline{x}_n} \hat{M_n}  \, \negf{\impl} \, \negf{P_1^{-} \veen} \ldots \negf{\veen P_m^{-}} ) 
 		\]
-		\smallskip
 \[
 		\negf{\forall \overline{z}}(P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, Q_1^{\pm} \veepn \ldots \veepn Q_n^{\pm})
 		\]
-}
-\end{overlayarea}
+\vfill
 \end{frame}
+
+%% \begin{frame}\frametitle{\only<1-4>{Example: Horn clauses as bipoles} \only<5>{Other examples}}
+
+%% \only<1>{\[
+%% 		\forall \overline{z}(P_1 \wedge \ldots \wedge P_m \, \impl \, Q)
+%% 		\]}
+	
+%% \only<2>{\[
+%% 		\negf{\forall \overline{z}}(P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, Q^{\pm})
+%% 		\]}
+	
+%% \only<3>{\[
+%% 	\negf{\forall \overline{z}}(\posf{P_1^{+}} \posf{\wedgep} \ldots \posf{\wedgep} \posf{P_m^{+}} \, \negf{\impl} \, \posf{Q^{+}} )
+%% 	\]}
+
+%% \only<4>{\[
+%% 	\negf{\forall \overline{z}}(\negf{P_1^{-} \wedgen} \ldots \negf{\wedgen P_m^{-}} \, \negf{\impl} \, \negf{Q^{-}})
+%% 	\]}
+		
+%% \bigskip
+
+
+%% \begin{overlayarea}{\textwidth}{2cm}
+%% \only<3>{
+%% $$	\infer[FC]
+%% 	{\emphdr{\overline{P}}, \Gamma'\vdash\Delta}
+%% 	{\emphdr{Q}, \Gamma\vdash\Delta}	
+%% 	$$
+%% \begin{center}
+%% \emph{Forward-chaining} \\
+%% \emph{[Simpson, Negri, Ciabattoni]}
+%% \end{center}
+%% }
+
+%% \only<4>{
+%% $$\infer[BC]
+%% 	{\Gamma\vdash \emphdr{Q},\Delta'}
+%% 	{\Gamma\vdash \emphdr{P_1}, \Delta & \ldots &\Gamma\vdash \emphdr{P_m}, \Delta}
+%% 	$$
+%% \begin{center}
+%% \emph{Back-chaining}\\
+%% \emph{[Vigan\`o]}
+%% \end{center}
+%% }
+%% \only<5>{
+%% \begin{center}
+%% Geometric, co-geometric, universal axioms...
+%% \end{center}
+%% \medskip
+%% \[\negf{\forall \overline{z}} (P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, \posf{\exists \overline{x}_1} \hat{M_1} \veepn \ldots \veepn \posf{\exists \overline{x}_n} \hat{M_n} )
+%% 		\]
+%% 		\smallskip
+%% \[
+%% 		\negf{\forall \overline{z}} (\negf{\forall \overline{x}_1} \hat{M_1} \wedgepn \ldots \wedgepn \negf{\forall \overline{x}_n} \hat{M_n}  \, \negf{\impl} \, \negf{P_1^{-} \veen} \ldots \negf{\veen P_m^{-}} ) 
+%% 		\]
+%% 		\smallskip
+%% \[
+%% 		\negf{\forall \overline{z}}(P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, Q_1^{\pm} \veepn \ldots \veepn Q_n^{\pm})
+%% 		\]
+%% }
+%% \end{overlayarea}
+%% \end{frame}
 
 
 \begin{frame}
@@ -545,7 +592,6 @@ Geometric, co-geometric, universal axioms...
   intuitionistic logics.  [Liang \& Miller, 2009]\\[10pt]
 
 \item \textbf{Synthetic inference rules:}
-\pause
   \begin{itemize}
   \item \textbf{Bipoles:} A flexible means exists to translate bipoles
     ($\mathcal{N}_2$) to inference rules involving only atomic
@@ -592,8 +638,6 @@ With higher-order quantification, provability can be maintained.
 \pause
 If you drop $\exists x$ for a new predicate symbol, the expressions
 are equisatisfiable.
-
-\newcommand{\sledom}{\Relbar\joinrel\mathrel{|}}
 
 \[
   u\impl ((p\impl q)\impl r) \impl s \sledom \models
@@ -677,10 +721,6 @@ For example,
   }\quad\right]
 \]
 \end{frame}
-
-\newcommand{\Twoseq}[3]{{\color{darkred}#1:}\,#2\vdash #3}
-\newcommand{\LUB}{\textsf{\color{blue}lub}}
-\newcommand{\lub   }[3]{\LUB~#1~#2~#3}
 
 \begin{frame}
 \frametitle{Higher-level of rules: An example with quantifiers}
