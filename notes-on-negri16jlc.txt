@@ -1,39 +1,87 @@
-[I have read over most of this paper quickly, skipping some of the proofs and all the material on modal logic. I provide my first thoughts on reading this paper and how what we know about focusing can relate to this.  Dale, 05/04/2024]
+[I have read over most of this paper quickly, skipping some of the
+proofs and all the material on modal logic. I provide my first
+thoughts on reading this paper and how what we know about focusing can
+relate to this.  Dale, 05/04/2024]
 
-** EP. I have read this paper in detail about 3 years ago, including all the proofs and etc. It has many interesting ideas, but some are based on some 'mistaken principles'
+** EP. I have read this paper in detail about 3 years ago, including
+   all the proofs and etc. It has many interesting ideas, but some are
+   based on some 'mistaken principles'
 
-I think Negri attempts to “optimize” too early, obscuring some of the main ideas. For example, when describing the big picture of synthetic inference rules, it is okay to use contractions and to repeat the implication to the right premise of the imp-L rule. There are ways to deal with this after the fact. Also, multiple-conclusion intuitionistic systems are not important either.  Also, “height-preserving” weakening/contraction is unimportant in a focused setting.
+I think Negri attempts to “optimize” too early, obscuring some of the
+main ideas. For example, when describing the big picture of synthetic
+inference rules, it is okay to use contractions and to repeat the
+implication to the right premise of the imp-L rule. There are ways to
+deal with this after the fact. Also, multiple-conclusion
+intuitionistic systems are not important either.  Also,
+“height-preserving” weakening/contraction is unimportant in a focused
+setting.
 
-For example, the G3 restriction is not handled directly by focusing.  I describe an approach in my Lisbon lectures (slide 62) [https://www.lix.polytechnique.fr/Labo/Dale.Miller/papers/days-of-logic-2024.pdf]
+For example, the G3 restriction is not handled directly by focusing.
+I describe an approach in my Lisbon lectures (slide 62)
+[https://www.lix.polytechnique.fr/Labo/Dale.Miller/papers/days-of-logic-2024.pdf]
 
-Weakness of Negri's approach
-1. GRS seems limited to forward chaining only.
-2. Results are stated for axioms in normal form only.
-3. Contraction is optimized too soon.  The “closure condition” described on page 518 seems like an unfortunate condition to need to worry about.
-4. Other optimizations are incorporated when they should be treated orthogonally.
+Weakness of Negri's approach 1. GRS seems limited to forward chaining
+only.  2. Results are stated for axioms in normal form only.
+3. Contraction is optimized too soon.  The “closure condition”
+described on page 518 seems like an unfortunate condition to need to
+worry about.  4. Other optimizations are incorporated when they should
+be treated orthogonally.
 
-** EP. All this is justified by her lack of understanding of polarities and focusing. The 'closure condition' in particular, is not needed, being imported from earlier works on the subject. In her work, and Agata's as well, the positive polarity is assumed.
+** EP. All this is justified by her lack of understanding of
+   polarities and focusing. The 'closure condition' in particular, is
+   not needed, being imported from earlier works on the subject. In
+   her work, and Agata's as well, the positive polarity is assumed.
 
-The notion of Generalized Geometric Axiom GA_n (page 518) is interesting to me since (1) it seems like these are “first-order clauses” since to the left of an implication, there are no implications nor universal quantifiers, while (2) there is an arbitrary nesting of polarity shifts available in such formulas (which typically happens in higher-order settings).
+The notion of Generalized Geometric Axiom GA_n (page 518) is
+interesting to me since (1) it seems like these are “first-order
+clauses” since to the left of an implication, there are no
+implications nor universal quantifiers, while (2) there is an
+arbitrary nesting of polarity shifts available in such formulas (which
+typically happens in higher-order settings).
 
-** EP. I think it is easy to extend that with our polarity classes. 
+** EP. I think it is easy to extend that with our polarity classes.
 
-Theorem 3.2 should be a consequence of the usual observation that (in the polarized setting) additive connectives move out over multiplicative connectives (of the same polarity).
+Theorem 3.2 should be a consequence of the usual observation that (in
+the polarized setting) additive connectives move out over
+multiplicative connectives (of the same polarity).
 
-Page 522: The need to switch from the formula Term to Term’ strongly suggests that some important structure is missing (explicit signatures, explicit notation for meta-level quantification).
+Page 522: The need to switch from the formula Term to Term’ strongly
+suggests that some important structure is missing (explicit
+signatures, explicit notation for meta-level quantification).
 
-** EP. I think we could discuss your idea of adding labels to axioms -- you presented this to me some time ago.
+** EP. I think we could discuss your idea of adding labels to axioms
+   -- you presented this to me some time ago.
 
-I find it odd that Negri does not cite PS-H’s paper on a natural extension to natural deduction.  Maybe this is because she is dealing with “a natural extension to sequent calculus” (although her presentation does not make this extension feel so “natural”).
+I find it odd that Negri does not cite PS-H’s paper on a natural
+extension to natural deduction.  Maybe this is because she is dealing
+with “a natural extension to sequent calculus” (although her
+presentation does not make this extension feel so “natural”).
 
-Theorem 5.1 (Generalization of Barr’s theorem).  I can probably extend my (handwritten) proof using LJF/LKF of Barr’s theorem to this setting.
+Theorem 5.1 (Generalization of Barr’s theorem).  I can probably extend
+my (handwritten) proof using LJF/LKF of Barr’s theorem to this
+setting.
 
-A big problem for accounting for a “system of rules” is coming up with a better notation for complex rules. The scope of first-order variables is very important, challenging how variables are usually qualified in inference diagrams. A linear logic meta-theory (or PSF) should provide the right framework. In the natural deduction setting, LF seems to provide a good framework.
+A big problem for accounting for a “system of rules” is coming up with
+a better notation for complex rules. The scope of first-order
+variables is very important, challenging how variables are usually
+qualified in inference diagrams. A linear logic meta-theory (or PSF)
+should provide the right framework. In the natural deduction setting,
+LF seems to provide a good framework.
 
-When there is an isomorphism between two classes of things (in this case, axioms and inference rules), why pick one over the other? The inference rules are written using horizontal lines, commas, turnstiles, etc. Formulas are written using connectives, quantifiers, and atoms. In general, inference rules contain less structure (such as disjunctive branching), so we need normal forms of formulas to correspond more precisely with inference rules.
+When there is an isomorphism between two classes of things (in this
+case, axioms and inference rules), why pick one over the other? The
+inference rules are written using horizontal lines, commas,
+turnstiles, etc. Formulas are written using connectives, quantifiers,
+and atoms. In general, inference rules contain less structure (such as
+disjunctive branching), so we need normal forms of formulas to
+correspond more precisely with inference rules.
 
-Sara argues that her generalized inference rules allow for proving independence results, etc. My guess is that a simple focused proof system will achieve the same thing. So the real question is, "Why do this work to derive synthetic rules in the first place?"
+Sara argues that her generalized inference rules allow for proving
+independence results, etc. My guess is that a simple focused proof
+system will achieve the same thing. So the real question is, "Why do
+this work to derive synthetic rules in the first place?"
 
-I'm not sure of the answer.  Maybe one does this because the topic is floating around in the literature.
+I'm not sure of the answer.  Maybe one does this because the topic is
+floating around in the literature.
 
-** EP> I think that the main 
+** EP> I think that the main
