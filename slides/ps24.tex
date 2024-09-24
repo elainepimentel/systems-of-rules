@@ -5,7 +5,7 @@
 \title{Higher-level rules for sequent calculus}
 \author[Miller, Pimentel]{
   \emph{Dale Miller} \\
-  {\small Inria-Saclay \& Institut Polytechnique de Paris} \\[20pt]
+  {\small Inria-Saclay \& Institut Polytechnique de Paris} \\[10pt]
   {\small Joint work with Elaine Pimentel, UCL} \\[20pt]
   {\small 6th International Workshop on Proof Theory, Birmingham}
 }
@@ -73,12 +73,12 @@ Assume $\vdash P\impl Q$ and $\vdash P$.
 \only<5>{
 \medskip
 
-\emphdb{Girard}: The {\em Hauptsatz} fails for systems with proper axioms.}
+The {\em Hauptsatz} fails for systems with proper axioms.}
 
 \only<6-7>{
 \medskip
 
-\emphdo{A better solution:} Add non-logical rules of inference
+\emphdo{A better approach:} Add non-logical rules of inference
 
 
 \medskip
@@ -144,7 +144,8 @@ negative atom or has a top-level negative connective.
 \begin{frame}{A fresh view to an old problem}
 
 \begin{overlayarea}{\textwidth}{7cm}			
- \only<1->{Combining the \emphdb{polarities' hierarchy} [Ciabattoni et al.] with a}
+ \only<1->{Combining the \emphdb{polarities' hierarchy} [Ciabattoni et
+     al., 2008] with a}
  \only<1>{\medskip
           \begin{center}
           \includegraphics[scale=0.8]{figs/h5}
@@ -191,7 +192,7 @@ negative atom or has a top-level negative connective.
 \only<2->{
 \medskip
 systematic construction of synthetic rules from axioms using
-\emphdb{focusing} [Andreoli 1912],}
+\emphdb{focusing} [Andreoli, 1992],}
 \only<2->{\medskip\emph{justifies} the introduction of the class of
           \emphdr{bipolar axioms}. Here, $B\in\mathcal{N}_2$.}
 \only<2>{
@@ -465,67 +466,114 @@ $\Gamma_i\subseteq\mathcal{N}_{n-2}$, for all $i=1,\ldots,n$.}
 %\end{frame}
 
 
-\begin{frame}\frametitle{\only<1-4>{Example: Horn clauses as bipoles} \only<5>{Other examples}}
+\begin{frame}
+\frametitle{Example: Various clauses as bipoles}
 
-\only<1>{\[
-		\forall \overline{z}(P_1 \wedge \ldots \wedge P_m \, \impl \, Q)
-		\]}
-	
-\only<2>{\[
-		\negf{\forall \overline{z}}(P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, Q^{\pm})
-		\]}
-	
-\only<3>{\[
-	\negf{\forall \overline{z}}(\posf{P_1^{+}} \posf{\wedgep} \ldots \posf{\wedgep} \posf{P_m^{+}} \, \negf{\impl} \, \posf{Q^{+}} )
-	\]}
-
-\only<4>{\[
-	\negf{\forall \overline{z}}(\negf{P_1^{-} \wedgen} \ldots \negf{\wedgen P_m^{-}} \, \negf{\impl} \, \negf{Q^{-}})
-	\]}
-		
-\bigskip
-
-
-\begin{overlayarea}{\textwidth}{2cm}
-\only<3>{
-$$	\infer[FC]
+\[
+  \negf{\forall \overline{z}}(\posf{P_1^{+}} \posf{\wedgep} \ldots \posf{\wedgep} \posf{P_m^{+}} \, \negf{\impl} \, \posf{Q^{+}} )
+  \qquad
+  \vcenter{
+  \infer[FC]
 	{\emphdr{\overline{P}}, \Gamma'\vdash\Delta}
-	{\emphdr{Q}, \Gamma\vdash\Delta}	
-	$$
+	{\emphdr{\overline{P},Q}, \Gamma\vdash\Delta}}
+\]
 \begin{center}
-\emph{Forward-chaining} \\
+\emph{Forward-chaining} 
 \emph{[Simpson, Negri, Ciabattoni]}
 \end{center}
-}
-
-\only<4>{
-$$\infer[BC]
+\vfill
+\pause
+\[
+  \negf{\forall \overline{z}}(\negf{P_1^{-} \wedgen} \ldots \negf{\wedgen P_m^{-}} \, \negf{\impl} \, \negf{Q^{-}})
+  \qquad
+  \vcenter{
+  \infer[BC]
 	{\Gamma\vdash \emphdr{Q},\Delta'}
 	{\Gamma\vdash \emphdr{P_1}, \Delta & \ldots &\Gamma\vdash \emphdr{P_m}, \Delta}
-	$$
+   }
+\]
 \begin{center}
-\emph{Back-chaining}\\
+\emph{Back-chaining}
 \emph{[Vigan\`o]}
 \end{center}
-}
-\only<5>{
+\vfill
+\pause
 \begin{center}
-Geometric, co-geometric, universal axioms...
+Other examples: Geometric, co-geometric, universal axioms, $\ldots$
 \end{center}
 \medskip
 \[\negf{\forall \overline{z}} (P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, \posf{\exists \overline{x}_1} \hat{M_1} \veepn \ldots \veepn \posf{\exists \overline{x}_n} \hat{M_n} )
 		\]
-		\smallskip
 \[
 		\negf{\forall \overline{z}} (\negf{\forall \overline{x}_1} \hat{M_1} \wedgepn \ldots \wedgepn \negf{\forall \overline{x}_n} \hat{M_n}  \, \negf{\impl} \, \negf{P_1^{-} \veen} \ldots \negf{\veen P_m^{-}} ) 
 		\]
-		\smallskip
 \[
 		\negf{\forall \overline{z}}(P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, Q_1^{\pm} \veepn \ldots \veepn Q_n^{\pm})
 		\]
-}
-\end{overlayarea}
+\vfill
 \end{frame}
+
+%% \begin{frame}\frametitle{\only<1-4>{Example: Horn clauses as bipoles} \only<5>{Other examples}}
+
+%% \only<1>{\[
+%% 		\forall \overline{z}(P_1 \wedge \ldots \wedge P_m \, \impl \, Q)
+%% 		\]}
+	
+%% \only<2>{\[
+%% 		\negf{\forall \overline{z}}(P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, Q^{\pm})
+%% 		\]}
+	
+%% \only<3>{\[
+%% 	\negf{\forall \overline{z}}(\posf{P_1^{+}} \posf{\wedgep} \ldots \posf{\wedgep} \posf{P_m^{+}} \, \negf{\impl} \, \posf{Q^{+}} )
+%% 	\]}
+
+%% \only<4>{\[
+%% 	\negf{\forall \overline{z}}(\negf{P_1^{-} \wedgen} \ldots \negf{\wedgen P_m^{-}} \, \negf{\impl} \, \negf{Q^{-}})
+%% 	\]}
+		
+%% \bigskip
+
+
+%% \begin{overlayarea}{\textwidth}{2cm}
+%% \only<3>{
+%% $$	\infer[FC]
+%% 	{\emphdr{\overline{P}}, \Gamma'\vdash\Delta}
+%% 	{\emphdr{Q}, \Gamma\vdash\Delta}	
+%% 	$$
+%% \begin{center}
+%% \emph{Forward-chaining} \\
+%% \emph{[Simpson, Negri, Ciabattoni]}
+%% \end{center}
+%% }
+
+%% \only<4>{
+%% $$\infer[BC]
+%% 	{\Gamma\vdash \emphdr{Q},\Delta'}
+%% 	{\Gamma\vdash \emphdr{P_1}, \Delta & \ldots &\Gamma\vdash \emphdr{P_m}, \Delta}
+%% 	$$
+%% \begin{center}
+%% \emph{Back-chaining}\\
+%% \emph{[Vigan\`o]}
+%% \end{center}
+%% }
+%% \only<5>{
+%% \begin{center}
+%% Geometric, co-geometric, universal axioms...
+%% \end{center}
+%% \medskip
+%% \[\negf{\forall \overline{z}} (P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, \posf{\exists \overline{x}_1} \hat{M_1} \veepn \ldots \veepn \posf{\exists \overline{x}_n} \hat{M_n} )
+%% 		\]
+%% 		\smallskip
+%% \[
+%% 		\negf{\forall \overline{z}} (\negf{\forall \overline{x}_1} \hat{M_1} \wedgepn \ldots \wedgepn \negf{\forall \overline{x}_n} \hat{M_n}  \, \negf{\impl} \, \negf{P_1^{-} \veen} \ldots \negf{\veen P_m^{-}} ) 
+%% 		\]
+%% 		\smallskip
+%% \[
+%% 		\negf{\forall \overline{z}}(P_1^{\pm} \wedgepn \ldots \wedgepn P_m^{\pm} \, \negf{\impl} \, Q_1^{\pm} \veepn \ldots \veepn Q_n^{\pm})
+%% 		\]
+%% }
+%% \end{overlayarea}
+%% \end{frame}
 
 
 \begin{frame}
@@ -540,15 +588,14 @@ Geometric, co-geometric, universal axioms...
   two-phase structure.\\[10pt]
 
   These features of proofs arose within linear logic.  The \LKF and
-  \LJF proof system apply these features to classical and
+  \LJF proof systems apply these features to classical and
   intuitionistic logics.  [Liang \& Miller, 2009]\\[10pt]
 
 \item \textbf{Synthetic inference rules:}
-\pause
   \begin{itemize}
   \item \textbf{Bipoles:} A flexible means exists to translate bipoles
     ($\mathcal{N}_2$) to inference rules involving only atomic
-    formulas: see Marin, Miller, Pimentel, \& Volpe [2022].\\[6pt]
+    formulas: see [Marin, Miller, Pimentel, \& Volpe, 2022].\\[6pt]
 \pause
 
   \item \textbf{Non-bipoles:} The topic of the rest of this talk. Two
@@ -580,10 +627,10 @@ new predicate symbols.
 \vfill\pause
 With higher-order quantification, provability can be maintained.
 \[
-  (u\impl (p\impl q)\impl r) \impl s \dashv\vdash {\color{red}\exists x. }
+  u\impl ((p\impl q)\impl r) \impl s \dashv\,\vdash {\color{red}\exists x. }
 \left(\begin{array}{c}
-    (u\impl(x\impl r) \impl s) \wedge~\\
-    (x\impl (p\impl q))  \wedge~\\
+    (u\impl(x\impl r) \impl s)~\wedge~\\
+    (x\impl (p\impl q))~\wedge~\\
     ((p\impl q)\impl x)
 \end{array}
 \right)
@@ -592,10 +639,8 @@ With higher-order quantification, provability can be maintained.
 If you drop $\exists x$ for a new predicate symbol, the expressions
 are equisatisfiable.
 
-\newcommand{\sledom}{\Relbar\joinrel\mathrel{|}}
-
 \[
-  (u\impl (p\impl q)\impl r) \impl s \sledom \models
+  u\impl ((p\impl q)\impl r) \impl s \sledom \models
 \left(\begin{array}{c}
     (u\impl (x\impl r) \impl s) \wedge~\\
     (x\impl (p\impl q))  \wedge~\\
@@ -611,12 +656,12 @@ N.B.: With only implications, $B$ is of order $n$ if and only if $B\in\mathcal{N
 \begin{frame}
 \frametitle{Another approach to treating non-bipoles: Higher-level of rules}
 
-Let $C$ denote $(u\impl (p\impl q)\impl r) \impl s)$.  (Assume that
+Let $C$ denote $u\impl ((p\impl q)\impl r) \impl s$.  (Assume that
 $s$ has negative polarity.)
 
 \[
   \infer{\jUnf{\Gamma, C}{\cdot}{\cdot}{s}}{
-  \infer={\jLf{\Gamma, C}{(u\impl (p\impl q)\impl r) \impl s}{s}}{
+  \infer={\jLf{\Gamma, C}{u\impl ((p\impl q)\impl r) \impl s}{s}}{
     \infer[\krelease_r]{\jRf{\Gamma,C}{u}}{
        \infer[\kstore_l]{\jUnf{\Gamma,C}{\cdot}{u}{\cdot}}
                         {\jUnf{\Gamma,C}{\cdot}{\cdot}{u}}}
@@ -644,7 +689,7 @@ replaced by an inference rule: which rule depends on polarity.
 \begin{frame}
 \frametitle{Higher-level of rules: an example}
 
-The synthetic rule for $C=(u\impl (p\impl q)\impl r) \impl s)$ (where 
+The synthetic rule for $C=u\impl ((p\impl q)\impl r) \impl s$ (where 
 $s$ has negative polarity).
 \[\left[\quad\vcenter{
   \infer[C]{\Gamma\seq s}{\Gamma\seq u
@@ -676,9 +721,6 @@ For example,
   }\quad\right]
 \]
 \end{frame}
-
-\newcommand{\Twoseq}[3]{{\color{darkred}#1:}\,#2\vdash #3}
-\newcommand{\lub   }[3]{\textsf{lub}~#1~#2~#3}
 
 \begin{frame}
 \frametitle{Higher-level of rules: An example with quantifiers}
@@ -722,11 +764,11 @@ getting complicated.
 \frametitle{Higher-level of rules: Continued}
 
 The $\mathcal{N}_3$ formula\quad
-$
+\[
   \forall x\forall y\exists z(x\le z\wedgep y\le z\wedgep
               \forall w(x\le w\wedgep y\le w\impl z\le w)),
-$
-can be bipolarized by introducing a new predicate \textsf{lub} so that
+\]
+can be bipolarized by introducing a new predicate \LUB\xspace so that
 the atomic formula $(\lub{x}{y}{z})$ denotes the fact that $z$ is the
 least upper bound of $x$ and $y$. 
 \[
@@ -746,8 +788,8 @@ Focusing on this formula yields the derivation.
                 {\lub{x}{y}{z},~x\le z,~y\le z,~\Gamma}
                 {\Delta}}
 \]
-Now, sequents are prefixed with a list of eigenvariables that are
-bound over the sequent.
+%Now, sequents are prefixed with a list of eigenvariables that are
+%bound over the sequent.
 \vfill
 
 It seems more natural to use this formulation with a new predicate
@@ -769,8 +811,8 @@ If we limit ourselves to
     $\forall$) and
     \item negative polarized atoms,
 \end{itemize}
-then the sequent calculus is essentially natural deduction
-[Herbelin 1994, Esp{\'{\i}}rito Santo 2007].
+then the sequent calculus is essentially natural deduction:
+[Herbelin 1994],\\[0pt] [Esp{\'{\i}}rito Santo 2007].
 
 \vfill
 
@@ -785,17 +827,16 @@ considered long ago.
   Natural Deduction, 1990.
 
 \item  Harper, Honsell, Gordon Plotkin, "A Framework for Defining
-  Logics", 1987.
+  Logics", 1993.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Higher-level of rules in sequent calculus}
 
-Following the papers by Marin, Miller, Pimentel, \& Volpe [2022] and
-by Miller \& Pimentel 2013, it seems that we should be able to
-describe systems of higher-level rules in the sequent calculus that
-account for
+Using the papers [Marin, Miller, Pimentel, \& Volpe, 2022] and [Miller
+  \& Pimentel, 2013], we should be able to describe systems of
+higher-level rules for the sequent calculus that accounts for
 \begin{itemize}
 \item intuitionistic, classical, linear proof systems,
 \item additive and multiplicative connectives,
@@ -803,10 +844,11 @@ account for
 \item first-order quantification and eigenvariables.
 \end{itemize}
 \vfill
+\pause
 
-Capturing these features of proof without using logical connectives
+However: Capturing these features without using logical connectives
 seems a questionable pursuit since logical formulas have evolved to
-capture all these features, except for the polarity of atoms.
+capture all these features (except for the polarity of atoms).
 \vfill
 
 \begin{itemize}
@@ -826,8 +868,8 @@ capture all these features, except for the polarity of atoms.
 
 \begin{itemize}
 
-\item We plan to consider how higher-level rules can be organized for
-  capturing the richness of inference in the sequent calculus for (at
+\item We plan to consider how higher-level rules can be organized to
+  capture the richness of inference in the sequent calculus for (at
   least) classical, intuitionistic, and linear logics.
 
 \vfill
@@ -838,14 +880,14 @@ capture all these features, except for the polarity of atoms.
   
 \begin{itemize}
   \item Developing these approaches in an interactive theorem
-    prover(such as Abella) might provide an interesting setting to
-    explore these trade-off in various simple mathematical theories.
+    prover (such as Abella) might provide an interesting setting to
+    explore these trade-offs in various simple mathematical theories.
 \end{itemize}
 \vfill
 
-\item We hope to also understand the relations between higher-level
-  rules and more ``exotic'' proof systems: for example, hypersequents
-  [Ciabattoni \& Genco, 2018]. 
+\item We also hope to understand the relations between higher-level
+  rules and more “exotic” proof systems: hypersequents [Ciabattoni \&
+    Genco, 2018]. 
 \vfill
 \vfill
 \end{itemize}

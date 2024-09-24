@@ -19,7 +19,7 @@ publish: $(DOC).pdf
 	cp $(DOC).pdf ~/www/papers/$(EXTERNAL).pdf
 
 usb: $(DOC).pdf
-	cp $(DOC).pdf /media/dale/Sony_32GU/$(EXTERNAL).pdf
+	cp $(DOC).pdf /media/dale/Lexar/$(EXTERNAL).pdf
 
 clean:
 	rm $(DOC).aux $(DOC).log $(DOC).nav $(DOC).out $(DOC).snm $(DOC).toc
