@@ -106,3 +106,48 @@
   When instantiating forall- P and forall+ P, presumably, we need to
   preserve polarity: that is, instantiate (forall- P) with a formula
   of negative polarity.  Confirm that this works as intended.
+
+* Example to develop: first-order Godel-Dummett logic
+  Axiom 1: (P => Q) \/ (Q => P).   Linearity
+  Axiom 2: forall x (A x \/ B) => forall x (A x) \/ B.
+
+  By focusing on Axiom 1, it seems that we can come up with the right
+  2-system formulation.  Using the Ciabattoni & Genco result, we get
+  the com rule for hypersequents.
+
+  We should next focus on Axiom 2 to see what it means for 2-systems
+  and then for hypersequents.
+
+  First quess: The sequents in a hypersequent carry their own local
+  sequents.  A "com-like" rule would also an eigenvariable from one
+  sequent to get added to another sequent's signature.
+   1. Is this the correct rule for GD logic?
+   2. How does this rule get motivated by focusing on Axiom 2?
+
+* De-bipolarization approach to non-bipoles
+
+  Make a short section that describes how this approach is popular but
+  not really proof theoretic.
+
+  Introduce new non-logical constants to define and remove subformulas
+  so that the alternation of polarities diminishes.
+
+  This has many names and has been studied and used in many papers:
+  Tseitin [1960’s], Mints et al. [1982].  Andreoli: skolemization
+  [1992], bipolarization [2001].  Dyckhoff & Negri: geometrisation
+  [2015]
+
+  In the FPC setting, we have an explicit naming device (indexes) for
+  formulas that are stored.  These names are proof theoretic devices
+  only and should not be considered part of the semantics of formulas.
+  That is, we might give a stored formula the index "(lub x y z)" and
+  later when we do a decide, we can use the formula associated to that
+  index.  At the same time, that index is not in the formula so it
+  does not need to be given a model theoretic semantics... (as is done
+  in the Dyckhoff & Negri paper).
+
+  - This discussion reminds me of the use of Skolem functions in
+    higher-order logic.  These Skolem functions can be considered as
+    real functions, but then you prove instances of the axiom of
+    choice.  Instead, Skolem functions are more a linguistic device
+    for naming eigenvariables.
