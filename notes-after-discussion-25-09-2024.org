@@ -1,0 +1,108 @@
+25 September 2024: notes following discuss at LIX between EP and DM
+
+* We should resist doing the following in the planned paper
+
+ 1. Avoid using the floor/ceiling approach to encoding inference
+    rules used in the Pimentel & Nigam & Miller papers.
+
+ 2. Avoid trying to answer the question: what is a full blown
+    notational system for encoding inference rules for a
+    quantificational logic involving higher-level rules.  Instead, we
+    rely on the focusing proof systems to generate the rules that we
+    need within the paper.
+
+* Observations to make explicitly (about nesting of polarities)
+
+ 1. If we decide on a formula in N_n then the asynchronous phase deals
+    with formulas in P_(n-1) and we finally get formulas stored in
+    N_(n-2).  In particular, if we decide on Horn clauses (N_1) then
+    no formulas are stored: there is no changes to the LHS.
+
+ 2. If B has only implications, then B is of order n (in the
+    type-theory sense) then B is in B_n.
+
+* Features appear in sequent calculus proof systems
+  There are a number of features that can be addressed in designing
+  sequent calculus proof systems.
+
+ 1. propositional vs first-order quantification (vs second-order vs
+    higher-order).  How to treat eigenvariables?
+
+ 2. do rules have zones?  In particular, bounded and unbounded zones.
+
+ 3. Treat classical and intuitionistic logics.  This is
+    straightforward if we have zones.  LHS is unbounded.  The choice
+    is then whether or not the RHS is bounded or unbounded.
+
+ 4. the multiplicative vs additive distinction in inference rules
+
+ 5. forward vs backward chaining - on which side of the sequent should
+    which atoms appear?
+
+ 6. System of rules: higher-level of rules
+
+* Natural deduction for intuitionistic logic is a specific form of sequent calculus
+
+** Referring to the features listed above:
+
+   - fix the LHS be unbounded, RHS be bounded
+
+   - backchaining only (hence, the one formula on the right must be
+     present, no other formulas present in conclusion).  Thus, the
+     bounded context is treated linearly by backchaining.
+
+   - The distinction between additive and multiplicative treatment of
+     contexts disappears.  The only remaining vestige of this
+     distinction appears in the form of the left-introduction for
+     conjunction (keep one or both conjuncts?).
+
+   - Various papers by Herbelin, Espirito Santo, etc, show the
+     connections between typed lambda-terms and LJT.
+
+   - Hence, we can say that if we limit ourselves to intuitionistic
+     sequents (hence, LHS is unbounded, RHS is bounded), negative polarity 
+     connections only (imp, forall, additive conjunction) and for
+     atoms (hence, backchaining), then we have a presentation of
+     natural deduction with synthetic rules.
+
+** Higher-level of rules in natural deduction
+
+   The propositional fragment is treated by PSH.
+
+   The LF proof system treats full first-order quantification.
+
+   We should show that higher-level rules in our general setting just
+   become the rules intended in the PSH and LF systems.
+
+* Schema variables and synthetic inference rules
+
+  Example: In order to treat the linear axiom for the Godel-Dummentt
+  logic, we want to add the formula (P => Q) \/ (Q => P) as an axiom.
+  Then this axiom should yield a synthetic inference rule.
+
+  However, the P and Q here are schematic variables.  The intention is
+  that they can be instantiate by arbitrary formulas.
+
+  Clearly, the synthetic inference rule we intend should be generated
+  from (P => Q) \/ (Q => P) where P and Q are considered *constants*.
+  After the same of the synthetic rule is generated, we need to
+  reinstate them as schema variables.
+
+  Thus, the axiom that we need is more of the form
+
+	      forall- P forall- Q. (P => Q) \/ (Q => P)
+
+  and we consider P and Q as negatively polarized atomic formulas
+  during the construction of the synthetic inference rule.
+
+  In the MMPV paper, we have no schematic variables, so we are
+  formally making an extensions to that previous work.  Most inference
+  rules have schematic variables while the ones created in the MMPV
+  paper do not have such variables.
+
+  We should avoid what others might be tempted to do: restriction P
+  and Q to atomic formulas only.
+
+  When instantiating forall- P and forall+ P, presumably, we need to
+  preserve polarity: that is, instantiate (forall- P) with a formula
+  of negative polarity.  Confirm that this works as intended.
