@@ -1,0 +1,90 @@
+/*
+Starting over by D Miller on 30 May 2015
+*/
+
+html {
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 10pt;
+    background: #f0f0f0;
+}
+
+table, th, td {
+    font-size: 10pt;
+    padding: 0pt; 
+    border-spacing: 15px 2px;
+    border-collapse: separate;
+    border: 0px solid black;
+}
+
+.title { text-align: center;
+         padding-top:10px;
+         border-top:1px solid #000000;
+         padding-bottom:10px;
+         border-bottom:1px solid #000000;
+}
+
+body {
+    width: 90%;
+    margin: 10px auto;
+    padding: 8px;
+    text-align: left;
+    background: white;
+    color: #000000;
+    border: 2px solid #333;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+h1, h2, h3, h4 {
+    margin: 1;
+    padding: 0;
+    font-weight: normal;
+    color: #32639A;
+}
+h1 {
+    font-size: 1.8em;
+}
+h2 {
+    font-size: 1.4em;
+    padding-bottom:0px;
+}
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.0em;
+}
+
+.timestamp-wrapper { 
+/*     border: 1px solid grey; */
+ }
+
+.timestamp { 
+  color: grey;
+  font-weight: lighter;
+ }
+/* .timestamp-kwd { color: CadetBlue } */
+.timestamp-kwd {
+  color: grey;
+  font-weight: lighter;
+}
+
+.outline-2 {
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.outline-3 {
+    margin: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+a.fold-link {
+    color: grey;
+    font-size: small;
+}

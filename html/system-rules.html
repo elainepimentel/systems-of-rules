@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-11-08 Fri 17:25 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>System of Rules: notes</title>
+<meta name="author" content="Dale Miller" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="mystyle.css" />
+
+<script src="./org-info.js">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+// @license-end
+</script>
+
+<script>
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "0");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "content");
+org_html_manager.setup();  // activate after the parameters are set
+// @license-end
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">System of Rules: notes</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc6b2b37">1. Outline of paper</a>
+<ul>
+<li><a href="#orgab10813">1.1. Motivation</a></li>
+<li><a href="#org457316a">1.2. Prior related work</a></li>
+<li><a href="#org01f6e06">1.3. Use focusing, but this time, go beyond bipoles</a>
+<ul>
+<li><a href="#org948213a">1.3.1. Fix on LJF and LKF</a></li>
+<li><a href="#org37ba28e">1.3.2. Storage includes non-atomic formulas</a></li>
+<li><a href="#org84b4277">1.3.3. Limiting ourselves to N3 formulas might be fine</a></li>
+<li><a href="#orgceef08a">1.3.4. We should resist doing the following in the planned paper</a></li>
+</ul>
+</li>
+<li><a href="#org8873453">1.4. Address full features of first-order logic</a></li>
+<li><a href="#org14a4f09">1.5. Schematic variables</a></li>
+<li><a href="#org1052686">1.6. Examples</a>
+<ul>
+<li><a href="#org011c5b4">1.6.1. Higher-level of rules in natural deduction (this is well known)</a></li>
+<li><a href="#org2f2ca99">1.6.2. Example: Idenity rules (repeat and cut)</a></li>
+<li><a href="#org9394250">1.6.3. Example: Peirce's formula and Gabbay's restart rule</a></li>
+<li><a href="#org7b89372">1.6.4. Example: The excluded middle</a></li>
+<li><a href="#org751ab52">1.6.5. Example: focusing on formulas that do not have schema variables</a></li>
+<li><a href="#org52df26c">1.6.6. When all schema variables have negative polarity</a></li>
+<li><a href="#org8a3f1f0">1.6.7. Remember the "killing of premises" in Parigot's free deduction</a></li>
+</ul>
+</li>
+<li><a href="#orgf34bf07">1.7. Deal with first-order quantification</a>
+<ul>
+<li><a href="#orge2afa4f">1.7.1. Goedel-Dummett Logic</a></li>
+<li><a href="#orgd1d97ec">1.7.2. Examples from mathematics of non-geometric formulas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgf977117">2. ToDo list</a></li>
+<li><a href="#org0f02656">3. Other possibily related topics</a>
+<ul>
+<li><a href="#org8c5882b">3.1. Do we talk about hypersequents?</a></li>
+<li><a href="#org3286db1">3.2. Do we discussion and comparison with devices to "bipolarize" formulas</a>
+<ul>
+<li><a href="#org4576a9c">3.2.1. Tseitin constants and Andreoli's skolemization</a></li>
+<li><a href="#orgfe428da">3.2.2. Transforming general theories to geometric theories</a></li>
+<li><a href="#org52e1f8e">3.2.3. Use of "index" when storing formulas in the FPC framework</a></li>
+</ul>
+</li>
+<li><a href="#orge6d9fe4">3.3. Thoughts when reading a recent paper</a></li>
+<li><a href="#orgfcafbe5">3.4. Meeting with Revantha 2 July 2024</a></li>
+<li><a href="#orgb86271a">3.5. Connections might exist with the following topics.</a></li>
+</ul>
+</li>
+<li><a href="#org902961c">4. History of this document</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc6b2b37" class="outline-2">
+<h2 id="orgc6b2b37"><span class="section-number-2">1.</span> Outline of paper</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgab10813" class="outline-3">
+<h3 id="orgab10813"><span class="section-number-3">1.1.</span> Motivation</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+There is an interest in removing formulas with their many logical
+connectives and introduction rules with simple inference rules.
+</p>
+
+<p>
+There are limitations to that effort.  It has been formalized well
+in natural deduction (LF, PS-H).  In sequent calculus (which can be
+seen as subsuming the natded setting), is more complex.  There are
+more structures to witness: additive/multiplicative, pos/neg
+polarity of connectives and atomic formulas, bounded/unbounded
+zones in sequents, etc.
+</p>
+
+<p>
+We will attempt to capture many of these features also in inference
+rules, although this will require us to extend the syntax of
+inference rules.  We will probably also limit ourselves to N3
+formulas: higher-levels of polarity nesting is possible but that
+would probably strain the nature of inference rules too much.
+</p>
+
+<p>
+We use focusing to describe the general setting.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org457316a" class="outline-3">
+<h3 id="org457316a"><span class="section-number-3">1.2.</span> Prior related work</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>PS-H's paper on a natural extension to ND.</li>
+<li>Aaron's "Gentzenizing Schroeder-Heister".</li>
+<li>Harper, Honsell, Plotkin. LF.</li>
+<li>Negri and others (axioms to inference rules)</li>
+<li>Ciabattoni and Genco, ToCL 2018, "Hypersequents and Systems of
+Rules: Embeddings and Applications".  Elaine says that they
+show transformations between
+<ul class="org-ul">
+<li>Hypersequents &lt;-&gt; 
+System of rules in Sequent calculus &lt;-&gt;
+Natural Deduction.</li>
+</ul></li>
+<li>Ciabattoni, Galatos, Terui: From Axioms to Analytic Rules in
+Nonclassical Logics. LICS 2008: Structural rules and the
+polarity hierarchy.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org01f6e06" class="outline-3">
+<h3 id="org01f6e06"><span class="section-number-3">1.3.</span> Use focusing, but this time, go beyond bipoles</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org948213a" class="outline-4">
+<h4 id="org948213a"><span class="section-number-4">1.3.1.</span> Fix on LJF and LKF</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+Stress that cut elimination results can follow automatically for
+correctly designed proof systems.  Discussing the cut rule is very
+important in this abstract.
+</p>
+
+<p>
+WARNING Given the use of higher-order-like quantification, we
+might not have the subformula property even when we technically
+have cut-free proofs.  See notes below from meeting with Revantha.
+</p>
+
+<p>
+Observations to make explicitly (about nesting of polarities)
+</p>
+
+<ol class="org-ol">
+<li>If we decide on a formula in N<sub>n</sub> then the asynchronous phase
+deals with formulas in P<sub>(n-1)</sub> and we finally get formulas
+stored in N<sub>(n-2)</sub>.  In particular, if we decide on Horn clauses
+(N<sub>1</sub>) then no formulas are stored: there is no changes to the
+LHS.</li>
+
+<li>If B has only implications, then B is of order n (in the
+type-theory sense) then B is in B<sub>n</sub>.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org37ba28e" class="outline-4">
+<h4 id="org37ba28e"><span class="section-number-4">1.3.2.</span> Storage includes non-atomic formulas</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+Usually, decide rules on the underlying theory or on stored atomic
+formulas.  Now, there will be stored formulas which will yield
+inference rules of their own.  Given the formula-as-rule analogy
+(avoid saying axiom-as-rule), then it is natural and immediate to
+develop the notion of system-of-rules (higher-level rules).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org84b4277" class="outline-4">
+<h4 id="org84b4277"><span class="section-number-4">1.3.3.</span> Limiting ourselves to N3 formulas might be fine</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+There are limitations in the use of inference rules instead of
+formulas and going beyond N3 seems to be pushing hard against the
+limitation of inference rules (scope of schematic variables, etc).
+Such a restriction is similar to what Ciabattoni &amp; Genco do.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgceef08a" class="outline-4">
+<h4 id="orgceef08a"><span class="section-number-4">1.3.4.</span> We should resist doing the following in the planned paper</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<ol class="org-ol">
+<li>Avoid using the floor/ceiling approach to encoding inference
+rules used in the Pimentel &amp; Nigam &amp; Miller papers.</li>
+
+<li>Avoid trying to answer the question: what is a full blown
+notational system for encoding inference rules for a
+quantificational logic involving higher-level rules.  Instead, we
+rely on the focusing proof systems to generate the rules that we
+need within the paper.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8873453" class="outline-3">
+<h3 id="org8873453"><span class="section-number-3">1.4.</span> Address full features of first-order logic</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>classical and intuitionistic logics</li>
+<li>additive and multiplicative connectives</li>
+<li>propositional and quantificational logics (care with eigenvariables)</li>
+<li>do sequents have zone? bounded/unbounded zone?</li>
+<li>forward vs backward chaining</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org14a4f09" class="outline-3">
+<h3 id="org14a4f09"><span class="section-number-3">1.5.</span> Schematic variables</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+I think we must determine the shape of the synthetic rule based
+on schematic variables and not their possible instantiations.
+</p>
+
+<p>
+Prefix schematic axioms with <code>forall-</code> or <code>forall+</code> to determine the
+polarity of prop/predicate variables in their scope. These are not
+real quantifiers.
+</p>
+</div>
+</div>
+<div id="outline-container-org1052686" class="outline-3">
+<h3 id="org1052686"><span class="section-number-3">1.6.</span> Examples</h3>
+<div class="outline-text-3" id="text-1-6">
+</div>
+<div id="outline-container-org011c5b4" class="outline-4">
+<h4 id="org011c5b4"><span class="section-number-4">1.6.1.</span> Higher-level of rules in natural deduction (this is well known)</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<p>
+Focused sequent calculus for intuitionistic logic (negative
+connectives) is natural deduction.  This claim needs to be
+confirmed again.  The distinction between additive and
+multiplicate inference rules disappears since the LHS is unbounded
+(treated additively even with multiplicative rules) and the RHS is
+bounded but only a singleton.
+</p>
+
+<p>
+Hence, we can say that if we limit ourselves to intuitionistic
+sequents (hence, LHS is unbounded, RHS is bounded), negative polarity 
+connections only (imp, forall, additive conjunction) and for
+atoms (hence, backchaining), then we have a presentation of
+natural deduction with synthetic rules.
+</p>
+
+<p>
+The propositional fragment is treated by PSH.
+</p>
+
+<p>
+The LF proof system treats full first-order quantification.
+</p>
+
+<p>
+We should show that higher-level rules in our general setting just
+become the rules intended in the PSH and LF systems.
+</p>
+
+<p>
+Various papers by Herbelin, Espirito Santo, etc, show the
+connections between typed lambda-terms and LJT.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org2f2ca99" class="outline-4">
+<h4 id="org2f2ca99"><span class="section-number-4">1.6.2.</span> Example: Idenity rules (repeat and cut)</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+Consider the higher-order formulas <code>(forall p, p -&gt; p)</code>.
+</p>
+<ul class="org-ul">
+<li>If we use either <code>(forall- p, p -&gt; p)</code> or <code>(forall+ p, p -&gt; p)</code>, we
+get two versions of the repeat inference rule below (respectively).</li>
+</ul>
+
+<pre class="example" id="org1bcf6a1">
+Gamma |- p        Gamma, p |- E
+-----------       --------------
+Gamma |- p        Gamma, p |- E
+</pre>
+<ul class="org-ul">
+<li>If we introduce a delay, then we have the cut rule. That is, the
+formula <code>(forall+ p, (top -&gt; p) -&gt; p)</code> yields the cut rule as a
+synthetic rules.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9394250" class="outline-4">
+<h4 id="org9394250"><span class="section-number-4">1.6.3.</span> Example: Peirce's formula and Gabbay's restart rule</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<p>
+Peirce's law: <code>forall phi, forall theta, (( phi -&gt; theta) -&gt; phi) -&gt; phi</code>
+</p>
+
+<p>
+If phi and theta are negative bias, then we have the restart
+rule.
+</p>
+<pre class="example" id="org0e36242">
+Delta |- phi
+==============
+Delta |- theta
+      .
+      .
+      .
+Gamma |- phi
+============
+Gamma |- phi
+</pre>
+<p>
+If phi is negative and theta is positive then we have 
+</p>
+<pre class="example" id="org91431e1">
+Delta |- phi   Delta, theta |- E
+================================
+        Delta |- E
+  	      .
+  	      .
+  	      .
+  	Gamma |- phi
+  	============
+    	Gamma |- phi
+</pre>
+<p>
+This latter rule is a bit odd.  Since theta could be anything, we
+can take it to be false, so the right premise is finished.  In
+any case, the right premise is not needed, since <code>Delta |- phi</code>
+will yield <code>Gamma |- phi</code> in the usual monotonic setting were <code>Gamma</code>
+is contained in <code>Delta</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7b89372" class="outline-4">
+<h4 id="org7b89372"><span class="section-number-4">1.6.4.</span> Example: The excluded middle</h4>
+<div class="outline-text-4" id="text-1-6-4">
+<p>
+See Elaine's main.tex for this example (probably pos polarity atoms).
+</p>
+<pre class="example" id="org1944af2">
+forall- phi, delay- (phi \/ (phi -&gt; zero)) 
+</pre>
+<p>
+We need the delay since we want the excluded middle to be stored
+for use at some future time.
+</p>
+<pre class="example" id="orgb18c988">
+ Psi, p |- E           Upsilon |- p
+=============          ============
+    Psi |- E           Upsilon |- B
+         .                     .
+         .                     .
+         .                     .
+   Gamma |- Delta        Gamma |- Delta 
+   ====================================
+              Gamma |- Delta
+</pre>
+<p>
+Thus, we can use strengthening on the same formula on the left (on
+the left premise) and on the right (on the right premise) for the
+same formula.
+</p>
+</div>
+</div>
+<div id="outline-container-org751ab52" class="outline-4">
+<h4 id="org751ab52"><span class="section-number-4">1.6.5.</span> Example: focusing on formulas that do not have schema variables</h4>
+<div class="outline-text-4" id="text-1-6-5">
+<ul class="org-ul">
+<li>one oplus one - yields "superposition"</li>
+<li>one par one - yields mix, but only works with classical
+logic. The usual presentation of mix is as an inference rule
+that proves the formula one par one.  Here, we have the
+converse: if you accept these formulas as axioms, you get the
+inference rules.  See <a href="https://www.pls-lab.org/en/Mix_rule">https://www.pls-lab.org/en/Mix_rule</a>.</li>
+</ul>
+
+<p>
+See the discussion in the brief abstract by
+Mario Piazza &amp; Gabriele Pulcini: On the maximality of classical logic
+at <a href="https://ls.cs.uni-tuebingen.de/GPT/abstracts.xhtml">https://ls.cs.uni-tuebingen.de/GPT/abstracts.xhtml</a>
+The Post Completeness result concerns whether or not a token is a
+constant or a schema variable.
+</p>
+</div>
+</div>
+<div id="outline-container-org52df26c" class="outline-4">
+<h4 id="org52df26c"><span class="section-number-4">1.6.6.</span> When all schema variables have negative polarity</h4>
+<div class="outline-text-4" id="text-1-6-6">
+<p>
+They we can start to emulate PS-H natural extension of natural
+deduction.  However, if we use positive polarity schema variables,
+the natural deduction setting is not so direct.
+</p>
+
+<p>
+Define "barb" as I did once before in the MMPV paper.  When we use
+negative schema variables, there will be exactly one member of the
+barb and it is the RHS of a sequent.  This leads to a natural
+encoding in natural deduction.  Otherwise, a positive bias is
+interesting and useful but this does not lend itself to a natural
+deduction approach.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8a3f1f0" class="outline-4">
+<h4 id="org8a3f1f0"><span class="section-number-4">1.6.7.</span> Remember the "killing of premises" in Parigot's free deduction</h4>
+<div class="outline-text-4" id="text-1-6-7">
+<p>
+and the "standing proud" premises of Niel Tennant (See
+"Autologic" Chapter 5, page 41).  Is there a relationship with
+our notions of schematic variables and their polarity?
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf34bf07" class="outline-3">
+<h3 id="orgf34bf07"><span class="section-number-3">1.7.</span> Deal with first-order quantification</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Make the eigenvariable signature of rules explicit.
+</p>
+
+<p>
+How to treat the quantifier introduction rules.
+</p>
+</div>
+
+<div id="outline-container-orge2afa4f" class="outline-4">
+<h4 id="orge2afa4f"><span class="section-number-4">1.7.1.</span> Goedel-Dummett Logic</h4>
+<div class="outline-text-4" id="text-1-7-1">
+<p>
+Example: treat completely the Goedel-Dummett logic for first-order logic
+</p>
+<pre class="example" id="org8d87b64">
+Axiom 1: (P =&gt; Q) \/ (Q =&gt; P).                        Linearity
+Axiom 2: forall x (A x \/ B) =&gt; forall x (A x) \/ B.  Quantifier shift
+</pre>
+
+<p>
+By focusing on Axiom 1, it seems that we can come up with the right
+2-system formulation.  Using the Ciabattoni &amp; Genco result, we get
+the com rule for hypersequents.
+</p>
+
+<p>
+We should next focus on Axiom 2 to see what it means for 2-systems
+and then for hypersequents.
+</p>
+
+<p>
+First quess: The sequents in a hypersequent carry their own local
+sequents.  A "com-like" rule would also an eigenvariable from one
+sequent to get added to another sequent's signature.
+</p>
+
+<ul class="org-ul">
+<li>Is this the correct rule for GD logic?</li>
+<li>How does this rule get motivated by focusing on Axiom 2?</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd1d97ec" class="outline-4">
+<h4 id="orgd1d97ec"><span class="section-number-4">1.7.2.</span> Examples from mathematics of non-geometric formulas</h4>
+<div class="outline-text-4" id="text-1-7-2">
+<p>
+Eg, the lub example developed in the ProofSociety slides
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf977117" class="outline-2">
+<h2 id="orgf977117"><span class="section-number-2">2.</span> ToDo list</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Getting a treatment of first-order rules, especially the
+quantifier shift for Goedel-Dummett logic should be done next.</li>
+<li>Describing and justifying the scope of any new bindings for
+inference rules and schematic variables should be considered early
+on.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0f02656" class="outline-2">
+<h2 id="org0f02656"><span class="section-number-2">3.</span> Other possibily related topics</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org8c5882b" class="outline-3">
+<h3 id="org8c5882b"><span class="section-number-3">3.1.</span> Do we talk about hypersequents?</h3>
+</div>
+<div id="outline-container-org3286db1" class="outline-3">
+<h3 id="org3286db1"><span class="section-number-3">3.2.</span> Do we discussion and comparison with devices to "bipolarize" formulas</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Seems that there are two reasons to introduce names.  Sometimes
+they are used to name all subformulas for various reasons.
+(Harrison's book on CNF and recent papers on PTS).
+</p>
+</div>
+<div id="outline-container-org4576a9c" class="outline-4">
+<h4 id="org4576a9c"><span class="section-number-4">3.2.1.</span> Tseitin constants and Andreoli's skolemization</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+Introduce new non-logical constants to define and remove subformulas
+so that the alternation of polarities diminishes.
+</p>
+
+<p>
+This has many names and has been studied and used in many papers
+</p>
+<ul class="org-ul">
+<li>Tseitin [1960’s]</li>
+<li>Andreoli: skolemization [1992], bipolarization [2001]</li>
+<li>Dyckhoff &amp; Negri: geometrisation [2015]</li>
+<li>Mints et al. [1982]</li>
+<li>Mint's resolution calculus: Link this with the FPC notion of
+index.  See the slides of Roy Dyckhoff at
+"~/Dropbox/People/R/RoyDyckhoff/Proof systems for intuitionistic
+logic 2008 talk.pdf" Especially when he speaks of the resolution
+calculus of Mints (starting on slide 28).  This looks very much
+like choosing to polarize so that lots of delays are inserted.
+Such delays should invoke a store which comes with a label.
+These labels would play the role of Tseitin constants (maybe
+Mints does not use that term).</li>
+<li>Mint's article is a chapter in "~/Dropbox/Books/Constraint
+Programming (NATO ASI Series 131) eds Mayoh, Tyugu, Uustalu,
+Mayoh, Tyugu, Penjam.pdf"</li>
+<li>DM has some notes on Tseitin/Skolemization in his Projects.org
+file.  I have lots of notes there that might be related to this
+project.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfe428da" class="outline-4">
+<h4 id="orgfe428da"><span class="section-number-4">3.2.2.</span> Transforming general theories to geometric theories</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<p>
+Overview paper by Dyckhoff and Negri.
+</p>
+</div>
+</div>
+<div id="outline-container-org52e1f8e" class="outline-4">
+<h4 id="org52e1f8e"><span class="section-number-4">3.2.3.</span> Use of "index" when storing formulas in the FPC framework</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<p>
+These indexes are part of the proof structure and not part of the
+logic.  These are not constants for which models need to be
+constructed.
+</p>
+
+<p>
+In the FPC setting, we have an explicit naming device (indexes)
+for formulas that are stored.  These names are proof theoretic
+devices only and should not be considered part of the semantics of
+formulas.  That is, we might give a stored formula the index <code>(lub
+    x y z)</code> and later when we do a decide, we can use the formula
+associated to that index.  At the same time, that index is not in
+the formula so it does not need to be given a model theoretic
+semantics&#x2026; (as is done in the Dyckhoff &amp; Negri paper).
+</p>
+
+<p>
+This discussion reminds me of the use of Skolem functions in
+higher-order logic.  These Skolem functions can be considered as
+real functions, but then you prove instances of the axiom of
+choice.  Instead, Skolem functions are more a linguistic device
+for naming eigenvariables.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge6d9fe4" class="outline-3">
+<h3 id="orge6d9fe4"><span class="section-number-3">3.3.</span> Thoughts when reading a recent paper</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+"Proof-theoretic Semantics for Intuitionistic Multiplicative Linear
+Logic" by Alexander V. Gheorghiu , Tao Gu and David J. Pym
+</p>
+
+<ul class="org-ul">
+<li>The use of names to name every subformula - used by Sandqvist's
+proof of completeness (Theorem 1 and its proof).  This reminds me
+of Mints's resolution method and my use of indexes in FPCs.</li>
+<li>Corollary 3, where it seems that a meta-level quantifier is
+reduced to a quantifier on atomic formulas.  Seems to be a
+regular theme.  (Neat proof of this corollary.)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfcafbe5" class="outline-3">
+<h3 id="orgfcafbe5"><span class="section-number-3">3.4.</span> Meeting with Revantha 2 July 2024</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+KC and RR and I discussed several things this afternoon.
+</p>
+<ul class="org-ul">
+<li>I should make sure that when we use axioms such as
+  (forall p, q. (p -&gt; q) \/ (q -&gt; p))
+that we can limit it to subformulas only.</li>
+<li>However, using the axiom (forall p, p -&gt; p) gives rise to the cut
+rule and this is not generally expected to be limited to
+subformulas (analytic cuts).</li>
+
+<li>check RR's technical results about "restricted cuts".  See:
+Agata Ciabattoni, Timo Lang, Revantha Ramanayake:
+Cut-Restriction: From Cuts to Analytic Cuts. LICS 2023: 1-13.</li>
+<li>Bounded-analytic sequent calculi and embeddings for hypersequent
+logics, by Agata Ciabattoni1, Timo Lang, and Revantha Ramanayake
+2024 (see RR's dropbox).</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb86271a" class="outline-3">
+<h3 id="orgb86271a"><span class="section-number-3">3.5.</span> Connections might exist with the following topics.</h3>
+<div class="outline-text-3" id="text-3-5">
+<ul class="org-ul">
+<li>Russell-Prawitz translation: See papers by Luiz Carlos Pereira on
+this topic.</li>
+<li>FAT: rules where schematic variables can be restricted to atomic formulas
+Paulo Olivia, Guida, etc.  See arXiv.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org902961c" class="outline-2">
+<h2 id="org902961c"><span class="section-number-2">4.</span> History of this document</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>Incorporates the file: notes-after-discussion-25-09-2024.org</li>
+<li>DM and EP discussed most of this on 8 Nov 2024.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Dale Miller</p>
+<p class="date">Created: 2024-11-08 Fri 17:25</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,358 @@
+* Outline of paper
+** Motivation
+   There is an interest in removing formulas with their many logical
+   connectives and introduction rules with simple inference rules.
+
+   There are limitations to that effort.  It has been formalized well
+   in natural deduction (LF, PS-H).  In sequent calculus (which can be
+   seen as subsuming the natded setting), is more complex.  There are
+   more structures to witness: additive/multiplicative, pos/neg
+   polarity of connectives and atomic formulas, bounded/unbounded
+   zones in sequents, etc.
+
+   We will attempt to capture many of these features also in inference
+   rules, although this will require us to extend the syntax of
+   inference rules.  We will probably also limit ourselves to N3
+   formulas: higher-levels of polarity nesting is possible but that
+   would probably strain the nature of inference rules too much.
+
+   We use focusing to describe the general setting.
+
+** Prior related work
+    - PS-H's paper on a natural extension to ND.
+    - Aaron's "Gentzenizing Schroeder-Heister".
+    - Harper, Honsell, Plotkin. LF.
+    - Negri and others (axioms to inference rules)
+    - Ciabattoni and Genco, ToCL 2018, "Hypersequents and Systems of
+      Rules: Embeddings and Applications".  Elaine says that they
+      show transformations between
+      + Hypersequents <-> 
+        System of rules in Sequent calculus <->
+        Natural Deduction.
+    - Ciabattoni, Galatos, Terui: From Axioms to Analytic Rules in
+      Nonclassical Logics. LICS 2008: Structural rules and the
+      polarity hierarchy.
+** Use focusing, but this time, go beyond bipoles
+*** Fix on LJF and LKF
+
+    Stress that cut elimination results can follow automatically for
+    correctly designed proof systems.  Discussing the cut rule is very
+    important in this abstract.
+
+    WARNING Given the use of higher-order-like quantification, we
+    might not have the subformula property even when we technically
+    have cut-free proofs.  See notes below from meeting with Revantha.
+
+    Observations to make explicitly (about nesting of polarities)
+
+    1. If we decide on a formula in N_n then the asynchronous phase
+       deals with formulas in P_(n-1) and we finally get formulas
+       stored in N_(n-2).  In particular, if we decide on Horn clauses
+       (N_1) then no formulas are stored: there is no changes to the
+       LHS.
+
+    2. If B has only implications, then B is of order n (in the
+       type-theory sense) then B is in B_n.
+
+*** Storage includes non-atomic formulas
+    Usually, decide rules on the underlying theory or on stored atomic
+    formulas.  Now, there will be stored formulas which will yield
+    inference rules of their own.  Given the formula-as-rule analogy
+    (avoid saying axiom-as-rule), then it is natural and immediate to
+    develop the notion of system-of-rules (higher-level rules).
+
+*** Limiting ourselves to N3 formulas might be fine
+    There are limitations in the use of inference rules instead of
+    formulas and going beyond N3 seems to be pushing hard against the
+    limitation of inference rules (scope of schematic variables, etc).
+    Such a restriction is similar to what Ciabattoni & Genco do.
+
+*** We should resist doing the following in the planned paper
+
+ 1. Avoid using the floor/ceiling approach to encoding inference
+    rules used in the Pimentel & Nigam & Miller papers.
+
+ 2. Avoid trying to answer the question: what is a full blown
+    notational system for encoding inference rules for a
+    quantificational logic involving higher-level rules.  Instead, we
+    rely on the focusing proof systems to generate the rules that we
+    need within the paper.
+
+** Address full features of first-order logic
+   - classical and intuitionistic logics
+   - additive and multiplicative connectives
+   - propositional and quantificational logics (care with eigenvariables)
+   - do sequents have zone? bounded/unbounded zone?
+   - forward vs backward chaining
+
+** Schematic variables
+    I think we must determine the shape of the synthetic rule based
+    on schematic variables and not their possible instantiations.
+
+    Prefix schematic axioms with =forall-= or =forall+= to determine the
+    polarity of prop/predicate variables in their scope. These are not
+    real quantifiers.
+** Examples
+*** Higher-level of rules in natural deduction (this is well known)
+    Focused sequent calculus for intuitionistic logic (negative
+    connectives) is natural deduction.  This claim needs to be
+    confirmed again.  The distinction between additive and
+    multiplicate inference rules disappears since the LHS is unbounded
+    (treated additively even with multiplicative rules) and the RHS is
+    bounded but only a singleton.
+
+    Hence, we can say that if we limit ourselves to intuitionistic
+    sequents (hence, LHS is unbounded, RHS is bounded), negative polarity 
+    connections only (imp, forall, additive conjunction) and for
+    atoms (hence, backchaining), then we have a presentation of
+    natural deduction with synthetic rules.
+
+    The propositional fragment is treated by PSH.
+
+    The LF proof system treats full first-order quantification.
+
+    We should show that higher-level rules in our general setting just
+    become the rules intended in the PSH and LF systems.
+
+    Various papers by Herbelin, Espirito Santo, etc, show the
+    connections between typed lambda-terms and LJT.
+
+
+*** Example: Idenity rules (repeat and cut)
+    Consider the higher-order formulas =(forall p, p -> p)=.
+    - If we use either =(forall- p, p -> p)= or =(forall+ p, p -> p)=, we
+      get two versions of the repeat inference rule below (respectively).
+
+#+BEGIN_EXAMPLE
+      Gamma |- p        Gamma, p |- E
+      -----------       --------------
+      Gamma |- p        Gamma, p |- E
+#+END_EXAMPLE
+    - If we introduce a delay, then we have the cut rule. That is, the
+      formula =(forall+ p, (top -> p) -> p)= yields the cut rule as a
+      synthetic rules.
+
+*** Example: Peirce's formula and Gabbay's restart rule
+     Peirce's law: =forall phi, forall theta, (( phi -> theta) -> phi) -> phi=
+     
+     If phi and theta are negative bias, then we have the restart
+     rule.
+#+BEGIN_EXAMPLE
+	  Delta |- phi
+	  ==============
+	  Delta |- theta
+	        .
+	        .
+	        .
+	  Gamma |- phi
+	  ============
+	  Gamma |- phi
+#+END_EXAMPLE
+      If phi is negative and theta is positive then we have 
+#+BEGIN_EXAMPLE
+       Delta |- phi   Delta, theta |- E
+       ================================
+               Delta |- E
+  	             .
+  	             .
+  	             .
+  	       Gamma |- phi
+  	       ============
+    	       Gamma |- phi
+#+END_EXAMPLE
+     This latter rule is a bit odd.  Since theta could be anything, we
+     can take it to be false, so the right premise is finished.  In
+     any case, the right premise is not needed, since =Delta |- phi=
+     will yield =Gamma |- phi= in the usual monotonic setting were =Gamma=
+     is contained in =Delta=.
+
+*** Example: The excluded middle
+See Elaine's main.tex for this example (probably pos polarity atoms).
+#+BEGIN_EXAMPLE
+      forall- phi, delay- (phi \/ (phi -> zero)) 
+#+END_EXAMPLE
+     We need the delay since we want the excluded middle to be stored
+     for use at some future time.
+#+BEGIN_EXAMPLE
+     Psi, p |- E           Upsilon |- p
+    =============          ============
+        Psi |- E           Upsilon |- B
+             .                     .
+             .                     .
+             .                     .
+       Gamma |- Delta        Gamma |- Delta 
+       ====================================
+                  Gamma |- Delta
+#+END_EXAMPLE
+   Thus, we can use strengthening on the same formula on the left (on
+   the left premise) and on the right (on the right premise) for the
+   same formula.
+*** Example: focusing on formulas that do not have schema variables
+     - one oplus one - yields "superposition"
+     - one par one - yields mix, but only works with classical
+       logic. The usual presentation of mix is as an inference rule
+       that proves the formula one par one.  Here, we have the
+       converse: if you accept these formulas as axioms, you get the
+       inference rules.  See https://www.pls-lab.org/en/Mix_rule.
+
+   See the discussion in the brief abstract by
+   Mario Piazza & Gabriele Pulcini: On the maximality of classical logic
+   at https://ls.cs.uni-tuebingen.de/GPT/abstracts.xhtml
+   The Post Completeness result concerns whether or not a token is a
+   constant or a schema variable.
+*** When all schema variables have negative polarity
+    They we can start to emulate PS-H natural extension of natural
+    deduction.  However, if we use positive polarity schema variables,
+    the natural deduction setting is not so direct.
+
+    Define "barb" as I did once before in the MMPV paper.  When we use
+    negative schema variables, there will be exactly one member of the
+    barb and it is the RHS of a sequent.  This leads to a natural
+    encoding in natural deduction.  Otherwise, a positive bias is
+    interesting and useful but this does not lend itself to a natural
+    deduction approach.
+
+*** Remember the "killing of premises" in Parigot's free deduction
+     and the "standing proud" premises of Niel Tennant (See
+     "Autologic" Chapter 5, page 41).  Is there a relationship with
+     our notions of schematic variables and their polarity?
+
+** Deal with first-order quantification
+    Make the eigenvariable signature of rules explicit.
+
+    How to treat the quantifier introduction rules.
+
+*** Goedel-Dummett Logic
+    Example: treat completely the Goedel-Dummett logic for first-order logic
+#+BEGIN_EXAMPLE
+    Axiom 1: (P => Q) \/ (Q => P).                        Linearity
+    Axiom 2: forall x (A x \/ B) => forall x (A x) \/ B.  Quantifier shift
+#+END_EXAMPLE
+
+  By focusing on Axiom 1, it seems that we can come up with the right
+  2-system formulation.  Using the Ciabattoni & Genco result, we get
+  the com rule for hypersequents.
+
+  We should next focus on Axiom 2 to see what it means for 2-systems
+  and then for hypersequents.
+
+  First quess: The sequents in a hypersequent carry their own local
+  sequents.  A "com-like" rule would also an eigenvariable from one
+  sequent to get added to another sequent's signature.
+
+   - Is this the correct rule for GD logic?
+   - How does this rule get motivated by focusing on Axiom 2?
+
+*** Examples from mathematics of non-geometric formulas
+    Eg, the lub example developed in the ProofSociety slides
+* ToDo list
+  - Getting a treatment of first-order rules, especially the
+    quantifier shift for Goedel-Dummett logic should be done next.
+  - Describing and justifying the scope of any new bindings for
+    inference rules and schematic variables should be considered early
+    on.
+* Other possibily related topics
+** Do we talk about hypersequents?
+** Do we discussion and comparison with devices to "bipolarize" formulas
+   Seems that there are two reasons to introduce names.  Sometimes
+   they are used to name all subformulas for various reasons.
+   (Harrison's book on CNF and recent papers on PTS).
+*** Tseitin constants and Andreoli's skolemization
+
+    Introduce new non-logical constants to define and remove subformulas
+    so that the alternation of polarities diminishes.
+
+    This has many names and has been studied and used in many papers
+    - Tseitin [1960’s]
+    - Andreoli: skolemization [1992], bipolarization [2001]
+    - Dyckhoff & Negri: geometrisation [2015]
+    - Mints et al. [1982]
+    - Mint's resolution calculus: Link this with the FPC notion of
+      index.  See the slides of Roy Dyckhoff at
+      "~/Dropbox/People/R/RoyDyckhoff/Proof systems for intuitionistic
+      logic 2008 talk.pdf" Especially when he speaks of the resolution
+      calculus of Mints (starting on slide 28).  This looks very much
+      like choosing to polarize so that lots of delays are inserted.
+      Such delays should invoke a store which comes with a label.
+      These labels would play the role of Tseitin constants (maybe
+      Mints does not use that term).
+    - Mint's article is a chapter in "~/Dropbox/Books/Constraint
+      Programming (NATO ASI Series 131) eds Mayoh, Tyugu, Uustalu,
+      Mayoh, Tyugu, Penjam.pdf"
+    - DM has some notes on Tseitin/Skolemization in his Projects.org
+      file.  I have lots of notes there that might be related to this
+      project.
+*** Transforming general theories to geometric theories
+    Overview paper by Dyckhoff and Negri.
+*** Use of "index" when storing formulas in the FPC framework
+    These indexes are part of the proof structure and not part of the
+    logic.  These are not constants for which models need to be
+    constructed.
+
+    In the FPC setting, we have an explicit naming device (indexes)
+    for formulas that are stored.  These names are proof theoretic
+    devices only and should not be considered part of the semantics of
+    formulas.  That is, we might give a stored formula the index =(lub
+    x y z)= and later when we do a decide, we can use the formula
+    associated to that index.  At the same time, that index is not in
+    the formula so it does not need to be given a model theoretic
+    semantics... (as is done in the Dyckhoff & Negri paper).
+
+    This discussion reminds me of the use of Skolem functions in
+    higher-order logic.  These Skolem functions can be considered as
+    real functions, but then you prove instances of the axiom of
+    choice.  Instead, Skolem functions are more a linguistic device
+    for naming eigenvariables.
+
+** Thoughts when reading a recent paper
+   "Proof-theoretic Semantics for Intuitionistic Multiplicative Linear
+   Logic" by Alexander V. Gheorghiu , Tao Gu and David J. Pym
+
+   - The use of names to name every subformula - used by Sandqvist's
+     proof of completeness (Theorem 1 and its proof).  This reminds me
+     of Mints's resolution method and my use of indexes in FPCs.
+   - Corollary 3, where it seems that a meta-level quantifier is
+     reduced to a quantifier on atomic formulas.  Seems to be a
+     regular theme.  (Neat proof of this corollary.)
+** Meeting with Revantha 2 July 2024
+   KC and RR and I discussed several things this afternoon.
+   - I should make sure that when we use axioms such as
+       (forall p, q. (p -> q) \/ (q -> p))
+     that we can limit it to subformulas only.
+   - However, using the axiom (forall p, p -> p) gives rise to the cut
+     rule and this is not generally expected to be limited to
+     subformulas (analytic cuts).
+
+   1. check RR's technical results about "restricted cuts".  See:
+      Agata Ciabattoni, Timo Lang, Revantha Ramanayake:
+      Cut-Restriction: From Cuts to Analytic Cuts. LICS 2023: 1-13.
+   2. Bounded-analytic sequent calculi and embeddings for hypersequent
+      logics, by Agata Ciabattoni1, Timo Lang, and Revantha Ramanayake
+      2024 (see RR's dropbox).
+** Connections might exist with the following topics.
+   - Russell-Prawitz translation: See papers by Luiz Carlos Pereira on
+     this topic.
+   - FAT: rules where schematic variables can be restricted to atomic formulas
+     Paulo Olivia, Guida, etc.  See arXiv.
+* History of this document
+
+  - Incorporates the file: notes-after-discussion-25-09-2024.org
+  - DM and EP discussed most of this on 8 Nov 2024.
+
+#+TITLE: System of Rules: notes
+#+AUTHOR: Dale Miller
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="mystyle.css" />
+
+#+OPTIONS: toc:t
+#+INFOJS_OPT: view:content toc:t ltoc:nil path:./org-info.js
+#+bind: org-export-allow-bind-keywords t
+
+# Local Variables:
+# org-export-html-style: "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\" />"
+# org-export-allow-bind-keywords: t
+# End:
+
+#+BEGIN_COMMENT
+INFOJS_OPT: view:overview toc:t ltoc:t path:../Sync/Exports/org-info.js
+bind: org-export-publishing-directory "~/Dropbox/Sync/Exports/"
+#+END_COMMENT
