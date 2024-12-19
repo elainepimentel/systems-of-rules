@@ -34,13 +34,19 @@ This means that $P\in\Gamma_1$ and the derivations together would justify the sy
 \infer[r]{\Gamma\vdash C}
       {\deduce{\Gamma\vdash C\strut}
               {\deduce{\vdots}
-                      {\infer[r_1]{\Gamma_1,P\vdash }{}}}\quad&\quad
+                      {\left(~\vcenter{
+                        \infer[r_1]{\Gamma_1,P\vdash}{\strut}
+                        }\right)}}
+       \quad&\quad
        \deduce{\Gamma\vdash C\strut}
               {\deduce{\vdots}
-                      {\infer[r_2]{\Gamma_2\vdash C_2}
-                             {\deduce{\Gamma_2,P\vdash }{}}}}}
+                      {\left(~\vcenter{
+                        \infer[r_2]{\Gamma_2\vdash C_2}
+                                   {\deduce{\Gamma_2,P\vdash }{}}
+                       }\right)}}}
 \]
 That is, the rules $r_i$ may be applied, with the condition that $r$ should have been already applied, in a bottom-up reading of rules. This has a natural deduction flavor, when rules carry on some information of derivations, like the {\em discharging of formulas}.
+
 
 The {\em
 systems of rules}~\cite{Neg16} is an extension of the \emph{axioms-as-rules
