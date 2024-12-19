@@ -134,51 +134,51 @@ ambiguous.
 \begin{figure}
 	{\sc Asynchronous Rules}
 \[
-  \infer[\kern-2pt\veen_r]{\jUnf{\Gamma}{\Sigma}{A \veen\kern-3pt B, \Omega}{\Delta}}
-                 {\jUnf{\Gamma}{\Sigma}{A,B, \Omega}{\Delta}}   
+  \infer[\kern-2pt\veen_r]{\jUnf{\Gamma}{\Psi}{A \veen\kern-3pt B, \Omega}{\Delta}}
+                 {\jUnf{\Gamma}{\Psi}{A,B, \Omega}{\Delta}}   
   \qquad 
-  \infer[\kern-2pt\wedgen_r]{\jUnf{\Gamma}{\Sigma}{A \wedgen B, \Omega}{\Delta}}
-                   {\jUnf{\Gamma}{\Sigma}{A, \Omega}{\Delta}
+  \infer[\kern-2pt\wedgen_r]{\jUnf{\Gamma}{\Psi}{A \wedgen B, \Omega}{\Delta}}
+                   {\jUnf{\Gamma}{\Psi}{A, \Omega}{\Delta}
                     & 
-                    \jUnf{\Gamma}{\Sigma}{B, \Omega}{\Delta}}
+                    \jUnf{\Gamma}{\Psi}{B, \Omega}{\Delta}}
 \]
 \[
-  \infer[\wedgep_l]{\jUnf{\Gamma}{A\wedgep B,\Sigma}{\Omega}{\Delta}}
-                   {\jUnf{\Gamma}{A , B, \Sigma}{\Omega}{\Delta}}
+  \infer[\wedgep_l]{\jUnf{\Gamma}{A\wedgep B,\Psi}{\Omega}{\Delta}}
+                   {\jUnf{\Gamma}{A , B, \Psi}{\Omega}{\Delta}}
   \qquad
-  \infer[\veep_l]{\jUnf{\Gamma}{A\veep B,\Sigma}{\Omega}{\Delta}}
-                 {\jUnf{\Gamma}{A,\Sigma}{\Omega}{\Delta}
+  \infer[\veep_l]{\jUnf{\Gamma}{A\veep B,\Psi}{\Omega}{\Delta}}
+                 {\jUnf{\Gamma}{A,\Psi}{\Omega}{\Delta}
                   & 
-                  \jUnf{\Gamma}{B,\Sigma}{\Omega}{\Delta}}
+                  \jUnf{\Gamma}{B,\Psi}{\Omega}{\Delta}}
 \]
 \[
-  \infer[\forall_r]{\jUnf{\Gamma}{\Sigma}{\forall x.B, \Omega}{\Delta}}
-                   {\jUnf{\Gamma}{\Sigma}{[y/x]B, \Omega}{\Delta}}	
+  \infer[\forall_r]{\jUnf{\Gamma}{\Psi}{\forall x.B, \Omega}{\Delta}}
+                   {\jUnf{\Gamma}{\Psi}{[y/x]B, \Omega}{\Delta}}	
   \qquad
-  \infer[\exists_l]{\jUnf{\Gamma}{\exists x.B, \Sigma}{\Omega}{\Delta}}
-                   {\jUnf{\Gamma}{[y/x]B,\Sigma}{\Omega}{\Delta}}
+  \infer[\exists_l]{\jUnf{\Gamma}{\exists x.B, \Psi}{\Omega}{\Delta}}
+                   {\jUnf{\Gamma}{[y/x]B,\Psi}{\Omega}{\Delta}}
 \]
 \[
-  \infer[\kern-2pt\impl_r]{\jUnf{\Gamma}{\Sigma}{A \impl B, \Omega}{\Delta}}
-                 {\jUnf{\Gamma}{\Sigma,A}{B,\Omega}{\Delta}}
+  \infer[\kern-2pt\impl_r]{\jUnf{\Gamma}{\Psi}{A \impl B, \Omega}{\Delta}}
+                 {\jUnf{\Gamma}{\Psi,A}{B,\Omega}{\Delta}}
   \qquad
-  \infer[\kern-2pt\ptrue_l]{\jUnf{\Gamma}{\ptrue\kern-2pt, \Sigma}{\Omega}{\Delta}}
-                  {\jUnf{\Gamma}{\Sigma}{\Omega}{\Delta}}
+  \infer[\kern-2pt\ptrue_l]{\jUnf{\Gamma}{\ptrue\kern-2pt, \Psi}{\Omega}{\Delta}}
+                  {\jUnf{\Gamma}{\Psi}{\Omega}{\Delta}}
   \qquad
-  \infer[\kern-2pt\nfalse_r]{\jUnf{\Gamma}{\Sigma}{\nfalse\kern-2pt,\Omega}{\Delta}}
-                            {\jUnf{\Gamma}{\Sigma}{\Omega}{\Delta}}
+  \infer[\kern-2pt\nfalse_r]{\jUnf{\Gamma}{\Psi}{\nfalse\kern-2pt,\Omega}{\Delta}}
+                            {\jUnf{\Gamma}{\Psi}{\Omega}{\Delta}}
 \]
 \[
-  \infer[\ntrue_r]{\jUnf{\Gamma}{\Sigma}{\ntrue\kern-3pt,\Omega}{\Delta}}{}
+  \infer[\ntrue_r]{\jUnf{\Gamma}{\Psi}{\ntrue\kern-3pt,\Omega}{\Delta}}{}
   \qquad
-  \infer[\kern-2pt\pfalse_l]{\jUnf{\Gamma}{\pfalse\kern-2pt,\Sigma}{\Omega}{\Delta}}{}
+  \infer[\kern-2pt\pfalse_l]{\jUnf{\Gamma}{\pfalse\kern-2pt,\Psi}{\Omega}{\Delta}}{}
 \]
 	
 \medskip{\sc Synchronous Rules}	
 
 \[ 
   \infer[\impl_l]{\jLf{\Gamma}{A\impl B}{\Delta}}
-                 {\jRf{\Gamma}{A}{\Delta} &  \jLf{\Gamma}{B}{\Delta}}
+                 {\kRf{\Gamma}{A}{\Delta} &  \jLf{\Gamma}{B}{\Delta}}
   \quad	
   \infer[\veen_l]{\jLf{\Gamma}{A \veen\kern-3pt B}{\Delta}}
                  {\jLf{\Gamma}{A}{\Delta}
@@ -189,24 +189,24 @@ ambiguous.
                    {\jLf{\Gamma}{A_i}{\Delta}}
 \]
 \[
-  \infer[\wedgep_r]{\jRf{\Gamma}{A \wedgep B}{\Delta}}
-                   {\jRf{\Gamma}{A}{\Delta}
-                    & 
-                    \jRf{\Gamma}{B}{\Delta}}
-  \qquad
-  \infer[\veep_r]{\jRf{\Gamma}{A_1 \veep A_2}{\Delta}}
-                 {\jRf{\Gamma}{A_i}{\Delta}}
-\]
-\[
   \infer[\forall_l]{\jLf{\Gamma}{\forall x.B}{\Delta}}
                    {\jLf{\Gamma}{[t/x]B}{\Delta}}
-  \quad
-  \infer[\exists_r]{\jRf{\Gamma}{\exists x.B}{\Delta}}
-                   {\jRf{\Gamma}{[t/x]B}{\Delta}}
-  \quad
-  \infer[\ptrue_r]{\jRf{\Gamma}{\ptrue}{\Delta}}{}
-  \quad
+  \qquad
   \infer[\nfalse_l]{\jLf{\Gamma}{\nfalse}{\Delta}}{}
+  \qquad
+  \infer[\wedgep_r]{\kRf{\Gamma}{A \wedgep B}{\Delta}}
+                   {\kRf{\Gamma}{A}{\Delta}
+                    & 
+                    \kRf{\Gamma}{B}{\Delta}}
+\]
+\[
+  \infer[\veep_r]{\kRf{\Gamma}{A_1 \veep A_2}{\Delta}}
+                 {\kRf{\Gamma}{A_i}{\Delta}}
+  \qquad
+  \infer[\exists_r]{\kRf{\Gamma}{\exists x.B}{\Delta}}
+                   {\kRf{\Gamma}{[t/x]B}{\Delta}}
+  \qquad
+  \infer[\ptrue_r]{\kRf{\Gamma}{\ptrue}{\Delta}}{}
 \]
 
 \medskip{\sc Identity rules}
@@ -214,7 +214,7 @@ ambiguous.
 \[
   \infer[\kinit_l]{\jLf{\Gamma}{N_a}{N_a, \Delta}}{}
   \qquad
-  \infer[\kinit_r]{\jRf{\Gamma,P_a}{P_a}{\Delta}}{}
+  \infer[\kinit_r]{\kRf{\Gamma,P_a}{P_a}{\Delta}}{}
 %	\qquad 
 %	\infer[cut]{\jUnf{\Gamma}{}{}{\Delta}}
 %	{\jUnf{\Gamma}{}{F}{\Delta}
@@ -229,17 +229,17 @@ ambiguous.
                     {\jLf{\Gamma,N}{N}{\Delta}}
   \quad
   \infer[\kdecide_r]{\jUnf{\Gamma}{}{}{P, \Delta}}
-                    {\jRf{\Gamma}{P}{P, \Delta}}
+                    {\kRf{\Gamma}{P}{P, \Delta}}
   \quad
   \infer[\krelease_l]{\jLf{\Gamma}{P}{\Delta}}
                      {\jUnf{\Gamma}{P}{}{\Delta}}
   \quad
-  \infer[\krelease_r]{\jRf{\Gamma}{N}{\Delta}}
+  \infer[\krelease_r]{\kRf{\Gamma}{N}{\Delta}}
                      {\jUnf{\Gamma}{}{N}{\Delta}}
 \]
 \[
-  \infer[\kstore_l]{\jUnf{\Gamma}{C,\Sigma}{\Omega}{\Delta}}
-                   {\jUnf{C,\Gamma}{\Sigma}{\Omega}{\Delta}}
+  \infer[\kstore_l]{\jUnf{\Gamma}{C,\Psi}{\Omega}{\Delta}}
+                   {\jUnf{C,\Gamma}{\Psi}{\Omega}{\Delta}}
   \qquad
   \infer[\kstore_r]{\jUnf{\Gamma}{}{D, \Omega}{\Delta}}
                    {\jUnf{\Gamma}{}{\Omega}{D, \Delta}}
@@ -287,14 +287,14 @@ conclusion.
 \[ 
   \infer[\impl_l]{\jLfG{A \impl B}}{  \jRfG{A}\quad \jLfG{B}}
   \qquad
-  \infer[\veep_r]{ \jRfG{A_1 \veep A_2}}{\jRfG{A_i}}
+  \infer[\forall_l]{\jLfG{\forall x.B}}{\jLfG{[t/x]B}}
   \qquad
   \infer[\wedgen_l]{\jLfG {A_1 \wedgen A_2}}{\jLfG{A_i}}
 \]
 \[
   \infer[\wedgep_r]{\jRfG{A \wedgep B}}{\jRfG{A} \quad \jRfG{B}}
   \quad
-  \infer[\forall_l]{\jLfG{\forall x.B}}{\jLfG{[t/x]B}}
+  \infer[\veep_r]{ \jRfG{A_1 \veep A_2}}{\jRfG{A_i}}
   \quad
   \infer[\exists_r]{\jRfG{\exists x.B}}{\jRfG{[t/x]B}}
   \quad
@@ -307,7 +307,7 @@ conclusion.
   \infer[\kinit_l]{\jLf{\Gamma}{N_a}{N_a}}{}
   \qquad
   \infer[\kinit_r]{\jRf{\Gamma,P_a}{P_a}}{}
-  \qquad
+%  \qquad
 %  \infer[cut]{\jUnf{\Gamma}{}{}{R}}
 %             {\jUnf{\Gamma}{}{F}{}\qquad \jUnf{\Gamma}{F}{}{R}}
 \]
@@ -341,6 +341,9 @@ conclusion.
 \caption{The focused intuitionistic sequent calculus \LJF.}
 \label{fig:ljf}
 \end{figure}	
+
+\DM{It might be worth seeing if we can present \LJF as a restriction
+on \LKF.  This might not lead to a simplier presentation, however.}
 
 The inference rules of \LKF and \LJF presented in Figures~\ref{fig:lkf} and~\ref{fig:ljf}, respectively, involve three kinds of sequents 
 \begin{itemize}

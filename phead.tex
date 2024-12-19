@@ -6,15 +6,20 @@
 %!TEX root = geometric.tex
 
 \newcommand{\lP}{$\lambda$Prolog\xspace}
-\newcommand{\zc}[1]{{\color[rgb]{1.000000,0.509804,0.278431} ZC: #1}}
 \newcommand{\ie}{i.e.,\xspace}
 \newcommand{\eg}{e.g.,\xspace}
 \newcommand{\lpInf}{\: \turnstyle \:}
 \newcommand{\turnstyle}{\hbox{\tt \ :-\ }} % turnstyle Prolog-style
-\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+\newcommand{\red    }[1]{\textcolor{red}{#1}}
 \newcommand{\magenta}[1]{\textcolor{magenta}{#1}}
-\newcommand{\cyan}[1]{\textcolor{cyan}{#1}}
-\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\cyan   }[1]{\textcolor{cyan}{#1}}
+\newcommand{\green  }[1]{\textcolor{green}{#1}}
+\newcommand{\blue   }[1]{\textcolor{blue}{#1}}
+
+\newcommand{\Blue}[1]{{\color{blue}{#1}}} % Use this for comments
+\newcommand{\DM}[1]{\smallskip\par\noindent\green{\textbf{DM:} #1}\smallskip}
+\newcommand{\EP}[1]{\smallskip\par\noindent\red{#1}\smallskip}
 
 \newcommand{\D}{\mathsf{D}}
 \newcommand{\K}{\mathsf{K}}
@@ -57,35 +62,18 @@
 
 % Explore the idea of naming release with an uparrow, decide with a down arrow.
 
-%%%%%%%%%%%%%%
-% LKF Macros
-%%%%%%%%%%%%%%
-
-% => Sequents
-\newcommand{\async}[2]{\seq#1\mathbin{\Uparrow}   #2}
-\newcommand{\sync }[2]{\seq#1\mathbin{\Downarrow} #2}
-\newcommand{\Async}[3]{#1\async{#2}{#3}}  % With Xi
-\newcommand{\Sync }[3]{#1\sync{#2}{#3}}  % With Xi
-
 \newcommand{\impl}{\supset}
+\newcommand{\Rscr}{{\cal R}} % Used for an ambiguous rhs
 
+% LKF Macros
 
-% => Connectives and rules
-% ==> Names 
-%\newcommand{\knand}{ \& }
 \newcommand{\knand}{ \jnand }
-%\newcommand{\knor}{\parr }
 \newcommand{\knor}{\vee^{-}}
-%\newcommand{\kpand}{\otimes}
 \newcommand{\kpand}{\jpand}
-%\newcommand{\kpor}{\oplus }
 \newcommand{\kpor}{\veep }
 \newcommand{\unp}[1]{#1^{\circ}}
-%\newcommand{\pol}[1]{#1^{\bullet}}  % DM not needed
 \newcommand{\del}[1]{[#1]^{l/r}}
 \newcommand{\delm}[2]{[#1]^{l/r}_{#2}}
-%\newcommand{\delp}[1]{[#1]_{\delpf}}
-%\newcommand{\deln}[1]{[#1]_{\delnf}}
 \newcommand{\delp}[1]{[#1]^{r}}
 \newcommand{\deln}[1]{[#1]^{l}}
 \newcommand{\delpm}[2]{[#1]^{r}_{#2}}
@@ -94,12 +82,8 @@
 %\newcommand{\unpsynrules}[1]{\unp{\mathcal{R}}(#1)}
 \newcommand{\axioms}{\mathcal{T}}
 
-
-%\newcommand{\ksome}{\Sigma }
 \newcommand{\ksome}{\jsome }
-%\newcommand{\kall}{\Pi }
 \newcommand{\kall}{\jall}
-%\newcommand{\kpfalse}{0}
 \newcommand{\kpfalse}{\pfalse}
 \newcommand{\kptrue}{\ptrue}
 \newcommand{\knfalse}{\nfalse}
@@ -117,81 +101,27 @@
 \newcommand{\ksomeu}[1]{\ksome #1}
 \newcommand{\kallu}[1]{\kall #1}
 
-
-% => Bureau 
-%% ==> Names
-\newcommand{\knandc}{\knand_c}
-\newcommand{\knorc}{\knor_c}
-\newcommand{\kpande}{\kpand_e}
-\newcommand{\kpore}{\kpor_e}
-\newcommand{\ksomee}{\ksome_e}
-\newcommand{\kallc}{\kall_c}
-\newcommand{\kptruee}{\kptrue_e}
-\newcommand{\knfalsec}{\knfalse_c}
-%--Structural
-\newcommand{\kstorec}{\kstore_c}
-\newcommand{\kdecidee}{\kdecide_e}
-\newcommand{\kreleasee}{\krelease_e}
-\newcommand{\kinite}{\kinit_e}
-
-%% ==> Usage (with parameters)
-% ZC : still not sure about giving the formula as a parameter
-\newcommand{\knandcu}[4]{\knandc(#1,#2,#3,#4)} % C F C1 C2
-\newcommand{\knorcu}[3]{\knorc(#1,#2,#3)} % C F C'
-\newcommand{\kpandeu}[4]{\kpande(#1,#2,#3,#4)} % C F C1 C2
-\newcommand{\kporeu}[4]{\kpore(#1,#2,#3,#4)} % C F Choice C'
-\newcommand{\ksomeeu}[4]{\ksomee(#1,#2,#3,#4)} % C F Witness C'
-\newcommand{\kallcu}[3]{\kallc(#1,#2,#3)} % C F (x\C')
-\newcommand{\kptrueeu}[1]{\kptruee(#1)}
-\newcommand{\knfalsecu}[2]{\knfalsec(#1,#2)}
-%--Structural
-\newcommand{\kstorecu}[4]{\kstorec(#1,#2,#3,#4)} %C F Indx C'
-\newcommand{\kdecideeu}[3]{\kdecidee(#1,#2,#3)} % C Indx C'
-\newcommand{\kreleaseeu}[3]{\kreleasee(#1,#2,#3)} % C F C'
-\newcommand{\kiniteu}[3]{\kinite(#1,#2,#3)} %C F I
-
-%%%%%%%%%%%%%%
 % LJF Macros
-%%%%%%%%%%%%%%
-% => Sequents
-
-\newcommand{\veenldotsveen}{\veen\kern-5pt\ldots\kern-2pt\veen}
-%\newcommand{\CNXT}{\axiom, \neg \overline{P}, \neg \Gamma}
-\newcommand{\CNXT}{\Upsilon}
-
-%\newcommand{\Rscr}{{\cal S}} % Used for an ambiguous rhs
-% DM If we don't use \synrules, we can reclaim the R for ambiguous rhs
-\newcommand{\Rscr}{{\cal R}} % Used for an ambiguous rhs
-
-\newcommand{\kUnf}[4]{#1 \mathbin\Uparrow #2 \seq  #3 \mathbin\Uparrow #4}
-\newcommand{\kUnfG}[2]{\Gamma \mathbin\Uparrow #1 \seq  #2 \mathbin\Uparrow \Delta}
-\newcommand{\kUnfamb}[3]{#1 \mathbin\Uparrow #2 \seq  #3 \Theta' \Uparrow \Delta}
-\newcommand{\kUnfGamb}[1]{\Gamma\mathbin\Uparrow #1\seq \Theta' \Uparrow \Delta}
-\newcommand{\kLf}[3]{#1 \Downarrow #2 \seq #3}
-\newcommand{\kRf}[3]{#1 \seq #2 \Downarrow #3}
-\newcommand{\kLfG}[1]{\kLf{\Gamma}{#1}{\Delta}}
-\newcommand{\kRfG}[1]{\kRf{\Gamma}{#1}{\Delta}}
 
 % Use the following to see if a context is empty in a focused
 % sequent.  If so, used \cdot instead.  Needs the xifthen package.
 \newcommand{\isemp}[1]{\ifthenelse{\isempty{#1}}{\cdot}{#1}}
 
-%\newcommand{\jUnf}[4]{#1 ; #2 \seq  #3 ; #4}% unfocused sequent
-\newcommand{\jUnf}[4]{\isemp{#1}\mathbin{\Uparrow}\isemp{#2}\seq
-                      \isemp{#3}\mathbin{\Uparrow}\isemp{#4}}% unfocused sequent
+\newcommand{\jUnf}[4]{\isemp{#1}\;\red{\mathbin{\Uparrow}\,\isemp{#2}\seq
+                      \isemp{#3}\,\mathbin{\Uparrow}\;}\isemp{#4}}% unfocused sequent
 
-\newcommand{\jUnfamb}[3]{#1 \mathbin\Uparrow #2 \seq  #3 \Rscr}% unfocused sequent
-%\newcommand{\jUnfG}[2]{\jUnf{\Gamma}{#1}{#2}{{\cdot}}}% unf sequ with \Gamma
-\newcommand{\jUnfG}[2]{\jUnf{\Gamma}{\isemp{#1}}{\isemp{#2}}{{\cdot}}}% unf sequ with \Gamma
-\newcommand{\jUnfGamb}[1]{\Gamma\mathbin\Uparrow #1\seq \Rscr}% unf sequ with \Gamma
-\newcommand{\jLf}[3]{\isemp{#1}\Downarrow\isemp{#2}\seq\isemp{#3}}% left focused sequent
-\newcommand{\jLCf}[3]{#1,\Cx{\Downarrow{#2}}\seq\isemp{#3}}% left focused context sequent
+\newcommand{\jUnfamb }[3]{\jUnf{#1}{#2}{#3}{\Rscr}}% unfocused sequent
+\newcommand{\jUnfG   }[2]{\jUnf{\Gamma}{#1}{#2}{\cdot}}% unf sequ with \Gamma
+\newcommand{\jUnfGamb}[1]{\jUnfG{#1}{\Rscr}}% unf sequ with \Gamma
+
+\newcommand{\jLf }[3]{\isemp{#1}\,\red{\Downarrow\isemp{#2}\seq\isemp{#3}\;}}% left focused sequent
 \newcommand{\jLfG}[1]{\jLf{\Gamma}{#1}{R}}% left foc seq with \Gamma 
-\newcommand{\jRf}[2]{#1 \seq #2 \Downarrow}% right focused sequent
-\newcommand{\jRCf}[3]{#1 \seq \Cx{#2 \Downarrow},#3}% right focused sequent
+
+\newcommand{\jRf }[2]{#1 \;\red{\seq #2 \Downarrow}}% right focused sequent
 \newcommand{\jRfG}[1]{\jRf{\Gamma}{#1}}% right foc seq with \Gamma
-%\newcommand{\jC}[2]{{\blue {#1 \colon\,}} #2} % Use for all other instances
-\newcommand{\jC}[2]{{\blue {#1 \colon}} #2} % Use for all other instances
+
+
+\newcommand{\kRf }[3]{#1 \;\green{\seq #2 \Downarrow}\, #3}% right focused sequent
 
 % => Connectives
 % ==> Names
@@ -204,7 +134,7 @@
 \newcommand{\jtrue}{\hbox{\sl t}}
 \newcommand{\jfalse}{\hbox{\sl f}}
 \newcommand{\iimp}{\supset}
-% -- Strructural
+% -- Structural
 
 \newcommand{\jinit}{\mathbb{I}}
 \newcommand{\jrelease}{\mathbb{R}}
@@ -228,102 +158,6 @@
 \newcommand{\jsomeu}[1]{\jsome #1}
 \newcommand{\jallu}[1]{\jall  #1}
 
-% => Bureau
-% ==> Names
-\newcommand{\jarrc}{\jarr_c}
-\newcommand{\jarre}{\jarr_e}
-\newcommand{\jorc}{\jor_c}
-\newcommand{\jore}{\jor_e}
-\newcommand{\jpandc}{\jpand_c}
-\newcommand{\jpande}{\jpand_e}
-\newcommand{\jnandc}{\jnand_c}
-\newcommand{\jnande}{\jnand_e}
-\newcommand{\jsomec}{\jsome_c}
-\newcommand{\jsomee}{\jsome_e}
-\newcommand{\jallc}{\jall_c}
-\newcommand{\jalle}{\jall_e}
-
-\newcommand{\jtruec}{\jtrue_c}
-\newcommand{\jtruee}{\jtrue_e}
-\newcommand{\jfalsec}{\jfalse_c}
-%-- Structural
-\newcommand{\jinitle}{\jinitl_e}
-\newcommand{\jreleasele}{\jreleasel_e}
-\newcommand{\jdecidele}{\jdecidel_e}
-\newcommand{\jstorelc}{\jstorel_c}
-
-\newcommand{\jinitre}{\jinitr_e}
-\newcommand{\jreleasere}{\jreleaser_e}
-\newcommand{\jdecidere}{\jdecider_e}
-\newcommand{\jstorerc}{\jstorer_c}
-
-%==>Usage 
-% (#1,#2) [2] 
-\newcommand{\jarrcu}[3]{\jarrc(#1,#2,#3)}
-\newcommand{\jarreu}[4]{\jarre(#1,#2,#3,#4)}
-\newcommand{\jorcu}[4]{\jorc(#1,#2,#3,#4)}
-\newcommand{\joreu}[4]{\jore(#1,#2,#3,#4)}
-\newcommand{\jpandcu}[3]{\jpandc(#1,#2,#3)}
-\newcommand{\jpandeu}[4]{\jpande(#1,#2,#3,#4)}
-\newcommand{\jnandcu}[4]{\jnandc(#1,#2,#3,#4)}
-\newcommand{\jnandeu}[4]{\jnande(#1,#2,#3,#4)}
-\newcommand{\jsomecu}[3]{\jsomec(#1,#2,#3)}
-\newcommand{\jsomeeu}[4]{\jsomee(#1,#2,#3,#4)}
-\newcommand{\jallcu}[3]{\jallc(#1,#2,#3)}
-\newcommand{\jalleu}[4]{\jalle(#1,#2,#3,#4)}
-
-\newcommand{\jtruecu}[2]{\jtruec(#1,#2)}
-\newcommand{\jtrueeu}[1]{\jtruee(#1)}
-\newcommand{\jfalsecu}[1]{\jfalsec(#1)}
-%-- Structural
-\newcommand{\jinitleu}[1]{\jinitle(#1)}
-\newcommand{\jreleaseleu}[3]{\jreleasele(#1,#2,#3)}
-\newcommand{\jdecideleu}[3]{\jdecidele(#1,#2,#3)}
-\newcommand{\jstorelcu}[4]{\jstorelc(#1,#2,#3,#4)}
-
-\newcommand{\jinitreu}[2]{\jinitre(#1,#2)}
-\newcommand{\jreleasereu}[3]{\jreleasere(#1,#2,#3)}
-\newcommand{\jdecidereu}[2]{\jdecidere(#1,#2)}
-\newcommand{\jstorercu}[3]{\jstorerc(#1,#2,#3)}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Old ones  Should call on the new ones and be slowly eliminated.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\jeArr}[3]{\supset_e (#1,#2,#3)}
-\newcommand{\jeOr}[3]{\vee_e (#1,#2,#3)}
-\newcommand{\jeAndP}[3]{\wedgep_e (#1,#2,#3)}
-\newcommand{\jeDelayP}[2]{\posdop_e (#1,#2)}
-\newcommand{\jeAndN}[3]{\wedgen_e (#1,#2,#3)}
-\newcommand{\jeDelayN}[2]{\negdop_e (#1,#2)}
-\newcommand{\jeTrueP}[1]{\ptrue_e (#1)}
-\newcommand{\jeSome}[3]{\exists_e(#1,#2,#3)}
-\newcommand{\jeAll}[3]{\forall_e(#1,#2,#3)}
-
-\newcommand{\jcArr}[2]{\supset_c(#1,#2)}
-\newcommand{\jcOr}[3]{\vee_c (#1,#2,#3)}
-\newcommand{\jcFalse}[1]{\pfalse_c (#1)}
-\newcommand{\jcAndP}[2]{\wedgep_c(#1,#2)}
-\newcommand{\jcDelayP}[2]{\posdop_c(#1,#2)}
-\newcommand{\jcAndN}[3]{\wedgen_c(#1,#2,#3)}
-\newcommand{\jcDelayN}[2]{\negdop_c(#1,#2)}
-\newcommand{\jcTrueN}[1]{\ntrue_c(#1)}
-\newcommand{\jcTrueP}[2]{\ptrue_c(#1,#2)}
-\newcommand{\jcSome}[2]{\exists_c(#1,#2)}
-\newcommand{\jcAll}[2]{\forall_c(#1,#2)}
-% Structural
-\newcommand{\jeDecL}[3]{\hbox{\sl DecideL}_e(#1,#2,#3)}
-\newcommand{\jeDecR}[2]{\hbox{\sl DecideR}_e(#1,#2)}
-\newcommand{\jeRelL}[2]{\hbox{\sl ReleaseL}_e(#1,#2)}
-\newcommand{\jeRelR}[2]{\hbox{\sl ReleaseR}_e(#1,#2)}
-\newcommand{\jcStoreL}[3]{\hbox{\sl StoreL}_c(#1,#2,#3)}
-\newcommand{\jcStoreR}[2]{\hbox{\sl StoreR}_c(#1,#2)}
-% Identity experts
-\newcommand{\jeInitL}[1]{\hbox{\sl InitialL}_e(#1)}
-\newcommand{\jeInitR}[2]{\hbox{\sl InitialR}_e(#1,#2)}
-\newcommand{\jeCut}[4]{\hbox{\sl Cut}_e(#1,#2,#3,#4)}
-
-\newcommand{\cert}{{\tt cert}\xspace}
 
 %--------------------
 
@@ -343,33 +177,11 @@
 \newcommand{\implp}{\impl^{\!+}}
 \newcommand{\impln}{\impl^{\!-}}
 
-\newcommand{\andClerk}[3]{{\wedge_c}(#1,#2,#3)}
-\newcommand{\falseClerk}[2]{f_c(#1,#2)}
-\newcommand{\orClerk}[2]{{\vee_c}(#1,#2)}
-\newcommand{\allClerk}[2]{\forall_c(#1,#2)}
-\newcommand{\storeClerk}[3]{\hbox{\sl store}_c(#1,#2,#3)}
-
-\newcommand{\trueExpert }[1]{{\true_e}(#1)}
-\newcommand{\andExpert}[3]{{\wedge_e}(#1,#2,#3)}
-\newcommand{\andExpertLJF}[6]{{\wedge_e}(#1,#2,#3,#4,#5,#6)}
-\newcommand{\orExpert  }[3]{{\vee_e}(#1,#2,#3)}
-\newcommand{\someExpert}[3]{\exists_e(#1,#2,#3)}
-\newcommand{\initExpert}[2]{\hbox{\sl init}_e(#1,#2)}
-\newcommand{\cutExpert}[4]{\hbox{\sl cut}_e(#1,#2,#3,#4)}
-\newcommand{\decideExpert}[3]{\hbox{\sl decide}_e(#1,#2,#3)}
-\newcommand{\releaseExpert}[2]{\hbox{\sl release}_e(#1,#2)}
-
-\newcommand{\Blue}[1]{{\color{blue}{#1}}} % Use this for comments
-% In order to get a draft without blue sentences (for the web), we can
-% change its definition to the following
-%\newcommand{\Blue}[1]{#1} 
-
-\newcommand{\blue}[1]{{\color{blue}{#1}}}
-%\newcommand{\blue}[1]{{\color[rgb]{0,0,1} #1}}
 \newcommand{\tupp}[2]{\blue{\langle #1,}#2{\blue{\rangle}}}
 
 
-\newcommand{\seq}{\Rightarrow}
+%\newcommand{\seq}{\Rightarrow} % Making this choice more consis in paper
+\newcommand{\seq}{\vdash}
 \newcommand{\eseq}[3]{#1;#2\seq #3}
 \newcommand{\seqneg}[2]{\seq #1 ; #2}
 \newcommand{\seqpos}[3]{\seq #1 ; #2 ; #3}
@@ -517,10 +329,7 @@
                                  % (conflict with elsarticle)
 \newcommand{\coloneq}{\mathrel{::=}}
 
-%\newcommand{\DM}[1]{\smallskip\par\noindent\green{\bf #1}\smallskip}
-\newcommand{\DM}[1]{{\color[rgb]{0.23, 0.74, 0.23} 
-                     \smallskip\par\noindent\textbf{DM: #1}}\smallskip}
-\newcommand{\EP}[1]{\smallskip\par\noindent\red{#1}\smallskip}
+
 \newcommand{\bias}[1]{\delta(#1)}
 \newcommand{\biasn}[1]{\delta^-\kern -1pt(#1)}
 \newcommand{\biasp}[1]{\delta^+\kern -1pt(#1)}
@@ -613,7 +422,6 @@
 \@makecontextual{\Dxm}{\Delta^{-}}
 \@makecontextual{\Ox}{\Omega}
 %\@makecontextual{\RRx}{\Xi}
-%\@makecontextual{\CCx}{\Sigma}
 %\@makecontextual{\DDx}{\Theta}
 
 %\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
