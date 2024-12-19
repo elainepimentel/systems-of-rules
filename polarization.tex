@@ -259,27 +259,27 @@ conclusion.
 {\sc Asynchronous Rules}
 
 \[
-  \infer[\impl_r]{\jUnfG{\Sigma}{A \supset B}}{\jUnfG{A,\Sigma}{B}}   
+  \infer[\impl_r]{\jUnfG{\Psi}{A \supset B}}{\jUnfG{A,\Psi}{B}}   
   \qquad
-  \infer[\wedgen_r]{\jUnfG{\Sigma}{A \wedgen B}}
-                   {\jUnfG{\Sigma}{A} \quad \jUnfG{\Sigma}{B}}
+  \infer[\wedgen_r]{\jUnfG{\Psi}{A \wedgen B}}
+                   {\jUnfG{\Psi}{A} \quad \jUnfG{\Psi}{B}}
 \]
 \[
-  \infer[\wedgep_l]{\jUnfGamb{A\wedgep B,\Sigma}}{\jUnfGamb{A , B, \Sigma}}
+  \infer[\wedgep_l]{\jUnfGamb{A\wedgep B,\Psi}}{\jUnfGamb{A , B, \Psi}}
   \qquad
-  \infer[\veep_l]{\jUnfGamb{A\veep B,\Sigma}}
-        {\jUnfGamb{A,\Sigma}\quad \jUnfGamb{B,\Sigma}}
+  \infer[\veep_l]{\jUnfGamb{A\veep B,\Psi}}
+        {\jUnfGamb{A,\Psi}\quad \jUnfGamb{B,\Psi}}
 \]
 \[
-  \infer[\forall_r]{\jUnfG{\Sigma}{\forall x.B}}{\jUnfG{\Sigma}{[y/x]B}}
+  \infer[\forall_r]{\jUnfG{\Psi}{\forall x.B}}{\jUnfG{\Psi}{[y/x]B}}
   \qquad
-  \infer[\exists_l]{\jUnfGamb{\exists x.B, \Sigma}}{\jUnfGamb{[y/x]B,\Sigma}}
+  \infer[\exists_l]{\jUnfGamb{\exists x.B, \Psi}}{\jUnfGamb{[y/x]B,\Psi}}
  \]
 \[
-  \infer[\ntrue_r]{\jUnfG{\Sigma}{\ntrue}}{}\qquad
-  \infer[\ptrue_l]{\jUnfGamb{\ptrue, \Sigma}}{\jUnfGamb{\Sigma}}
+  \infer[\ntrue_r]{\jUnfG{\Psi}{\ntrue}}{}\qquad
+  \infer[\ptrue_l]{\jUnfGamb{\ptrue, \Psi}}{\jUnfGamb{\Psi}}
    \qquad
-  \infer[\pfalse_l]{\jUnfGamb{\pfalse, \Sigma}}{}
+  \infer[\pfalse_l]{\jUnfGamb{\pfalse, \Psi}}{}
 \]
 
 \medskip{\sc Synchronous Rules}
@@ -324,8 +324,8 @@ conclusion.
   \infer[\krelease_r]{\jRf{\Gamma}{N}}{ \jUnf{\Gamma}{}{N}{}}
 \]
 \[
-\infer[\kstore_l]{\jUnfamb{\Gamma}{C,\Sigma}{}}
-                 {\jUnfamb{C,\Gamma}{\Sigma}{}}
+\infer[\kstore_l]{\jUnfamb{\Gamma}{C,\Psi}{}}
+                 {\jUnfamb{C,\Gamma}{\Psi}{}}
   \qquad
   \infer[\kstore_r]{\jUnf{\Gamma}{}{D}{}}{\jUnf{\Gamma}{}{}{D}}
 \]
@@ -345,13 +345,20 @@ conclusion.
 \DM{It might be worth seeing if we can present \LJF as a restriction
 on \LKF.  This might not lead to a simplier presentation, however.}
 
-The inference rules of \LKF and \LJF presented in Figures~\ref{fig:lkf} and~\ref{fig:ljf}, respectively, involve three kinds of sequents 
+The inference rules of \LKF and \LJF presented in
+Figures~\ref{fig:lkf} and~\ref{fig:ljf}, respectively, involve three
+kinds of sequents  
 \begin{itemize}
-\item $\jUnf{\Gamma}{\Sigma}{\Omega}{\Delta}$ belongs to the {\em asynchronous phase}. During this phase, all negative (resp. positive) formulas in  $\Omega$ (resp. $\Sigma$) are introduced and all atoms and positive (resp. negative) formulas  are stored in the context $\Delta$ (resp. $\Gamma$);
-\item $\jLf{\Gamma}{B}{\Delta},\quad\hbox{and}\quad
-  \jRf{\Gamma}{B}{\Delta}$ belongs to the {\em synchronous phase}, where all positive connectives at the root of $B$ are introduced. 
+\item $\jUnf{\Gamma}{\Psi}{\Omega}{\Delta}$ belongs to the {\em
+asynchronous phase}. During this phase, all negative (resp. positive)
+formulas in  $\Omega$ (resp. $\Psi$) are introduced and all atoms and
+positive (resp. negative) formulas  are stored in the context $\Delta$
+(resp. $\Gamma$); 
+\item $\jLf{\Gamma}{B}{\Delta}$ and $\jRf{\Gamma}{B}{\Delta}$ belongs
+to the {\em synchronous phase}, where all positive connectives at the
+root of $B$ are introduced.  
 \end{itemize}
-Here $\Gamma$, $\Sigma$, $\Omega$ and $\Delta$ are
+Here $\Gamma$, $\Psi$, $\Omega$ and $\Delta$ are
 multisets of polarized formulas and $B$ is a polarized formula.
 %
 The formula occurrence $B$ in a $\Downarrow$-sequent is called the
@@ -364,7 +371,7 @@ The dynamics of the different phases is detailed below.
 This process includes storing formulas: note that the rules $\kstore_r, \kstore_l$ move, to the 
 contexts $\Gamma/\Delta$, atomic or negative/positive formulas since they cannot be decomposed during the asynchronous phase.
 
-The asynchronous phase ends when $\Sigma,\Omega$ in unfocused sequents are empty. A decision rule $\mathsf{D_l}$ or  $\mathsf{D_r}$ is then applied,  and
+The asynchronous phase ends when $\Psi,\Omega$ in unfocused sequents are empty. A decision rule $\mathsf{D_l}$ or  $\mathsf{D_r}$ is then applied,  and
 a synchronous phase starts by {\em focusing} on a non-atomic formula, either negative on the left or positive on the right.
 
 \noindent
