@@ -117,7 +117,6 @@
     Various papers by Herbelin, Espirito Santo, etc, show the
     connections between typed lambda-terms and LJT.
 
-
 *** Example: Idenity rules (repeat and cut)
     Consider the higher-order formulas =(forall p, p -> p)=.
     - If we use either =(forall- p, p -> p)= or =(forall+ p, p -> p)=, we
@@ -165,6 +164,18 @@
      any case, the right premise is not needed, since =Delta |- phi=
      will yield =Gamma |- phi= in the usual monotonic setting were =Gamma=
      is contained in =Delta=.
+
+     In Dyckhoff's "Contraction-Free" paper, he writes (page 805):
+     "Gabbay [14] proposes the bounded restart rule: this requires
+     that a history be kept of the search, but allows that when an
+     atomic goal is to be proved, one may restart the search at points
+     after earlier occasions when the same goal was investigated."
+     [14] Algorithmic proof with diminishing resources part 1, DM
+     Gabbay - International Workshop on Computer Science Logic, 1990.
+
+     The approach to Peirce's-formula-as-restart predicts restarts
+     with any formula (not just atoms).  How to move generally from
+     quantification over arbitrary formulas to atomic formulas?
 
 *** Example: The excluded middle
 See Elaine's main.tex for this example (probably pos polarity atoms).
