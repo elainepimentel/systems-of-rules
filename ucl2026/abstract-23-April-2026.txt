@@ -1,0 +1,28 @@
+Higher-level rules for sequent calculus
+
+Dale Miller
+Inria-Saclay & LIX, Institut Polytechnique de Paris
+
+Theories within a base logic are traditionally represented either as
+collections of formulas (axioms or assumptions) or as inference rules
+bypassing logical connectives. Schroeder-Heister and Avron established
+an equivalence between conventional natural deduction and higher-level
+rules for intuitionistic logic, which the LF framework later
+generalized using the dependently typed lambda-calculus. Transitioning
+to sequent calculus facilitates higher-level rules for both classical
+and intuitionistic sequent proof systems. While replacing geometric
+formulas (bipoles) with rules is well established, we investigate what
+can be done for non-geometric axioms or assumptions.
+
+Building on this foundation, we show that the "system of rules"
+approach, where inference rules introduce scoped rules into premises,
+is a direct interpretation of polarized proof systems. By focusing on
+polarized formulas, such as those for least upper bounds, we obtain
+synthetic inference rules in which premise assumptions correspond to
+specific, scoped rules. The structure of these rules is determined by
+whether the predicate polarity is positive or negative. Furthermore,
+we describe how Tseitin predicate symbols can be utilized to
+transition these scoped rules into a global context.
+
+This talk is based on an abstract delivered to the Proof Society
+Workshop in September 2024 and is joint work with Elaine Pimentel.
