@@ -1,0 +1,170 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Beamer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usecolortheme{dolphin}
+\useinnertheme{rounded}
+\useoutertheme{infolines}
+
+\setbeamercolor{block body alerted}{bg=alerted text.fg!10}
+\setbeamercolor{block title alerted}{bg=alerted text.fg!20}
+\setbeamercolor{block body}{bg=structure!10}
+\setbeamercolor{block title}{bg=structure!20}
+\setbeamercolor{block body example}{bg=green!10}
+\setbeamercolor{block title example}{bg=green!20}
+
+\setbeamertemplate{headline}[default]
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{sections/subsections in toc}[sections numbered]
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}[triangle]
+\setbeamerfont{itemize item}{size=\large}
+\setbeamerfont{itemize subitem}{size=\tiny}
+\setbeamertemplate{enumerate item}[circle]
+
+\definecolor{LightBlue}{rgb}{0,0,0.8}
+\definecolor{DarkGreen}{rgb}{0.15,0.50,0.30}
+\definecolor{DarkBlue}{rgb}{0.15,0.3,0.5}
+\definecolor{Grey}{rgb}{0.50,0.50,0.50}
+
+\definecolor{darkgreen}{rgb}{0,.3,0}
+\definecolor{darkred}{rgb}{.5,0,0}
+\definecolor{darkblue}{rgb}{0,0,.7}
+\definecolor{darkvio}{rgb}{.5,0,.5}
+\definecolor{darkorange}{rgb}{.8,0,.4}
+\definecolor{lightgreen}{rgb}{0,.9,0}
+\definecolor{itemblue}{rgb}{0,0,.4}
+\definecolor{lightblue}{rgb}{0,0,.3}
+\definecolor{bananamania}{rgb}{0.98, 0.91, 0.71}
+
+
+\renewcommand{\emph}[1]{{\color{blue} #1}}
+\newcommand{\empha}[1]{{\color{darkgreen} #1}}
+\newcommand{\emphb}[1]{{\color{darkvio} #1}}
+\newcommand{\emphdb}[1]{{\color{darkblue} #1}}
+\newcommand{\emphdr}[1]{{\color{darkred} #1}}
+\newcommand{\emphdo}[1]{{\color{darkorange} #1}}
+
+
+\newcommand{\yellow}[1]{{\color{yellow} #1}}
+\newcommand{\white}[1]{{\color{white} #1}}
+\newcommand{\violet}[1]{{\color{violet} #1}}
+\newcommand{\teal}[1]{{\color{teal} #1}}
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\purple}[1]{{\color{purple} #1}}
+\newcommand{\pink}[1]{{\color{pink} #1}}
+\newcommand{\orange}[1]{{\color{orange} #1}}
+\newcommand{\olive}[1]{{\color{olive} #1}}
+\newcommand{\magenta}[1]{{\color{magenta} #1}}
+\newcommand{\lime}[1]{{\color{lime} #1}}
+\newcommand{\lightgray}[1]{{\color{lightgray} #1}}
+\newcommand{\green}[1]{{\color{green} #1}}
+\newcommand{\gray}[1]{{\color{gray} #1}}
+\newcommand{\darkgray}[1]{{\color{darkgray} #1}}
+\newcommand{\cyan}[1]{{\color{cyan} #1}}
+\newcommand{\brown}[1]{{\color{brown} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+\newcommand{\black}[1]{{\color{black} #1}}
+
+\newcommand{\semitransp}[2][35]{\textcolor{fg!#1}{#2}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{proof}
+\usepackage{cmll}
+\usepackage{xspace}
+
+\usepackage{bm}
+\usepackage{colonequals}
+
+\usepackage[weather]{ifsym} %weather symbols
+\usepackage{wasysym} %smiley
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,backgrounds,positioning}%shapes.callouts,shapes.geometric
+\tikzset{
+	itria/.style={
+		draw,dashed, %shape border uses incircle
+		isosceles triangle,shape border rotate=90,yshift=-7ex}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Focus
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\proofadjust{\vadjust{\nobreak\vskip-2.7ex\nobreak}}
+\def\semiproofadjust{\vadjust{\nobreak\vskip-1.3ex\nobreak}}
+
+\newcommand{\eg}{e.g.,}
+\newcommand{\lP}{$\lambda$Prolog}
+
+\newcommand{\axioms}{\mathcal{T}}
+\newcommand{\tup}[1]{\langle #1\rangle}
+
+\newcommand{\impl}{\supset}
+\newcommand{\seq}{\vdash}
+
+\newcommand{\limpl}{L{\impl}}
+
+\newcommand{\relfo}{R}
+
+\newcommand{\truen}{t^-}
+\newcommand{\truep}{t^+}
+\newcommand{\falsen}{f^-}
+\newcommand{\falsep}{f^+}
+\newcommand{\wedgep}{\wedge^{\!+}}
+\newcommand{\wedgen}{\wedge^{\!-}}
+\newcommand{\veep}{\vee^{\!+}}
+\newcommand{\veen}{\vee^{\!-}}
+
+\newcommand{\wedgepn}{\wedge^{\!\pm}}
+\newcommand{\veepn}{\vee^{\!\pm}}
+
+\newcommand{\Seq}[2]{#1\seq #2}
+\newcommand{\labelleft}[1]{\deduce[\hbox{#1}]{\strut}{}}
+
+\newcommand{\jLf}[3]{#1\; {\Downarrow #2} \vdash #3}% left focused sequent
+\newcommand{\jRf}[3]{#1 \vdash {#2 \Downarrow}\;#3}% right focused sequent
+\newcommand{\jUnf}[4]{#1 \mathbin\Uparrow #2 \vdash  #3 \mathbin\Uparrow #4}% unfocused sequent
+
+\newcommand{\jUnfG   }[2]{\jUnf{\Gamma}{#1}{#2}{{}}}           % unf sequ with \Gamma
+\newcommand{\jUnfGamb}[1]{\Gamma\mathbin\Uparrow#1\vdash \Rscr}% unf sequ with \Gamma
+\newcommand{\Rscr}{\Delta_1\mathbin\Uparrow\Delta_2}                % Used for an ambiguous rhs
+\newcommand{\jLfG    }[1]{\jLf{\Gamma}{#1}{E}}                 % left foc seq with \Gamma 
+\newcommand{\jRfG    }[1]{\jRf{\Gamma}{#1}}                    % right foc seq with \Gamma
+\newcommand{\jUnfamb }[3]{#1\mathbin\Uparrow#2\vdash#3 \Rscr}  % unfocused sequent
+
+\newcommand{\krelease}{\mathsf{R}}
+\newcommand{\kstore}{\mathsf{s}}
+\newcommand{\kinit}{\mathsf{I}}
+
+\newcommand\negclass[2]{\mathcal{N}_{#1}^{#2}}
+\newcommand\posclass[2]{\mathcal{P}_{#1}^{#2}}
+
+\def\posf#1{\textcolor{DarkGreen}{#1}}
+\def\negf#1{\textcolor{orange}{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Systems
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\sys}[1]{\ensuremath{\mathsf{#1}}}
+
+\newcommand*{\LK}{\sys{LK}\xspace}
+\newcommand*{\LJ}{\sys{LJ}\xspace}
+\newcommand*{\LKF}{\sys{LKF}\xspace}
+\newcommand*{\LJF}{\sys{LJF}\xspace}
+
+
+\newcommand{\sledom}{\Relbar\joinrel\mathrel{|}}
+\newcommand{\Twoseq}[3]{{\color{darkred}#1:}\,#2\vdash #3}
+\newcommand{\LUB}{\textsf{\color{blue}lub}}
+\newcommand{\lub   }[3]{\LUB~#1~#2~#3}
+
+
