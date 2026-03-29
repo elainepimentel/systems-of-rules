@@ -132,7 +132,7 @@
       formula =(forall+ p, (top -> p) -> p)= yields the cut rule as a
       synthetic rules.
 
-*** Example: Peirce's formula and Gabbay's restart rule
+*** Example: Peirce's formula
      Peirce's law: =forall phi, forall theta, (( phi -> theta) -> phi) -> phi=
      
      If phi and theta are negative bias, then we have the restart
@@ -148,6 +148,11 @@
 	  ============
 	  Gamma |- phi
 #+END_EXAMPLE
+      This rule resembles Gabbay's restart rule.  However, others have
+      studied this rule earlier:  see Curry 1963 (Foundations of
+      mathematical logic).  Also, Zimmermann's TCS paper in 2002 (page
+      561-574). 
+
       If phi is negative and theta is positive then we have 
 #+BEGIN_EXAMPLE
        Delta |- phi   Delta, theta |- E
