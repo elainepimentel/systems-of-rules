@@ -6,13 +6,14 @@
 \author[Miller, Pimentel]{
   \emph{Dale Miller} \\
   {\small Inria-Saclay \& Institut Polytechnique de Paris} \\[10pt]
-  {\small Joint work with Elaine Pimentel, UCL}
+  {\small Joint work with Elaine Pimentel, UCL} \\[50pt]
+  {\small Based on a short talk given at The Proof Society Worskhop 2024}
 }
 \date{23 April 2026}
 
 \begin{document}
 \begin{frame}
-	\titlepage
+\titlepage
 \end{frame}	
 
 \begin{frame}{The original axioms-as-rules problem}
@@ -23,76 +24,57 @@
 	
 	for \emphdb{classical and intuitionistic logics}?
 }
-
 \only<2-3>{
 \medskip
 
-\emphdb{Gentzen:} Add mathematical theories to first-order logic.
+\emphdo{A naive attempt:} Expand the notion of initial rules to
+include axioms.
 
-\begin{center}
-{\em Consistency of the arithmetic without complete induction.}
-\end{center}
+\medskip
 
-\begin{tabular}{lcl}
-\includegraphics[scale=0.5]{../slides/figs/gentzen1} &\qquad& \includegraphics[scale=0.3]{../slides/figs/gentzen3}\\
-\includegraphics[scale=0.5]{../slides/figs/gentzen2} 
-\end{tabular}
-}	
-\only<3>{
-\begin{center}
-{\em ``If our arithmetic is inconsistent, there exists a [cut-free] $\LK$ derivation with endsequent
-\[
-\mathfrak{U}_1,\ldots \mathfrak{U}_n\seq
-\] 
-where $\mathfrak{U}_1,\ldots \mathfrak{U}_n$ are arithmetic axiom formulae.''}
-\end{center}
+Assume $P\impl Q$ and $P$ as axioms. Allow initial rules to conclude
+with these.
+$$
+  \infer[cut]
+        {\vdash Q}
+        {\infer{\vdash P}{} &
+         \infer[cut]
+               {P\vdash Q}
+	       {\infer{\vdash P\impl Q}{} &
+	        \infer[\impl_l]
+                      {P,P\impl Q\vdash Q}
+		      {\infer{P\vdash P}{} &
+		       \infer{Q\vdash Q}{}}}}
+$$
 }
+\only<3>{
+\medskip
 
+The {\em Hauptsatz} (i.e., cut-elimination) fails for systems with proper axioms.}
 
 \only<4-5>{
 \medskip
 
-\emphdo{A naive attempt:} Add non-logical axioms.
-
-\medskip
-
-Assume $\vdash P\impl Q$ and $\vdash P$. 
-			Then\semiproofadjust
-			$$
-			\infer[cut]{\vdash Q}
-			{\infer{\vdash P}{}&
-				\infer[cut]{P\vdash Q}
-				{\infer{\vdash P\impl Q}{}&
-					\infer[\impl_l]{P,P\impl Q\vdash Q}
-					{\infer{P\vdash P}{}&
-						\infer{Q\vdash Q}{}}}}
-			$$
-}
-\only<5>{
-\medskip
-
-The {\em Hauptsatz} fails for systems with proper axioms.}
-
-\only<6-7>{
-\medskip
-
 \emphdo{A better approach:} Add non-logical rules of inference
-
 
 \medskip
 			
-			$$
-			\infer[\emphdb{P\impl Q}]{\Gamma, P\seq C}{\Gamma, Q\seq C}\qquad
-			\infer[\emphdb{P}]{\Gamma\seq C}{\Gamma, P\seq C}
-			$$
-		}	
+$$
+  \infer[\emphdb{P\impl Q}]{\Gamma, P\seq C}{\Gamma, Q\seq C}
+  \qquad
+  \infer[\emphdb{P}]{\Gamma\seq C}{\Gamma, P\seq C}
+$$
+}	
 		
-		\only<7>{
-						The sequent $\seq Q$ now has the (cut-free) proof\semiproofadjust
-			$$
-			\infer[\emphdb{P}]{\seq Q}{\infer[\emphdb{P\impl Q}]{P\seq Q}
-				{\infer{Q\seq Q}{}}}
-			$$
+\only<5>{
+The sequent $\seq Q$ now has the (cut-free) proof\semiproofadjust
+$$
+  \infer[\emphdb{P}]
+        {\seq Q}
+        {\infer[\emphdb{P\impl Q}]
+               {P\seq Q}
+               {\infer{Q\seq Q}{}}}
+$$
 		}
 \end{overlayarea}
 \end{frame}
@@ -104,10 +86,8 @@ The {\em Hauptsatz} fails for systems with proper axioms.}
 \textbf{{Polarization is a feature of linear logic: $\otimes$, $\&$,
     $\oplus$, $\parr$}}
 \begin{itemize}
-  \item If the right-introduction rule is invertible, the connective
-    is \negf{negative}.
-  \item If the left-introduction rule is invertible, the connective
-    is \posf{positive}.
+  \item A connective is \negf{negative} if its right-introduction rule is invertible.
+  \item A connective is \negf{positive} if its left-introduction rule is invertible.
   \item De Morgan duality flips polarity.  Polarity for atoms is
     assigned arbitrarily.
 \end{itemize}
@@ -121,7 +101,7 @@ $$A\coloncolonequals P(x) \mid A \wedge A \mid t \mid A \vee A
 
 \textbf{{Polarized connectives:}}
 \begin{itemize}
-\item In \emphdr{classical  logic}%, the \emph{polarized connectives} are:
+\item In \emphdr{classical  logic}
 \begin{itemize}
 \item \posf{positive} and \negf{negative} versions of the logical connectives and constants: 
 \[\wedgen, \wedgep, \truen, \truep,\veen, \veep, \falsen, \falsep\]
@@ -240,144 +220,142 @@ $\Gamma_i\subseteq\mathcal{N}_{n-2}$, for all $i=1,\ldots,n$.}
 
 \end{frame}
 
-%\section{The roadmap}
+\section{The roadmap}
+
+\begin{frame}\frametitle{Obtaining rules from axioms}
+
+\scalebox{.8}{
+\begin{tikzpicture}
+\tikzstyle{operation}=[->,>=latex,thick]
+\tikzstyle{state}=[rectangle,draw,thick, rounded corners=5pt, text width = 1.6cm, align=center]
+\tikzstyle{etiquette}=[rectangle,draw,thick,dotted]
+%%rectangles
+%\draw [fill=red!20, thick] (5,-0.5) rectangle (8,-3.5);
+%\draw [fill=blue!20, thick, rounded corners=7pt] (-1.5,-0.5) rectangle (1.5,0.5);
+%%points
+\uncover<1->{
+\node[state, fill=gray!20] (i) at (0,0)  {Unpolarized\\Axiom};
+}
+\only<1,12>{
+\node[right = of i] {$\forall x (((P_1(x) \impl P_2(x)) \wedge Q(x)) \impl\exists y R(x,y))$};
+}
 %
-%\begin{frame}\frametitle{Obtaining rules from axioms}
-%	
-%	\scalebox{.8}{
-%		\begin{tikzpicture}
-%		\tikzstyle{operation}=[->,>=latex,thick]
-%		\tikzstyle{state}=[rectangle,draw,thick, rounded corners=5pt, text width = 1.6cm, align=center]
-%		\tikzstyle{etiquette}=[rectangle,draw,thick,dotted]
-%		%%rectangles
-%		%\draw [fill=red!20, thick] (5,-0.5) rectangle (8,-3.5);
-%		%\draw [fill=blue!20, thick, rounded corners=7pt] (-1.5,-0.5) rectangle (1.5,0.5);
-%		%%points
-%		\uncover<1->{
-%			\node[state, fill=gray!20] (i) at (0,0)  {Unpolarized\\Axiom};
-%		}
-%		\only<1,12>{
-%			\node[right = of i] {$\forall x (((P_1(x) \impl P_2(x)) \wedge Q(x)) \impl\exists y R(x,y))$};
-%		}
-%		%
-%		\uncover<2->{
-%			\node[state, fill=blue!20] (ii) at (2.5,2) {Polarized\\Axiom};
-%			\node[state, fill=blue!20] (ii') at (2.5,-2) {Polarized\\Axiom};
-%			%	\draw[dotted,thick] (2.5,1.2)--(2.5,-1.2);
-%		}
-%		%
-%		\uncover<2->{
-%			\draw[operation] (i)--(ii) node[etiquette] at (0.7,1.2) {Polarizing};
-%			\draw[operation] (i)--(ii');
-%		}
-%		\only<2-5,9,11>{
-%			\draw[operation,dotted] (i)--(2,0.8);
-%			\draw[operation,dotted] (i)--(2,0);
-%			\draw[operation,dotted] (i)--(2,-0.8);
-%		}
-%		%
-%		\only<2-4>{
-%			\node[right] at (2,0.8) {$\negf{\bm\forall}x (((\posf{P_1}(x) \negf{\bm\impl} \negf{P_2}(x)) \posf{\bm\wedgep} \posf{Q}(x)) \negf{\bm\impl}\posf{\bm\exists}y \posf{R}(x,y))$};
-%		}
-%		\only<2-3,9>{
-%			\node[right] at (2,0) {$\negf{\bm\forall}x (((\posf{P_1}(x) \negf{\bm\impl} \negf{P_2}(x)) \negf{\bm\wedgen} \negf{Q}(x)) \negf{\bm\impl}\posf{\bm\exists}y \posf{R}(x,y))$};
-%		}
-%		\only<2-3,11>{
-%			\node[right] at (2,-0.8) {$\negf{\bm\forall}x (((\posf{P_1}(x) \negf{\bm\impl} \negf{P_2}(x)) \negf{\bm\wedgen} \posf{Q}(x)) \negf{\bm\impl}\posf{\bm\exists}y \posf{R}(x,y))$};
-%		}
-%		%
-%		\uncover<3->{
-%			\node[etiquette] at (4.5,3) {Is it bipolar?};
-%		}
-%		%
-%		\uncover<4-8,9-10,12>{
-%			\draw[thick] (ii)--(4.5,2) node[circle,draw,fill=green!40] {$\bm\checkmark$};
-%		}
-%		\uncover<11-12>{
-%			\draw[thick] (ii')--(4.5,-2) node[circle,draw,fill=red!40] {$\bm\times$};%node[etiquette] 
-%		}
-%		%
-%		\uncover<5-8,10,12>{
-%			\node[state, fill=green!20] (iii) at (6.5,2) {Bipole\\in \LKF}; 
-%			\draw[operation] (4.85,2)--(iii);
-%		}
-%		\only<5-7>{
-%			\node[] at (8.5,-0.5) {$
-%				\infer[\forall_l]{\jLf{\Gamma}{\negf{\bm\forall}x (((\posf{P_1}(x) \negf{\bm\impl} \negf{P_2}(x)) \posf{\bm\wedgep} \posf{Q}(x)) \negf{\bm\impl}\posf{\bm\exists}y \posf{R}(x,y))}{}{\Delta}}{
-%					\infer[\impl_l]{{\jLf{\Gamma}{((P_1(t) \impl P_2(t)) \wedgep Q(t)) \impl \exists y R(t,y)}{}{\Delta}}}{
-%						\infer[\wedgep_r]{\jRf{\Gamma}{(P_1(t) \impl P_2(t)) \wedgep Q(t)}{\Delta}}{
-%							\infer[\krelease_r]{{\jRf{\Gamma}{P_1(t)\impl P_2(t)}{\Delta}}}{
-%								\infer[\impl_r]{\jUnf{\Gamma}{\cdot}{P_1(t)\impl P_2(t)}{\Delta}}{
-%									\infer[\kstore_l]{\jUnf{\Gamma}{P_1(t)}{P_2(t)}{\Delta}}{
-%										\infer[\kstore_r]{\jUnf{\Gamma,P_1(t)}{\cdot}{P_2(t)}{\Delta}}{
-%											\deduce{\jUnf{\Gamma,\posf{P_1(t)}}{\cdot}{\cdot}{\negf{P_2(t)},\Delta}}{}
-%										}
-%									}
-%								}
-%							} 
-%							& 
-%							\infer[\kinit_r]{\jRf{\Gamma}{\posf{Q(t)}}{\Delta}}{}
-%						} 
-%						& 
-%						\infer[\krelease_l]{\jLf{\Gamma}{\exists y R(t,y)}{\Delta}}{
-%							\infer[\exists_l]{\jUnf{\Gamma}{\exists y R(t,y)}{\cdot}{\Delta}}{
-%								\infer[\kstore_l]{\jUnf{\Gamma}{R(t,z)}{\cdot}{\Delta}}{
-%									\deduce{\jUnf{\Gamma, \posf{R(t,z)}}{\cdot}{\cdot}{\Delta}}{}
-%								}
-%							}
-%						}
-%					}
-%				}
-%				$};
-%		}
-%		%
-%		\uncover<7-12>{
-%			\node[state, fill=orange!20] (iv) at (9.5,2) {Inference\\rule for \LK};
-%		}
-%		\uncover<6-8,12>{
-%			\draw[operation] (iii)--(iv) node[etiquette] at (8,3) {Synthesizing};
-%		}
-%		\only<7-8>{
-%			\node[draw] at (11,1) {$
-%				\infer[]{\Gamma = \Gamma', \emphdr{Q(t)}\seq\Delta}{
-%					\Gamma, \emphdr{P_1(t)}\seq\emphdr{P_2(t)},\Delta
-%					& 
-%					\Gamma, \emphdr{R(t,z)}\seq\Delta}
-%				$};
-%		}
-%		%
-%		\only<10>{
-%			\node[draw] at (10.5,1) {$
-%				\infer[]{\Gamma\seq\Delta}{
-%					\Gamma, \emphdr{P_1(t)}\seq\emphdr{P_2(t)},\Delta
-%					&
-%					\Gamma \seq\emphdr{Q(t)},\Delta
-%					& 
-%					\Gamma, \emphdr{R(t,z)}\seq\Delta}
-%				$};
-%		}
-%		%
-%		\only<12>{
-%			\node[draw] at (11.5,0) {$
-%				\infer[]{\Gamma = \Gamma', \emphdr{Q(t)}\seq\Delta}{
-%					\Gamma, \emphdr{P_1(t)}\seq\emphdr{P_2(t)},\Delta
-%					& 
-%					\Gamma, \emphdr{R(t,z)}\seq\Delta}
-%				$};
-%			\node[draw] at (10.5,-1.5) {$
-%				\infer[]{\Gamma\seq\Delta}{
-%					\Gamma, \emphdr{P_1(t)}\seq\emphdr{P_2(t)},\Delta
-%					&
-%					\Gamma \seq\emphdr{Q(t)},\Delta
-%					& 
-%					\Gamma, \emphdr{R(t,z)}\seq\Delta}
-%				$};
-%		}
-%		\end{tikzpicture}
-%	}
-%	
-%	
-%\end{frame}
+\uncover<2->{
+\node[state, fill=blue!20] (ii) at (2.5,2) {Polarized\\Axiom};
+\node[state, fill=blue!20] (ii') at (2.5,-2) {Polarized\\Axiom};
+%	\draw[dotted,thick] (2.5,1.2)--(2.5,-1.2);
+}
+%
+\uncover<2->{
+\draw[operation] (i)--(ii) node[etiquette] at (0.7,1.2) {Polarizing};
+\draw[operation] (i)--(ii');
+}
+\only<2-5,9,11>{
+\draw[operation,dotted] (i)--(2,0.8);
+\draw[operation,dotted] (i)--(2,0);
+\draw[operation,dotted] (i)--(2,-0.8);
+}
+%
+\only<2-4>{
+\node[right] at (2,0.8) {$\negf{\bm\forall}x (((\posf{P_1}(x) \negf{\bm\impl} \negf{P_2}(x)) \posf{\bm\wedgep} \posf{Q}(x)) \negf{\bm\impl}\posf{\bm\exists}y \posf{R}(x,y))$};
+}
+\only<2-3,9>{
+\node[right] at (2,0) {$\negf{\bm\forall}x (((\posf{P_1}(x) \negf{\bm\impl} \negf{P_2}(x)) \negf{\bm\wedgen} \negf{Q}(x)) \negf{\bm\impl}\posf{\bm\exists}y \posf{R}(x,y))$};
+}
+\only<2-3,11>{
+\node[right] at (2,-0.8) {$\negf{\bm\forall}x (((\posf{P_1}(x) \negf{\bm\impl} \negf{P_2}(x)) \negf{\bm\wedgen} \posf{Q}(x)) \negf{\bm\impl}\posf{\bm\exists}y \posf{R}(x,y))$};
+}
+%
+\uncover<3->{
+\node[etiquette] at (4.5,3) {Is it bipolar?};
+}
+%
+\uncover<4-8,9-10,12>{
+\draw[thick] (ii)--(4.5,2) node[circle,draw,fill=green!40] {$\bm\checkmark$};
+}
+\uncover<11-12>{
+\draw[thick] (ii')--(4.5,-2) node[circle,draw,fill=red!40] {$\bm\times$};%node[etiquette] 
+}
+%
+\uncover<5-8,10,12>{
+\node[state, fill=green!20] (iii) at (6.5,2) {Bipole\\in \LKF}; 
+\draw[operation] (4.85,2)--(iii);
+}
+\only<5-7>{
+\node[] at (8.5,-0.5) {$
+	\infer[\forall_l]{\jLf{\Gamma}{\negf{\bm\forall}x (((\posf{P_1}(x) \negf{\bm\impl} \negf{P_2}(x)) \posf{\bm\wedgep} \posf{Q}(x)) \negf{\bm\impl}\posf{\bm\exists}y \posf{R}(x,y))}{}{\Delta}}{
+		\infer[\impl_l]{{\jLf{\Gamma}{((P_1(t) \impl P_2(t)) \wedgep Q(t)) \impl \exists y R(t,y)}{}{\Delta}}}{
+			\infer[\wedgep_r]{\jRf{\Gamma}{(P_1(t) \impl P_2(t)) \wedgep Q(t)}{\Delta}}{
+				\infer[\krelease_r]{{\jRf{\Gamma}{P_1(t)\impl P_2(t)}{\Delta}}}{
+					\infer[\impl_r]{\jUnf{\Gamma}{\cdot}{P_1(t)\impl P_2(t)}{\Delta}}{
+						\infer[\kstore_l]{\jUnf{\Gamma}{P_1(t)}{P_2(t)}{\Delta}}{
+							\infer[\kstore_r]{\jUnf{\Gamma,P_1(t)}{\cdot}{P_2(t)}{\Delta}}{
+								\deduce{\jUnf{\Gamma,\posf{P_1(t)}}{\cdot}{\cdot}{\negf{P_2(t)},\Delta}}{}
+							}
+						}
+					}
+				} 
+				& 
+				\infer[\kinit_r]{\jRf{\Gamma}{\posf{Q(t)}}{\Delta}}{}
+			} 
+			& 
+			\infer[\krelease_l]{\jLf{\Gamma}{\exists y R(t,y)}{\Delta}}{
+				\infer[\exists_l]{\jUnf{\Gamma}{\exists y R(t,y)}{\cdot}{\Delta}}{
+					\infer[\kstore_l]{\jUnf{\Gamma}{R(t,z)}{\cdot}{\Delta}}{
+						\deduce{\jUnf{\Gamma, \posf{R(t,z)}}{\cdot}{\cdot}{\Delta}}{}
+					}
+				}
+			}
+		}
+	}
+	$};
+}
+%
+\uncover<7-12>{
+\node[state, fill=orange!20] (iv) at (9.5,2) {Inference\\rule for \LK};
+}
+\uncover<6-8,12>{
+\draw[operation] (iii)--(iv) node[etiquette] at (8,3) {Synthesizing};
+}
+\only<7-8>{
+\node[draw] at (11,1) {$
+	\infer[]{\Gamma, \emphdr{Q(t)}\seq\Delta}{
+		\Gamma, \emphdr{P_1(t)}\seq\emphdr{P_2(t)},\Delta
+		& 
+		\Gamma, \emphdr{R(t,z)}\seq\Delta}
+	$};
+}
+%
+\only<10>{
+\node[draw] at (10.5,1) {$
+	\infer[]{\Gamma\seq\Delta}{
+		\Gamma, \emphdr{P_1(t)}\seq\emphdr{P_2(t)},\Delta
+		&
+		\Gamma \seq\emphdr{Q(t)},\Delta
+		& 
+		\Gamma, \emphdr{R(t,z)}\seq\Delta}
+	$};
+}
+%
+\only<12>{
+\node[draw] at (11.5,0) {$
+	\infer[]{\Gamma, \emphdr{Q(t)}\seq\Delta}{
+		\Gamma, \emphdr{P_1(t)}\seq\emphdr{P_2(t)},\Delta
+		& 
+		\Gamma, \emphdr{R(t,z)}\seq\Delta}
+	$};
+\node[draw] at (10.5,-1.5) {$
+	\infer[]{\Gamma\seq\Delta}{
+		\Gamma, \emphdr{P_1(t)}\seq\emphdr{P_2(t)},\Delta
+		&
+		\Gamma \seq\emphdr{Q(t)},\Delta
+		& 
+		\Gamma, \emphdr{R(t,z)}\seq\Delta}
+	$};
+}
+\end{tikzpicture}
+}
+\end{frame}
 
 
 
@@ -492,7 +470,7 @@ $\Gamma_i\subseteq\mathcal{N}_{n-2}$, for all $i=1,\ldots,n$.}
 \]
 \begin{center}
 \emph{Back-chaining}
-\emph{[Vigan\`o]}
+\emph{[Uniform proofs, Vigan\`o]}
 \end{center}
 \vfill
 \pause
@@ -749,9 +727,9 @@ predicate).  For example,
         {\infer{\Twoseq{\Sigma,z}{\Gamma,x\le z,~y\le z}{\Delta}}
                { \deduce{\strut\vdots}{
      \left(\vcenter{
-  \infer{\Twoseq{\Sigma,z}{\Gamma}{z\le w}}
-        {\Twoseq{\Sigma,z}{\Gamma}{x\le w} \qquad
-         \Twoseq{\Sigma,z}{\Gamma}{y\le w}}
+  \infer{\Twoseq{\Sigma,z}{\Gamma'}{z\le w}}
+        {\Twoseq{\Sigma,z}{\Gamma'}{x\le w} \qquad
+         \Twoseq{\Sigma,z}{\Gamma'}{y\le w}}
      }\right)}}}
 \]
 There are no logical constants.  The \emph{scope} of variables is
@@ -795,8 +773,8 @@ than the rule with a new scoped inference rule.
 \vfill
 
 Note: If the order relation is also known to be antisymmetric, then
-the \textsf{lub} predicate actually defines a function.  Moving from 
-relations to functions is another topic.
+the \textsf{lub} predicate actually defines a function.  Encoding
+functions as relations is another topic.
 
 \end{frame}
 
@@ -824,8 +802,8 @@ considered long ago.
 \item Avron, Gentzenizing Schroeder-Heister's Natural Extension of
   Natural Deduction, 1990.
 
-\item  Harper, Honsell, Gordon Plotkin, "A Framework for Defining
-  Logics", 1993.
+\item  Harper, Honsell, Gordon Plotkin, ``A Framework for Defining
+  Logics'', 1993.
 \end{itemize}
 \end{frame}
 
@@ -858,6 +836,18 @@ capture all these features (except for the polarity of atoms).
   inference rules is eschewed.
 \end{itemize}
 \vfill
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Extensions here}
+
+****
+
+Put here examples of 2-systems and hypersequent rules (see sections 4
+and 5) of main.tex.
+
+
 
 \end{frame}
 
