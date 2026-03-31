@@ -825,7 +825,6 @@ higher-level rules for the sequent calculus that accounts for
 However: Capturing these features without using logical connectives
 seems a questionable pursuit since logical formulas have evolved to
 capture all these features (except for the polarity of atoms).
-\vfill
 
 \begin{itemize}
 \item The implications $\multimap$, $\Rightarrow$ do not 
@@ -837,17 +836,130 @@ capture all these features (except for the polarity of atoms).
 \end{itemize}
 \vfill
 
+\pause Nonetheless, I illustrate some possible generalizations to
+rules in the sequent calculus.
+\end{frame}
+
+\newcommand{\delayop}{\partial}
+%\newcommand{\negdop}{\delayop}
+%\newcommand{\posdop}{\rotatebox[origin=c]{180}{\delayop}}
+\newcommand{\negd}[1]{\delayop_{\scriptscriptstyle -}(#1)}
+\newcommand{\posd}[1]{\delayop_{\scriptscriptstyle +}(#1)}
+%\newcommand{\delpf}{\delayop_{\scriptscriptstyle +}}%_F
+%\newcommand{\delnf}{\delayop_{\scriptscriptstyle -}}%_F
+
+\begin{frame}
+\frametitle{Weak Law of Excluded Middle: $\neg \alpha\vee\neg\neg\alpha$}
+
+Let $\negd{B}$ denote $B\wedgen\truen$ and $\neg B=B\impl\falsep$.
+Both of these are always negative.
+
+Polarized it as $\negd{\neg \alpha \veep \neg\neg \alpha}$, and assume
+that the atomic formula $\alpha$ is negative.
+
+\[
+  \infer=
+        {\jLf{\Gamma}{\negd{\neg \alpha \veep \neg\neg \alpha}}{C}}
+        {\infer[\veep_l]
+               {\jUnf{\Gamma}{\neg \alpha \veep \neg\neg \alpha}{}{C}}
+               {\infer[\kstore_l]
+                      {\jUnf{\Gamma}{\neg \alpha}{}{C}}
+                      {\jUnf{\Gamma,\neg \alpha}{}{}{C}}}
+  &
+  \infer[\kstore_l]
+        {\jUnf{\Gamma}{\neg\neg \alpha}{}{C}}
+        {\jUnf{\Gamma,\neg\neg \alpha}{}{}{C}}}
+\]
+Deciding on $\neg\alpha$ nor $\neg\neg\alpha$ leads to 
+\[
+  \infer={\jLf{\Gamma_1}{\neg \alpha}{C_1}}
+         {\jUnf{\Gamma_1}{}{}{\alpha}}
+  \qquad
+  \infer={\jLf{\Gamma_2}{\neg\neg \alpha}{C_2}}
+         {\jUnf{\Gamma_2,\alpha}{}{}{}}
+\]
+This yields a higher-level rule of the form
+\[
+\infer{\Gamma\vdash C}
+      {\deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\left(~\vcenter{
+                        \infer{\Gamma_1\vdash \alpha}{\strut}
+                        }\right)}}
+       \quad&\quad
+       \deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\left(~\vcenter{
+                        \infer{\Gamma_2\vdash C_2}
+                                   {\deduce{\Gamma_2,\alpha\vdash }{}}
+                       }\right)}}}
+\]
+
+
 \end{frame}
 
 \begin{frame}
-\frametitle{Extensions here}
+\frametitle{Perice's formula: $((\alpha\impl\beta)\impl\alpha)\impl\alpha$}
 
-****
+\[
+  \infer{\jLf{\Gamma}{((\alpha\impl\beta)\impl\alpha)\impl\alpha}{\alpha}}
+        {\infer{\jRf{\Gamma}{(\alpha\impl\beta)\impl\alpha}}
+               {\infer={\jUnf{\Gamma}{}{(\alpha\impl\beta)\impl\alpha}{}}
+                       {\jUnf{\Gamma,\alpha\impl\beta}{}{}{\alpha}}}
+         &
+         \infer{\jLf{\Gamma}{\alpha}{}{\alpha}}{}}
+\]
 
-Put here examples of 2-systems and hypersequent rules (see sections 4
-and 5) of main.tex.
+Peirce's formula yields the restart rule.
+
+\[
+  \infer{\Gamma\vdash \alpha}
+        {\infer{~\Gamma\vdash \alpha~}
+               {\deduce{\vdots}{
+                \left(~\vcenter{
+                         \infer{\Gamma'\vdash\beta}
+                               {\Gamma'\vdash\alpha}}
+                \right)}}}
+\]
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Linearity axiom: $(\alpha\impl\beta)\vee(\beta\impl\alpha)$}
 
 
+If $\alpha$ and $\beta$ are positive formulas, then this formula is an 
+$\mathcal{N}_4$ formulas.
+
+\[
+\infer{\Gamma\vdash C}
+      {\deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                      {\infer{\Gamma_1,\alpha\vdash C_1}{\Gamma_1,\alpha,\beta\vdash C_1}}}\quad&\quad
+       \deduce{\Gamma\vdash C\strut}
+              {\deduce{\vdots}
+                             {\infer{\Gamma_2,\beta\vdash C_2}{\Gamma_2,\beta,\alpha\vdash C_2}}}}
+\]
+
+One can see a resemblance with the following hypersequent inference rule.
+
+\[
+  \infer[com]
+        {G\mid \alpha,\Gamma_1\vdash C_1\mid \beta,\Gamma_2\vdash C_2}
+        {G\mid \alpha,\beta,\Gamma_1\vdash C_1 & G\mid  \alpha,\beta,\Gamma_2\vdash C_2}
+\]
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Issues with first-order quantification}
+
+\[
+  \forall x(\forall y(\forall u(P x y u\impl S x y u)\impl Q x y)\impl R x
+\]
+
+$\forall x(\forall y(\forall u(P x y u\impl S x y u)\impl Q x y)\impl R x$
 
 \end{frame}
 
