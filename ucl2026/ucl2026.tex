@@ -955,11 +955,28 @@ One can see a resemblance with the following hypersequent inference rule.
 \begin{frame}
 \frametitle{Issues with first-order quantification}
 
+Consider the following $\mathcal{N}_4$ formulas
 \[
-  \forall x(\forall y(\forall u(P x y u\impl S x y u)\impl Q x y)\impl R x
+  \forall x(\forall y(\forall u(P~x~y~u\impl S~x~y~u)\impl Q~x~y)\impl R~x
 \]
 
-$\forall x(\forall y(\forall u(P x y u\impl S x y u)\impl Q x y)\impl R x$
+\bigskip
+
+\[
+  \infer{\Gamma\vdash R x}
+        {\deduce{\Gamma\vdash Q~x~y\strut}
+                {\deduce{\vdots}
+                        {\left(~\vcenter{
+                              \infer{\Gamma'\vdash P~x~y~u}
+                                    {\Gamma'\vdash S~x~y~u}}
+                         \right)}}}
+\]
+
+\bigskip
+
+One needs to invent new notation to show the scope and status of bound
+variables: $y$ is a new (eigenvariable) while $u$ is a schema variable
+local to the assume rule, etc.
 
 \end{frame}
 
@@ -968,27 +985,16 @@ $\forall x(\forall y(\forall u(P x y u\impl S x y u)\impl Q x y)\impl R x$
 
 \begin{itemize}
 
-\item We plan to consider how higher-level rules can be organized to
-  capture the richness of inference in the sequent calculus for (at
-  least) classical, intuitionistic, and linear logics.
+\item Formally understand the connection between low complexity
+  formulas (say, $\mathcal{N}_3$ and $\mathcal{N}_4$) proof systems
+  such as two-level system of rules [Ciabattoni and Genco] and
+  hypersequents.
 
 \vfill
+\item In mathematically oriented theories, what is the usual, informal
+  practice?  (see, for example, the lub example).
 
-\item We will need to understand the trade-offs between bipolarizing
-  formulas (with the introduction of new predicates) or not.
-  \medskip
-  
-\begin{itemize}
-  \item Developing these approaches in an interactive theorem
-    prover (such as Abella) might provide an interesting setting to
-    explore these trade-offs in various simple mathematical theories.
-\end{itemize}
-\vfill
-
-\item We also hope to understand the relations between higher-level
-  rules and more “exotic” proof systems: hypersequents [Ciabattoni \&
-    Genco, 2018]. 
-\vfill
+\vfill  
 \vfill
 \end{itemize}
 \end{frame}
